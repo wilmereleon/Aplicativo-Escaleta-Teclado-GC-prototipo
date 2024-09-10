@@ -1,0 +1,524 @@
+Voy a darte una especificación más precisa de las acciones del enunciado como información recopilada para precisar el diagrama de casos de usos:
+
+1. El usuario con el rol productor abre la aplicación e ingresa al módulo DCSHA, que ha sido creado previamente por el usuario con el rol de administrador del sistema.
+2. Dentro de la interfaz de DCSHA, el usuario con el rol de productor tiene la opción de usar «plantilla base», de usar «plantilla de día anterior», o importar de Histórico; por lo que, en principio, el sistema debería tener acceso al módulo de Históricos gestionado por el servidor virtual y almacenado en la base de datos.
+3. Si el usuario con el rol de productor escoge «plantilla base», el sistema despliega una ventana con una escaleta definida por defecto y editable con una estructura similar a Excel en donde puede asignar nombre a las filas, el tipo de filas (Entrada, VTR/Nota, VTR/Full Placa, Cortina, Promoción/Venta, Separador de bloque, Pauta publicitaria, Voz en off) y darle un ID a la fila.
+4. El sistema permite insertar los ID de forma alfanumérica; da solo un mensaje de aviso si se intenta insertar un ID repetido.
+5. El usuario con el rol de productor puede poner una totalidad del tiempo total de la emisión al fin del separador de bloque. Este tiempo aparece en el panel superior de la escaleta; en dicho panel, se mostrara e tiempo en regresivo al momento de ejecutar la escaleta en la emisión del contenido.
+6. El usuario con el rol de productor podrá asignar tiempos a cada bloque en el que se estima la totalidad del contendido; este tiempo estimado de ejecución se irá deduciendo del tiempo total de la emisión y mostrará el tiempo faltante para cumplir con la totalidad del tiempo.
+7. El sistema asignara los números de inserción de forma ascendente de cada una de las identidades de los Zócalos.
+8. El usuario con el rol de asistente de producción podrá acceder a cada una de las celdas y tener acceso a cada una de ellas, podrá crear algunas de ellas (solo Entrada, VTR/Nota, VTR/Full y Placa).
+9. El usuario con el rol de asistente de producción podrá insertar Zócalos; dentro de ZÓCALOS podrá escoger entre TITULOS, CATASTROFE, 2 LINEAS, VENTAS y TEXTUALES.
+10. El sistema asigna los números de ID para la inserción en el documento Excel, sin repetir, dentro de cada una de las identidades Zócalos (TITULOS, CATASTROFE, 2 LINEAS, VENTAS, TEXTUALES) y Placas (EQUIPOS, DATOS EQUIPOS, COMPARATIVA, DATOS, PVENTASX3 y PVENTASX1).
+     10.1. El usuario con el rol de asistente de producción, dentro de Zócalos/TITULOS (dos campos de llenado), podrá insertar un texto alfanumérico de 44 caracteres máximo en el campo de la SOLAPA y 52 caracteres de TITULO. Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     10.2. El usuario con el rol de asistente de producción, dentro de Zócalos/CATASTROFE (dos campos de llenado), podrá insertar un texto alfanumérico de 44 caracteres máximo en el campo de la SOLAPA y 52 caracteres en TEXTO. Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     10.2. El usuario con el rol de asistente de producción, dentro de Zócalos/2 LINEAS (seis campos de llenado), podrá insertar un texto alfanumérico de 44 caracteres máximo en el campo de la SOLAPA y 52 caracteres en LINEA 1 y LINEA 2. Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     10.3. El usuario con el rol de asistente de producción, dentro de Zócalos/VENTAS (tres tipos de campos de llenado con seis campos de llenado en total), podrá insertar un texto numérico en DIA de dos caracteres arriba y texto alfanumérico de 10 caracteres abajo; podrá insertar texto alfanumérico de 34 caracteres en el campo de TEXTO arriba y TEXTO abajo; podrá insertar un texto alfanumérico de 25 caracteres en el campo HORA - CANAL. Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     10.4. El usuario con el rol de asistente de producción, dentro de Zócalos/TEXTUALES (cuatro campos de llenado), podrá insertar un texto alfanumérico de 30 caracteres máximo en los campos TEXTUAL 1, 2, 3 y 4; y escoger entre 4 opciones de ICONOS (TWITTER, WHATSAPP, TELEFONOS e INSTAGRAM). Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+11. El usuario con el rol de asistente de producción podrá insertar Placas; dentro de Placas podrá escoger entre EQUIPOS, DATOS EQUIPOS, COMPARATIVA, DATOS PVENTASX3 y PVENTASX1.
+     11.1. El usuario con el rol de asistente de producción, dentro de Placas/EQUIPOS (treinta campos de llenado), podrá insertar un texto numérico en POSI (12 datos máx.) en un grupo de datos en columna y texto alfanumérico de 50 caracteres al lado derecho, en la columna NOMBRES (12 datos máx.), de cada uno de los datos POSI; En la columna CABECERA, se insertan datos del nombre del competidor o equipo en dos celdas de forma horizontal al inicio de la cabecera, luego se escribe el nombre de la TEXTURA y se selecciona el TIPO DE TEXTURA; al final de la columna CABECERA se pueden poner dos datos adicionales en dos celdas al finalizar la columna; en la columna COLORES, se escoge entre NORMAL y DESTACADO (el destacado es de color púrpura). Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     11.2. El usuario con el rol de asistente de producción, dentro de Placas/DATOS EQUIPOS (65 campos de llenado), podrá insertar un texto numérico en NUM (12 datos máx.) en un grupo de datos en columna y texto alfanumérico de 50 caracteres al lado derecho, en la columna NOMBRES (12 datos máx.), de cada uno de los datos NUM; En las columnas PAIS, EQUIPO y TIEMPO se insertan datos del país, equipo (en formato ISO y máx. 12 datos) y tiempos (en formato de texto), luego se escriben los nombres de los títulos en la columna de NOMBRE (un campo de título), PAIS, EQUIPO, TIEMPO (un título de campo compartido para los tres tipos de datos); en la columna COLORES, se escoge entre NORMAL y DESTACADO (el destacado es de color púrpura). Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+     11.3. El usuario con el rol de asistente de producción, dentro de Placas/PVENTAX1 (tres tipos de campos de llenado con nueve campos de llenado en total); la celda de la columna LOGO es para escoger la TEXTURA; la columna TEXTO se llena en cuatro celdas de tipo alfanumérico de 34 caracteres c/u; en la celda INFO, se usan cuatro celdas que se distribuyen con dos celdas superiores con un límite de caracteres alfanuméricos de 10 y dos celdas inferiores con un límite de caracteres de 25 alfanuméricos. Para todos los campos habrá apiñamiento de texto en caso de exceder el límite caracteres.
+12. El sistema leerá las celdas de ID de cada una de las pestañas del documento usado: DE_CICLISMO_2023, que serán empleadas para numerar en el índice (generado por el sistema) y hará impronta en el Excel.
+
+
+HISTORIAS DE USUARIO:
+
+1. **Historia de Usuario 1: Acceso al Módulo DCSHA**
+   - **Como** productor,
+   - **Quiero** abrir la aplicación e ingresar al módulo DCSHA,
+   - **Para** poder gestionar la programación de contenidos que ha sido creada previamente por el administrador del sistema.
+
+2. **Historia de Usuario 2: Opciones de Plantilla**
+   - **Como** productor,
+   - **Quiero** tener la opción de usar «plantilla base», «plantilla de día anterior» o importar de Histórico,
+   - **Para** poder seleccionar la mejor opción para la programación de contenidos, asegurando que el sistema tenga acceso al módulo de Históricos gestionado por el servidor virtual y almacenado en la base de datos.
+
+3. **Historia de Usuario 3: Uso de Plantilla Base**
+   - **Como** productor,
+   - **Quiero** que al seleccionar «plantilla base», el sistema despliegue una ventana con una escaleta editable,
+   - **Para** poder asignar nombres a las filas, definir el tipo de filas y dar un ID a cada fila, utilizando una estructura similar a Excel.
+
+4. **Historia de Usuario 4: Inserción de ID**
+   - **Como** productor,
+   - **Quiero** poder insertar IDs de forma alfanumérica,
+   - **Para** que el sistema me avise si intento insertar un ID que ya existe, evitando duplicados.
+
+5. **Historia de Usuario 5: Totalidad del Tiempo de Emisión**
+   - **Como** productor,
+   - **Quiero** poder asignar un tiempo total de emisión al separador de bloque,
+   - **Para** que este tiempo se muestre en el panel superior de la escaleta y se cuente regresivamente durante la emisión del contenido.
+
+6. **Historia de Usuario 6: Asignación de Tiempos a Bloques**
+   - **Como** productor,
+   - **Quiero** asignar tiempos a cada bloque de contenido,
+   - **Para** que el tiempo estimado se deduzca del tiempo total de emisión y se muestre el tiempo restante.
+
+7. **Historia de Usuario 7: Asignación de Números de Inserción**
+   - **Como** sistema,
+   - **Quiero** asignar los números de inserción de forma ascendente a cada una de las identidades de los Zócalos,
+   - **Para** mantener un orden lógico y facilitar la gestión de los Zócalos.
+
+8. **Historia de Usuario 8: Acceso del Asistente de Producción**
+   - **Como** asistente de producción,
+   - **Quiero** acceder a cada una de las celdas de la escaleta,
+   - **Para** poder crear y gestionar las celdas de tipo Entrada, VTR/Nota, VTR/Full y Placa.
+
+9. **Historia de Usuario 9: Inserción de Zócalos**
+   - **Como** asistente de producción,
+   - **Quiero** poder insertar Zócalos y escoger entre TITULOS, CATASTROFE, 2 LINEAS, VENTAS y TEXTUALES,
+   - **Para** enriquecer la programación de contenidos con información relevante.
+
+10. **Historia de Usuario 10: Inserción de Zócalos - TITULOS**
+    - **Como** asistente de producción,
+    - **Quiero** insertar un texto alfanumérico en los campos de SOLAPA y TITULO dentro de Zócalos/TITULOS,
+    - **Para** que el texto se ajuste a los límites de caracteres establecidos y se apiñe si es necesario.
+
+11. **Historia de Usuario 11: Inserción de Zócalos - CATASTROFE**
+    - **Como** asistente de producción,
+    - **Quiero** insertar un texto alfanumérico en los campos de SOLAPA y TEXTO dentro de Zócalos/CATASTROFE,
+    - **Para** que el texto se ajuste a los límites de caracteres establecidos y se apiñe si es necesario.
+
+12. **Historia de Usuario 12: Inserción de Zócalos - 2 LINEAS**
+    - **Como** asistente de producción,
+    - **Quiero** insertar un texto alfanumérico en los campos de SOLAPA, LINEA 1 y LINEA 2 dentro de Zócalos/2 LINEAS,
+    - **Para** que el texto se ajuste a los límites de caracteres establecidos y se apiñe si es necesario.
+
+13. **Historia de Usuario 13: Inserción de Zócalos - VENTAS**
+    - **Como** asistente de producción,
+    - **Quiero** insertar texto numérico y alfanumérico en los campos de Zócalos/VENTAS,
+    - **Para** que el texto se ajuste a los límites de caracteres establecidos y se apiñe si es necesario.
+
+14. **Historia de Usuario 14: Inserción de Zócalos - TEXTUALES**
+    - **Como** asistente de producción,
+    - **Quiero** insertar texto alfanumérico en los campos TEXTUAL 1, 2, 3 y 4 dentro de Zócalos/TEXTUALES,
+    - **Para** que el texto se ajuste a los límites de caracteres establecidos y se apiñe si es necesario, además de poder escoger entre 4 opciones de ICONOS.
+
+
+15. **Historia de Usuario 15: Inserción de Placas por el Asistente de Producción**
+    -**Como** asistente de producción,  
+    -**Quiero** insertar Placas,  
+    -**Para** poder gestionar diferentes tipos de datos relacionados con los equipos y sus características.
+
+16. **Historia de Usuario 16: Inserción de datos en Placas/EQUIPOS** 
+    -**Como** asistente de producción,  
+    -**Quiero** insertar datos en la sección Placas/EQUIPOS,  
+    -**Para** poder registrar información sobre los equipos, incluyendo POSI, NOMBRES, CABECERA y COLORES.  
+    -**Criterios de Aceptación:**
+     - Puedo insertar hasta 12 datos numéricos en la columna POSI.
+     - Puedo insertar texto alfanumérico de hasta 50 caracteres en la columna NOMBRES, con un máximo de 12 datos.
+     - La columna CABECERA debe contener el nombre del competidor o equipo, la TEXTURA y el TIPO DE TEXTURA.
+     - Puedo seleccionar entre NORMAL y DESTACADO en la columna COLORES.
+     - El texto se apiñará si excede el límite de caracteres.
+
+17. **Historia de Usuario 17: Inserción de datos en Placas/DATOS EQUIPOS**
+    -**Como** asistente de producción,  
+    -**Quiero** insertar datos en la sección Placas/DATOS EQUIPOS,  
+    -**Para** poder registrar información detallada sobre los equipos, incluyendo NUM, NOMBRES, PAIS, EQUIPO y TIEMPO.  
+    -**Criterios de Aceptación:**
+     - Puedo insertar hasta 12 datos numéricos en la columna NUM.
+     - Puedo insertar texto alfanumérico de hasta 50 caracteres en la columna NOMBRES, con un máximo de 12 datos.
+     - Las columnas PAIS, EQUIPO y TIEMPO deben contener datos específicos, con un formato ISO para EQUIPO.
+     - Puedo seleccionar entre NORMAL y DESTACADO en la columna COLORES.
+     - El texto se apiñará si excede el límite de caracteres.
+
+18. Historia de Usuario 18: Inserción de datos en Placas/PVENTAX1**
+    -**Como** asistente de producción,  
+    -**Quiero** insertar datos en la sección Placas/PVENTAX1,  
+    -**Para** poder gestionar información sobre las ventas, incluyendo LOGO, TEXTO e INFO.  
+    -**Criterios de Aceptación:**
+     - Puedo seleccionar la TEXTURA en la columna LOGO.
+     - Puedo insertar hasta 4 celdas de texto alfanumérico de 34 caracteres en la columna TEXTO.
+     - En la columna INFO, puedo usar 4 celdas: 2 superiores con un límite de 10 caracteres y 2 inferiores con un límite de 25 caracteres.
+     - El texto se apiñará si excede el límite de caracteres.
+
+18. Historia de Usuario 18: Lectura de celdas de ID para el índice  
+    -**Como** sistema,  
+    -**Quiero** leer las celdas de ID de cada pestaña del documento DE_CICLISMO_2023,  
+    -**Para** poder numerar automáticamente el índice y hacer impronta en el Excel.  
+    -**Criterios de Aceptación:**
+     - El sistema debe identificar y leer correctamente las celdas de ID en cada pestaña.
+     - El índice generado debe reflejar la numeración basada en los ID leídos.
+     - La impronta en el Excel debe ser precisa y estar alineada con los datos leídos.
+     
+
+### Casos de Uso
+
+#### Caso de Uso 1: Ingresar al Módulo DCSHA
+*Actor:* Productor  
+*Descripción:* El productor abre la aplicación e ingresa al módulo DCSHA.  
+*Precondiciones:* El módulo DCSHA ha sido creado previamente por el administrador del sistema.  
+*Flujo Principal:*
+1. El productor abre la aplicación.
+2. El productor selecciona el módulo DCSHA.
+3. El sistema verifica que el módulo DCSHA existe.
+4. El sistema muestra la interfaz del módulo DCSHA.
+
+#### Caso de Uso 2: Seleccionar Plantilla
+*Actor:* Productor  
+*Descripción:* El productor selecciona una plantilla base, una plantilla del día anterior o importa de Histórico.  
+*Precondiciones:* El sistema tiene acceso al módulo de Históricos.  
+*Flujo Principal:*
+1. El productor selecciona la opción de plantilla base, plantilla del día anterior o importar de Histórico.
+2. El sistema verifica la disponibilidad de la opción seleccionada.
+3. El sistema carga la plantilla seleccionada.
+
+#### Caso de Uso 3: Editar Escaleta
+*Actor:* Productor  
+*Descripción:* El productor edita una escaleta con una estructura similar a Excel.  
+*Precondiciones:* El productor ha seleccionado una plantilla base.  
+*Flujo Principal:*
+1. El sistema despliega una ventana con la escaleta editable.
+2. El productor asigna nombres a las filas.
+3. El productor define el tipo de filas (Entrada, VTR/Nota, VTR/Full Placa, Cortina, Promoción/Venta, Separador de bloque, Pauta publicitaria, Voz en off).
+4. El productor asigna un ID a cada fila.
+
+#### Caso de Uso 4: Insertar ID
+*Actor:* Productor  
+*Descripción:* El productor inserta IDs de forma alfanumérica en la escaleta.  
+*Precondiciones:* El productor está editando una escaleta.  
+*Flujo Principal:*
+1. El productor inserta un ID en una fila.
+2. El sistema verifica si el ID es repetido.
+3. Si el ID es repetido, el sistema muestra un mensaje de aviso.
+
+#### Caso de Uso 5: Asignar Tiempo Total de Emisión
+*Actor:* Productor  
+*Descripción:* El productor asigna el tiempo total de la emisión al final del separador de bloque.  
+*Precondiciones:* El productor está editando una escaleta.  
+*Flujo Principal:*
+1. El productor asigna el tiempo total de la emisión al final del separador de bloque.
+2. El sistema muestra el tiempo total en el panel superior de la escaleta.
+3. Durante la emisión, el sistema muestra el tiempo en regresivo.
+
+#### Caso de Uso 6: Asignar Tiempos a Bloques
+*Actor:* Productor  
+*Descripción:* El productor asigna tiempos a cada bloque de la escaleta.  
+*Precondiciones:* El productor está editando una escaleta.  
+*Flujo Principal:*
+1. El productor asigna tiempos a cada bloque.
+2. El sistema deduce el tiempo asignado del tiempo total de la emisión.
+3. El sistema muestra el tiempo faltante para cumplir con el tiempo total.
+
+#### Caso de Uso 7: Asignar Números de Inserción
+*Actor:* Sistema  
+*Descripción:* El sistema asigna números de inserción de forma ascendente a cada identidad de los Zócalos.  
+*Precondiciones:* El productor está editando una escaleta.  
+*Flujo Principal:*
+1. El sistema asigna números de inserción de forma ascendente a cada identidad de los Zócalos.
+
+#### Caso de Uso 8: Acceder y Crear Celdas
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción accede y crea celdas en la escaleta.  
+*Precondiciones:* El asistente de producción tiene acceso a la escaleta.  
+*Flujo Principal:*
+1. El asistente de producción accede a las celdas de la escaleta.
+2. El asistente de producción crea celdas (solo Entrada, VTR/Nota, VTR/Full y Placa).
+
+#### Caso de Uso 9: Insertar Zócalos
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta Zócalos en la escaleta.  
+*Precondiciones:* El asistente de producción tiene acceso a la escaleta.  
+*Flujo Principal:*
+1. El asistente de producción selecciona la opción de insertar Zócalos.
+2. El asistente de producción escoge entre TITULOS, CATASTROFE, 2 LINEAS, VENTAS y TEXTUALES.
+3. El sistema inserta el Zócalo seleccionado en la escaleta.
+
+#### Caso de Uso 10: Asignar Números de ID
+*Actor:* Sistema  
+*Descripción:* El sistema asigna números de ID para la inserción en el documento Excel.  
+*Precondiciones:* El asistente de producción está insertando Zócalos o Placas.  
+*Flujo Principal:*
+1. El sistema asigna números de ID sin repetir dentro de cada identidad de Zócalos y Placas.
+
+#### Caso de Uso 11: Insertar Texto en Zócalos/TITULOS
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Zócalos/TITULOS.  
+*Precondiciones:* El asistente de producción está insertando Zócalos.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto alfanumérico en el campo SOLAPA (máx. 44 caracteres).
+2. El asistente de producción inserta texto alfanumérico en el campo TITULO (máx. 52 caracteres).
+3. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 12: Insertar Texto en Zócalos/CATASTROFE
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Zócalos/CATASTROFE.  
+*Precondiciones:* El asistente de producción está insertando Zócalos.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto alfanumérico en el campo SOLAPA (máx. 44 caracteres).
+2. El asistente de producción inserta texto alfanumérico en el campo TEXTO (máx. 52 caracteres).
+3. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 13: Insertar Texto en Zócalos/2 LINEAS
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Zócalos/2 LINEAS.  
+*Precondiciones:* El asistente de producción está insertando Zócalos.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto alfanumérico en el campo SOLAPA (máx. 44 caracteres).
+2. El asistente de producción inserta texto alfanumérico en los campos LINEA 1 y LINEA 2 (máx. 52 caracteres cada uno).
+3. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 14: Insertar Texto en Zócalos/VENTAS
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Zócalos/VENTAS.  
+*Precondiciones:* El asistente de producción está insertando Zócalos.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto numérico en el campo DIA (máx. 2 caracteres arriba, 10 caracteres abajo).
+2. El asistente de producción inserta texto alfanumérico en los campos TEXTO arriba y TEXTO abajo (máx. 34 caracteres cada uno).
+3. El asistente de producción inserta texto alfanumérico en el campo HORA - CANAL (máx. 25 caracteres).
+4. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 15: Insertar Texto en Zócalos/TEXTUALES
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Zócalos/TEXTUALES y selecciona iconos.  
+*Precondiciones:* El asistente de producción está insertando Zócalos.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto alfanumérico en los campos TEXTUAL 1, 2, 3 y 4 (máx. 30 caracteres cada uno).
+2. El asistente de producción selecciona un icono entre TWITTER, WHATSAPP, TELEFONOS e INSTAGRAM.
+3. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 16: Insertar Placas (continuación)
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta Placas en la escaleta.  
+*Precondiciones:* El asistente de producción tiene acceso a la escaleta.  
+*Flujo Principal:*
+1. El asistente de producción selecciona la opción de insertar Placas.
+2. El asistente de producción escoge entre EQUIPOS, DATOS EQUIPOS, COMPARATIVA, DATOS PVENTASX3 y PVENTASX1.
+
+#### Caso de Uso 17: Insertar Texto en Placas/EQUIPOS
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Placas/EQUIPOS.  
+*Precondiciones:* El asistente de producción está insertando Placas.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto numérico en el campo POSI (máx. 12 datos).
+2. El asistente de producción inserta texto alfanumérico en el campo NOMBRES (máx. 50 caracteres).
+3. El asistente de producción inserta datos en la columna CABECERA.
+4. El asistente de producción selecciona el TIPO DE TEXTURA.
+5. El asistente de producción inserta datos adicionales en la columna CABECERA.
+6. El asistente de producción selecciona entre NORMAL y DESTACADO en la columna COLORES.
+7. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 18: Insertar Texto en Placas/DATOS EQUIPOS
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Placas/DATOS EQUIPOS.  
+*Precondiciones:* El asistente de producción está insertando Placas.  
+*Flujo Principal:*
+1. El asistente de producción inserta texto numérico en el campo NUM (máx. 12 datos).
+2. El asistente de producción inserta texto alfanumérico en el campo NOMBRES (máx. 50 caracteres).
+3. El asistente de producción inserta datos en las columnas PAIS, EQUIPO y TIEMPO.
+4. El asistente de producción inserta títulos en la columna NOMBRE.
+5. El asistente de producción selecciona entre NORMAL y DESTACADO en la columna COLORES.
+6. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 19: Insertar Texto en Placas/PVENTAX1
+*Actor:* Asistente de Producción  
+*Descripción:* El asistente de producción inserta texto en los campos de Placas/PVENTAX1.  
+*Precondiciones:* El asistente de producción está insertando Placas.  
+*Flujo Principal:*
+1. El asistente de producción selecciona la TEXTURA en la columna LOGO.
+2. El asistente de producción inserta texto alfanumérico en las cuatro celdas de la columna TEXTO (máx. 34 caracteres cada una).
+3. El asistente de producción inserta texto alfanumérico en las celdas superiores de la columna INFO (máx. 10 caracteres cada una).
+4. El asistente de producción inserta texto alfanumérico en las celdas inferiores de la columna INFO (máx. 25 caracteres cada una).
+5. El sistema apiña el texto si excede el límite de caracteres.
+
+#### Caso de Uso 20: Leer Celdas de ID
+*Actor:* Sistema  
+*Descripción:* El sistema lee las celdas de ID de cada una de las pestañas del documento DE_CICLISMO_2023.  
+*Precondiciones:* El documento DE_CICLISMO_2023 está disponible.  
+*Flujo Principal:*
+1. El sistema accede al documento DE_CICLISMO_2023.
+2. El sistema lee las celdas de ID de cada pestaña.
+3. El sistema numera en el índice y hace impronta en el Excel.
+
+#### Caso de Uso 21: Conectar Placas con Gestor de Procedimiento de Texturas
+*Actor:* Asistente de Producción  
+*Descripción:* Las placas EQUIPOS, COMPARATIVA, DATOS y PVENTASX1 se conectan con el componente de gestor de procedimiento de texturas.  
+*Precondiciones:* El asistente de producción está insertando Placas.  
+*Flujo Principal:*
+1. El asistente de producción selecciona la opción de conectar con el gestor de procedimiento de texturas.
+2. El gestor almacena la imagen en la terminal de asistente de producción en Redacción.
+3. Cuando se genera el ejecutable de la escaleta guardada, se añade a la terminal de asistente en máster.
+4. El sistema hace una impronta de las imágenes de la carpeta de texturas en el disco G del Maestro | TX.
+
+
+### Requerimientos Funcionales
+
+1. *RF-013*
+   - *Nombre del Requerimiento*: Ingresar al Módulo DCSHA
+   - *Características*: Permitir al productor acceder al módulo DCSHA.
+   - *Casos de Uso Asociados*: Ingresar al Módulo DCSHA
+   - *Precondiciones*: El productor debe estar autenticado en el sistema.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor ingresar al módulo DCSHA para gestionar la escaleta.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-005
+   - *Prioridad de Requerimiento*: Alto
+
+2. *RF-014*
+   - *Nombre del Requerimiento*: Seleccionar Plantilla
+   - *Características*: Permitir al productor seleccionar una plantilla para la escaleta.
+   - *Casos de Uso Asociados*: Seleccionar Plantilla
+   - *Precondiciones*: El productor debe haber ingresado al módulo DCSHA.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor seleccionar una plantilla para estandarizar el formato de la escaleta.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+   - *Prioridad de Requerimiento*: Alto
+
+3. *RF-015*
+   - *Nombre del Requerimiento*: Editar Escaleta
+   - *Características*: Permitir al productor editar la escaleta.
+   - *Casos de Uso Asociados*: Editar Escaleta
+   - *Precondiciones*: El productor debe haber seleccionado una plantilla.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor editar la escaleta para ajustar los contenidos y tiempos.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-007
+   - *Prioridad de Requerimiento*: Alto
+
+4. *RF-016*
+   - *Nombre del Requerimiento*: Insertar ID
+   - *Características*: Permitir al productor insertar un ID en la escaleta.
+   - *Casos de Uso Asociados*: Insertar ID
+   - *Precondiciones*: El productor debe estar editando la escaleta.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor insertar un ID en la escaleta para identificar cada segmento.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-005
+   - *Prioridad de Requerimiento*: Medio
+
+5. *RF-017*
+   - *Nombre del Requerimiento*: Asignar Tiempo Total de Emisión
+   - *Características*: Permitir al productor asignar el tiempo total de emisión.
+   - *Casos de Uso Asociados*: Asignar Tiempo Total de Emisión
+   - *Precondiciones*: El productor debe estar editando la escaleta.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor asignar el tiempo total de emisión para controlar la duración del programa.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-007
+   - *Prioridad de Requerimiento*: Alto
+
+6. *RF-018*
+   - *Nombre del Requerimiento*: Asignar Tiempos a Bloques
+   - *Características*: Permitir al productor asignar tiempos a los bloques.
+   - *Casos de Uso Asociados*: Asignar Tiempos a Bloques
+   - *Precondiciones*: El productor debe estar editando la escaleta.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al productor asignar tiempos a los bloques para organizar la programación.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-007
+   - *Prioridad de Requerimiento*: Alto
+
+7. *RF-019*
+   - *Nombre del Requerimiento*: Acceder y Crear Celdas
+   - *Características*: Permitir al asistente de producción acceder y crear celdas.
+   - *Casos de Uso Asociados*: Acceder y Crear Celdas
+   - *Precondiciones*: El asistente de producción debe estar autenticado en el sistema.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción acceder y crear celdas para insertar contenido.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+   - *Prioridad de Requerimiento*: Alto
+
+8. *RF-020*
+   - *Nombre del Requerimiento*: Insertar Zócalos
+   - *Características*: Permitir al asistente de producción insertar zócalos en las celdas.
+   - *Casos de Uso Asociados*: Insertar Zócalos
+   - *Precondiciones*: El asistente de producción debe haber accedido y creado celdas.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar zócalos en las celdas para añadir información textual.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+   - *Prioridad de Requerimiento*: Medio
+
+9. *RF-021*
+   - *Nombre del Requerimiento*: Insertar Texto en Zócalos/TITULOS
+   - *Características*: Permitir al asistente de producción insertar texto en zócalos de títulos.
+   - *Casos de Uso Asociados*: Insertar Texto en Zócalos/TITULOS
+   - *Precondiciones*: El asistente de producción debe haber insertado zócalos.
+   - *Tipo de Flujo*: Principal
+   - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en zócalos de títulos para mostrar encabezados.
+   - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+   - *Prioridad de Requerimiento*: Medio
+
+10. *RF-022*
+    - *Nombre del Requerimiento*: Insertar Texto en Zócalos/CATASTROFE
+    - *Características*: Permitir al asistente de producción insertar texto en zócalos de catástrofe.
+    - *Casos de Uso Asociados*: Insertar Texto en Zócalos/CATASTROFE
+    - *Precondiciones*: El asistente de producción debe haber insertado zócalos.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en zócalos de catástrofe para destacar información crítica.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+11. *RF-023*
+    - *Nombre del Requerimiento*: Insertar Texto en Zócalos/2 LINEAS
+    - *Características*: Permitir al asistente de producción insertar texto en zócalos de dos líneas.
+    - *Casos de Uso Asociados*: Insertar Texto en Zócalos/2 LINEAS
+    - *Precondiciones*: El asistente de producción debe haber insertado zócalos.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en zócalos de dos líneas para mostrar subtítulos.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+12. *RF-024*
+    - *Nombre del Requerimiento*: Insertar Texto en Zócalos/VENTAS
+    - *Características*: Permitir al asistente de producción insertar texto en zócalos de ventas.
+    - *Casos de Uso Asociados*: Insertar Texto en Zócalos/VENTAS
+    - *Precondiciones*: El asistente de producción debe haber insertado zócalos.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en zócalos de ventas para mostrar información comercial.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+13. *RF-025*
+    - *Nombre del Requerimiento*: Insertar Texto en Zócalos/TEXTUALES
+    - *Características*: Permitir al asistente de producción insertar texto en zócalos textuales.
+    - *Casos de Uso Asociados*: Insertar Texto en Zócalos/TEXTUALES
+    - *Precondiciones*: El asistente de producción debe haber insertado zócalos.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en zócalos textuales para mostrar información adicional.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+14. *RF-026*
+    - *Nombre del Requerimiento*: Insertar Placas
+    - *Características*: Permitir al asistente de producción insertar placas en las celdas.
+    - *Casos de Uso Asociados*: Insertar Placas
+    - *Precondiciones*: El asistente de producción debe haber accedido y creado celdas.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar placas en las celdas para añadir gráficos.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+15. *RF-027*
+    - *Nombre del Requerimiento*: Insertar Texto en Placas/EQUIPOS
+    - *Características*: Permitir al asistente de producción insertar texto en placas de equipos.
+    - *Casos de Uso Asociados*: Insertar Texto en Placas/EQUIPOS
+    - *Precondiciones*: El asistente de producción debe haber insertado placas.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en placas de equipos para mostrar información de los equipos.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+16. *RF-028*
+    - *Nombre del Requerimiento*: Insertar Texto en Placas/DATOS EQUIPOS
+    - *Características*: Permitir al asistente de producción insertar texto en placas de datos de equipos.
+    - *Casos de Uso Asociados*: Insertar Texto en Placas/DATOS EQUIPOS
+    - *Precondiciones*: El asistente de producción debe haber insertado placas.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en placas de datos de equipos para mostrar detalles técnicos.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+17. *RF-029*
+    - *Nombre del Requerimiento*: Insertar Texto en Placas/PVENTAX1
+    - *Características*: Permitir al asistente de producción insertar texto en placas de PVENTAX1.
+    - *Casos de Uso Asociados*: Insertar Texto en Placas/PVENTAX1
+    - *Precondiciones*: El asistente de producción debe haber insertado placas.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción insertar texto en placas de PVENTAX1 para mostrar información específica.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004
+    - *Prioridad de Requerimiento*: Medio
+
+18. *RF-030*
+    - *Nombre del Requerimiento*: Conectar Placas con Gestor de Procedimiento de Texturas
+    - *Características*: Permitir al asistente de producción conectar las placas con el gestor de procedimiento de texturas.
+    - *Casos de Uso Asociados*: Conectar Placas con Gestor de Procedimiento de Texturas
+    - *Precondiciones*: El asistente de producción debe haber insertado placas.
+    - *Tipo de Flujo*: Principal
+    - *Descripción del Requerimiento*: El sistema debe permitir al asistente de producción conectar las placas con el gestor de procedimiento de texturas para almacenar y gestionar imágenes.
+    - *Requerimientos No Funcionales Asociados*: RNF-003, RNF-004, RNF-005, RNF-006
+    - *Prioridad de Requerimiento*: Alto
