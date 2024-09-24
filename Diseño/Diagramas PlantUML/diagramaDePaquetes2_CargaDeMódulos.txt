@@ -1,0 +1,32 @@
+@startuml
+actor Productor
+actor AsistenteProducción
+actor Sistema
+actor AdministradorDeSistema
+
+package "Carga de Módulo de Principal" {
+    (Ingresar a módulo DCSHA)
+    (Abrir aplicación)
+    
+}
+
+package "Verificación de interfaz" {
+    (Interfaz DCSHA)
+}
+
+Productor -> (Ingresar a módulo DCSHA)
+Productor -> (Abrir aplicación)
+
+
+AsistenteProducción -> (Ingresar a módulo DCSHA)
+AsistenteProducción -> (Abrir aplicación)
+
+Sistema -> (Interfaz DCSHA)
+AdministradorDeSistema -> (Interfaz DCSHA)
+
+' Relaciones con el caso de uso "Interfaz DCSHA"
+(Abrir aplicación) --> (Interfaz DCSHA)
+
+' Cambiar la dirección del diagrama a vertical
+left to right direction
+@enduml

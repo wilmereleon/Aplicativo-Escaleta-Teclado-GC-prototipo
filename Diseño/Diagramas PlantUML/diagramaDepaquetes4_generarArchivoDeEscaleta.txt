@@ -1,0 +1,21 @@
+@startuml
+actor Productor
+actor Sistema
+
+package "Cierre de Módulo de Producción" {
+    Productor -> (Generar Archivo de escaleta)
+    Productor -> (Seleccionar Cerrar ventana de DCSHA)
+}
+
+
+package "Cierre de Módulo de Principal" {
+    Sistema -> (Guardar cambios en escaleta)
+    Sistema -> (Cerrar ventana de DCSHA)
+}
+
+
+(Seleccionar Cerrar ventana de DCSHA) -> (Guardar cambios en escaleta)
+
+' Cambiar la dirección del diagrama a vertical
+left to right direction
+@enduml

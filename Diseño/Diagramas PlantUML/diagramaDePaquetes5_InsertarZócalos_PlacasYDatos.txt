@@ -1,0 +1,31 @@
+@startuml
+actor AsistenteProducción
+actor Sistema
+
+package "Carga de Módulo de Gráficas" {
+    package "Carga de Módulo de Zócalos" {
+        AsistenteProducción -> (Seleccionar Tipo de Zócalo)
+    }
+
+    package "Carga de Módulo de Placas" {
+        AsistenteProducción -> (Seleccionar Tipo de Placa)
+    }
+
+    package "Carga de Módulo de Inserción" {
+        AsistenteProducción -> (Insertar Datos en Campos): Insertar datos
+        (Desplegar Campos de Llenado) -> (Insertar Datos en Campos)
+    }
+}
+
+package "Ejecución de funciones de asignación de ID" {
+    Sistema -> (Verificar Datos y Asignar ID Único): Verificar ID
+    
+}
+
+(Seleccionar Tipo de Zócalo) -> (Desplegar Campos de Llenado)
+(Seleccionar Tipo de Placa) -> (Desplegar Campos de Llenado)
+(Verificar Datos y Asignar ID Único) ->> (Insertar Datos en Campos): Resultado de validación
+
+' Cambiar la dirección del diagrama a vertical
+left to right direction
+@enduml

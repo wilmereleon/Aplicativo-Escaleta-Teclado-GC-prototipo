@@ -1,0 +1,67 @@
+@startuml
+actor Productor
+actor AsistenteProducción
+actor Sistema
+
+package "Carga de Módulo de Principal" {
+    (Ingresar a módulo DCSHA)
+    
+}
+
+package "Carga de Módulo de Productor" {
+    (Seleccionar plantilla)
+    (Editar escaleta)
+    (Asignar tiempo total de emisión)
+    (Asignar tiempos a bloques)
+    (Asignar números de inserción)
+    (Acceder y crear celdas)
+    (Generar archivo E)
+}
+
+package "Carga de Módulo de Asistente de Producción" {
+    (Insertar zócalos)
+    (Insertar texto en zócalos/CATASTROFE)
+    (Insertar texto en zócalos/2 LINEAS)
+    (Insertar texto en zócalos/VENTAS)
+    (Insertar texto en zócalos/TEXTUALES)
+    (Insertar placas)
+    (Insertar texto en placas/EQUIPOS)
+    (Insertar texto en placas/ DATOS EQUIPOS)
+    (Insertar texto en placas/PVENTAX1)
+    (Generar archivo ETgc)
+}
+
+package "Archivo de Escaleta-Teclado GC" {
+    (Archivo de Escaleta)
+}
+
+Productor -> (Ingresar a módulo DCSHA)
+Productor -> (Seleccionar plantilla)
+Productor -> (Editar escaleta)
+Productor -> (Asignar tiempo total de emisión)
+Productor -> (Asignar tiempos a bloques)
+Productor -> (Asignar números de inserción)
+Productor -> (Acceder y crear celdas)
+Productor -> (Generar archivo E)
+
+AsistenteProducción -> (Ingresar a módulo DCSHA)
+AsistenteProducción -> (Insertar zócalos)
+AsistenteProducción ->(Insertar texto en zócalos/CATASTROFE)
+AsistenteProducción ->(Insertar texto en zócalos/2 LINEAS)
+AsistenteProducción ->(Insertar texto en zócalos/VENTAS)
+AsistenteProducción ->(Insertar texto en zócalos/TEXTUALES)
+AsistenteProducción ->(Insertar placas)
+AsistenteProducción ->(Insertar texto en placas/EQUIPOS)
+AsistenteProducción ->(Insertar texto en placas/ DATOS EQUIPOS)
+AsistenteProducción ->(Insertar texto en placas/PVENTAX1)
+AsistenteProducción ->(Generar archivo ETgc)
+
+Sistema -> (Archivo de Escaleta)
+
+' Relaciones con el caso de uso "Archivo de Escaleta"
+(Generar archivo E) --> (Archivo de Escaleta)
+(Generar archivo ETgc)--> (Archivo de Escaleta)
+
+' Cambiar la dirección del diagrama a vertical
+left to right direction
+@enduml

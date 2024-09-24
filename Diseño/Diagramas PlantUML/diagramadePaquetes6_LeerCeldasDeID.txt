@@ -1,0 +1,87 @@
+@startuml
+
+actor Sistema
+
+left to right direction
+rectangle "Sistema ETgc" {
+    package "Capa de Presentación" {
+        component "Controladores" {
+             package "Gestión de Documentos" {
+                Sistema -> (Abrir Documento DE_CICLISMO_2023)
+                (Abrir Documento DE_CICLISMO_2023) -> (Leer Celdas de ID)
+                (Generar Índice Numerado) -> (Hacer Impronta en Excel)
+            }
+
+             package "Gestión de Usuarios" {
+                 Sistema -> (Validar tipo de usuario)
+             }
+        }
+    }
+
+    package "Capa de Lógica del Negocio" {
+        component "Servicios" {
+            (Leer Celdas de ID) --> (Validar celdas en Excel) : "Acceso a datos"
+            (Validar celdas en Excel) --> (Validar registros con índice)
+            (Generar Índice Numerado) <-- (Validar registros con índice) : "Acceso a datos"
+        }
+    }
+
+    package "Capa de Acceso a Datos" {
+        component "Repositorio" {
+            (Leer Celdas de ID) --> (Obtener Datos de ID)
+            (Validar celdas en Excel) --> (Validar Datos en Repositorio)
+            (Validar registros con índice) --> (Obtener Registros de Índice)
+            (Sincronizar Datos con DE_CICLISMO_2023) --> (Guardar Datos en Repositorio)
+        }
+    }
+
+    package "Capa de Persistencia" {
+        ' Aquí se pueden incluir casos de uso relacionados con la persistencia de datos
+    }
+
+    frame "Integración con Excel" {
+        Sistema -> (Insertar datos en Excel)
+        (Insertar datos en Excel) -> (Hacer Impronta en Excel)
+    }
+
+    frame "Gestión de Imágenes" {
+        component "Captura de imágenes" {
+            (Procesar Imagen) -> (Guardar Imagen)
+        }
+        component "Preproceso de imágenes" {
+            Sistema -> (Cargar Imagen)
+            (Cargar Imagen) -> (Procesar Imagen)
+        }
+    }
+}
+
+node "Láptop (terminal de asistente de producción en Máster)" {
+    component "ETgc"     #aliceblue;line:blue;line.dotted;text:blue  {
+        (Hacer Impronta en Excel) -> (Guardar)
+        (Guardar) -> (Sincronizar Datos con DE_CICLISMO_2023): Agrega datos en celdas
+    }
+}
+
+node "Terminal PC Máster GC" {
+    component "Maestro | TX"     #aliceblue;line:red;line.dotted;text:red  {
+    }
+    
+    folder "Disco G"  {
+        artifact "TEXTURAS" {
+        }
+    }
+}
+
+artifact "DE_CICLISMO_2023" {
+    (Sincronizar Datos con DE_CICLISMO_2023) -> («Salvar»)
+}
+
+"Disco G" <-- "DE_CICLISMO_2023"
+"Disco G" --> "Maestro | TX"
+(Abrir Documento DE_CICLISMO_2023) --> "DE_CICLISMO_2023"
+"Capa de Acceso a Datos" --> "Capa de Persistencia"
+
+' Conexión asincrónica entre Captura de imágenes y TEXTURAS
+(Captura de imágenes) -down-> "TEXTURAS" : <<asynchronous>>
+
+@enduml

@@ -1,0 +1,90 @@
+@startuml
+frame "Sistema de Gestión de ETgc: Zócalos, Placas y Filas" {
+  package "Módulo DCSHA" {
+    class "Interfaz DCSHA"
+    class "Interfaz DCSHA:Plantilla"
+    class "Plantilla:Base"
+    class "Plantilla:Historicos"
+    
+    "Interfaz DCSHA" -- "Interfaz DCSHA:Plantilla"
+    "Interfaz DCSHA:Plantilla" -- "Plantilla:Base"
+    "Interfaz DCSHA:Plantilla" -- "Plantilla:Historicos"
+  }
+
+  package "Módulo de Placas" {
+    class "Placas"
+    class "Placas/EQUIPOS"
+    class "Placas/DATOS EQUIPOS"
+    class "Placas/PVENTAX1"
+
+    "Placas" -- "Placas/EQUIPOS"
+    "Placas" -- "Placas/DATOS EQUIPOS"
+    "Placas" -- "Placas/PVENTAX1"
+  }
+
+   package "Módulo de Zócalos" {
+     class "Zócalos"
+     class "Zócalos/TITULOS"
+     class "Zócalos/CATASTROFE"
+     class "Zócalos/2 LINEAS"
+     class "Zócalos/VENTAS"
+     class "Zócalos/TEXTUALES"
+    
+     "Zócalos" -- "Zócalos/TITULOS"
+     "Zócalos" -- "Zócalos/CATASTROFE"
+     "Zócalos" -- "Zócalos/2 LINEAS"
+     "Zócalos" -- "Zócalos/VENTAS"
+     "Zócalos" -- "Zócalos/TEXTUALES"
+   } 
+    
+   package "Módulo Inserción de Filas" {
+     class "Fila"
+     class "Fila:Entrada"
+     class "Fila:Separador_de_bloque"
+     class "Fila:VTR_Nota"
+     class "Fila:VTR_Full"
+     class "Fila:PLACA"
+     class "Fila:Cortina"
+     class "Fila:Promocion_Venta"
+     class "Fila:Voz_en_Off"
+     class "Separador_de_bloque:Bloque"
+     class "Separador_de_bloque:Total"
+
+     "Fila" -- "Fila:Entrada"
+     "Fila" -- "Fila:Separador_de_bloque"
+     "Fila" -- "Fila:Entrada"
+     "Fila" -- "Fila:Separador_de_bloque"
+     "Fila" -- "Fila:VTR_Nota"
+     "Fila" -- "Fila:VTR_Full"
+     "Fila" -- "Fila:PLACA"
+     "Fila" -- "Fila:Cortina"
+     "Fila" -- "Fila:Promocion_Venta"
+     "Fila" -- "Fila:Voz_en_Off"
+     "Fila" -- "Separador_de_bloque"
+     "Separador_de_bloque" -- "Separador_de_bloque:Bloque"
+     "Separador_de_bloque" -- "Separador_de_bloque:Total"
+   }
+
+   package "Módulo TIEMPO" {
+     class "Tiempo"
+     class "Tiempo:Tiempo_Bloque"
+     class "Tiempo:Tiempo_Total"
+     class "Tiempo_Total:Tiempo_Ajustado"
+
+     "Tiempo" -- "Tiempo:Tiempo_Bloque"
+     "Tiempo" -- "Tiempo:Tiempo_Total"
+     "Tiempo:Tiempo_Total" -- "Tiempo_Total:Tiempo_Ajustado"
+   }
+     
+    "Plantilla:Base" .. "Módulo Inserción de Filas"
+    "Plantilla:Historicos" .. "Módulo Inserción de Filas"
+    "Fila:Entrada" .. "Módulo de Zócalos"
+    "Fila:Entrada" .. "Módulo de Placas"
+    "Fila:VTR_Nota" .. "Módulo de Zócalos"
+    "Fila:VTR_Full" .. "Módulo de Zócalos"
+    "Fila:Voz_en_Off" .. "Módulo de Zócalos"
+    "Fila:PLACA" .. "Módulo de Placas"
+    "Tiempo" .. "Fila"
+}
+
+@enduml

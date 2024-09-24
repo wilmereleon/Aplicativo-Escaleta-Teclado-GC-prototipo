@@ -1,0 +1,11 @@
+@startuml
+actor Productor
+
+package "Carga de Escaleta" {
+    Productor -> (Seleccionar Plantilla Base)
+    (Seleccionar Plantilla Base) -> (Desplegar Ventana Escaleta)
+    (Desplegar Ventana Escaleta) -> (Asignar Nombre a Filas)
+    (Desplegar Ventana Escaleta) -> (Asignar Tipo de Filas)
+    (Desplegar Ventana Escaleta) -> (Asignar ID a Filas)
+}
+@enduml
