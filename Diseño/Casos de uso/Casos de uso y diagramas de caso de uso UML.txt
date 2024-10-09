@@ -385,14 +385,14 @@ AsistenteDeProducción -> (Escoger ICONO)
 
 plantuml
 @startuml
-actor Asistente de Producción
-Asistente de Producción -> (Insertar Placas)
+actor AsistenteDeProducción
+AsistenteDeProducción -> (Insertar Placas)
 (Insertar Placas) -> (Ajustar Información a Límite)
 (Insertar Placas) --> (Mostrar Mensaje de Error) : [Error]
 @enduml
 
 
-#### Caso de Uso 17: Inserción de datos en Placas/EQUIPOS
+### Caso de Uso 17: Inserción de datos en Placas/EQUIPOS
 - *Actor*: Asistente de Producción
 - *Descripción*: El asistente de producción inserta datos en la sección Placas/EQUIPOS para registrar información sobre los equipos.
 - *Precondiciones*: El asistente de producción está editando una escaleta.
@@ -405,19 +405,23 @@ Asistente de Producción -> (Insertar Placas)
 - *Flujos Alternativos*:
   - Si el texto excede el límite de caracteres, se apiña.
 
+
 plantuml
 @startuml
-actor Asistente de Producción
-Asistente de Producción -> (Insertar Datos en POSI)
-Asistente de Producción -> (Insertar Texto en NOMBRES)
-Asistente de Producción -> (Insertar Datos en CABECERA)
-Asistente de Producción -> (Seleccionar COLORES)
-(Insertar Datos en POSI) -> (Ajustar Información a Límite)
-(Insertar Texto en NOMBRES) -> (Ajustar Información a Límite)
-(Insertar Datos en CABECERA) -> (Ajustar Información a Límite)
-(Seleccionar COLORES) -> (Ajustar Información a Límite)
+left to right direction
+actor AsistenteDeProducción as ADP
+
+ADP -right-> (Insertar Datos en POSI)
+ADP -right-> (Insertar Texto en NOMBRES)
+ADP -right-> (Insertar Datos en CABECERA)
+ADP -right-> (Seleccionar entre NORMAL y DESTACADO en COLORES)
+
+(Insertar Datos en POSI) -down-> (Ajustar Información a Límite)
+(Insertar Texto en NOMBRES) -down-> (Ajustar Información a Límite)
+(Insertar Datos en CABECERA) -down-> (Ajustar Información a Límite)
+(Seleccionar entre NORMAL y DESTACADO en COLORES) -down-> (Ajustar Información a Límite)
 (Insertar Texto en NOMBRES) --> (Apiñar Texto) : [Excede Límite]
-@enduml
+@endumll
 
 
 #### Caso de Uso 18: Inserción de datos en Placas/DATOS EQUIPOS
@@ -499,4 +503,28 @@ Sistema -> (Leer Celdas de ID)
 (Generar Índice) -> (Hacer Impronta en Excel)
 (Identificar Celdas de ID) --> (Mostrar Mensaje de Error) : [Error]
 (Leer Celdas de ID) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+#### Caso de Uso 21: Conectar Placas con Gestor de Procedimiento de Texturas
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción conecta las placas con el gestor de procedimiento de texturas para almacenar y gestionar imágenes relacionadas con el proceso de producción.
+- *Precondiciones*: El sistema y el gestor de procedimiento de texturas están operativos.
+- *Postcondiciones*: Las imágenes se almacenan correctamente y están disponibles para su uso en el sistema.
+- *Flujo Principal*:
+  1. El asistente de producción selecciona la opción de conectar con el gestor de procedimiento de texturas.
+  2. El gestor almacena la imagen en la terminal de asistente de producción en Redacción.
+  3. Cuando se genera el ejecutable de la escaleta guardada, se añade a la terminal de asistente en máster.
+  4. El sistema hace una impronta de las imágenes de la carpeta de texturas en el disco G del Maestro | TX.
+- *Flujos Alternativos*:
+  - Si hay un error al almacenar la imagen, se muestra un mensaje de error.
+
+@startuml
+actor AsistenteProduccion
+AsistenteProduccion -> (Conectar con Gestor de Procedimiento de Texturas)
+(Conectar con Gestor de Procedimiento de Texturas) -> (Almacenar Imagen en Redacción)
+(Almacenar Imagen en Redacción) -> (Generar Ejecutable de Escaleta)
+(Generar Ejecutable de Escaleta) -> (Añadir a Terminal de Asistente en Máster)
+(Añadir a Terminal de Asistente en Máster) -> (Hacer Impronta de Imágenes en Disco G)
+(Conectar con Gestor de Procedimiento de Texturas) --> (Mostrar Mensaje de Error) : [Error]
+(Almacenar Imagen en Redacción) --> (Mostrar Mensaje de Error) : [Error]
 @enduml

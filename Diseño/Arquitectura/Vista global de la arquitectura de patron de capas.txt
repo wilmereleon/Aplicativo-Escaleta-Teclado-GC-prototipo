@@ -1,0 +1,27 @@
+@startuml
+package "Capa de Presentación" {
+    [Interfaz de Usuario] as UI
+}
+
+package "Capa de Lógica del Negocio" {
+    [Servicios] as Services
+}
+
+package "Capa de Dominio" {
+    [Modelos de Dominio] as DomainModels
+}
+
+package "Capa de Acceso a Datos" {
+    [Repositorios] as Repositories
+}
+
+package "Capa de Persistencia" {
+    [SAL] as SAL
+}
+
+UI --> Services : Interacción
+Services --> DomainModels : Lógica de negocio
+DomainModels --> Repositories : Llamada a datos
+Repositories --> SAL : Acceso a datos
+SAL --> DomainModels : Acceso a lógica
+@enduml

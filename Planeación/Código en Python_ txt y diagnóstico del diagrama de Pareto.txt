@@ -1,0 +1,140 @@
+import pandas as pd
+
+# Datos de problemas y sus frecuencias
+data = {
+    'Problema': [
+        'Errores humanos en la inserción de datos',
+        'Falta de capacitación en herramientas Office',
+        'Falta de comunicación de procesos',
+        'Transferencia manual de datos',
+        'Ineficiencia en el proceso de inserción de datos',
+        'Dificultades en gestión de contenidos visuales',
+        'Falta de recursos para adquirir suite completa de AVID',
+        'Limitaciones de orquestación con otros sistemas de control de continuidad',
+        'Falta de servidor de previo',
+        'Dependencia de múltiples pestañas de Excel',
+        'Escalamiento de imágenes y visualización real del texto',
+        'Complicaciones en la gestión de textos',
+        'Limitaciones en la infraestructura',
+        'Software incompatibles con otros sistemas de gestión de GC',
+        'Falta de soporte técnico para resolver problemas',
+        'Falta de personal con competencias básicas en Excel',
+        'Presupuesto limitado para formación y herramientas',
+        'Escasez de recursos para optimización'
+    ],
+    'Frecuencia': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+# Crear un DataFrame
+df = pd.DataFrame(data)
+
+# Asegurarse de que la longitud de las listas sea la misma
+if len(data['Problema']) != len(data['Frecuencia']):
+    raise ValueError("Las listas de Problemas y Frecuencias deben tener la misma longitud.")
+
+# Ordenar los datos por frecuencia
+df = df.sort_values(by='Frecuencia', ascending=False)
+
+# Calcular el porcentaje acumulado
+df['Porcentaje Acumulado'] = df['Frecuencia'].cumsum() / df['Frecuencia'].sum() * 100
+
+# Crear el gráfico de Pareto
+plt.figure(figsize=(24, 12))  # Aumentar el tamaño de la figura
+fig, ax1 = plt.subplots()
+
+# Gráfico de barras con un ancho de barra ajustado
+ax1.bar(df['Problema'], df['Frecuencia'], color='b', alpha=0.7, width=0.4)  # Ajustar el ancho de la barra
+ax1.set_xlabel('Problemas', fontsize=14)
+ax1.set_ylabel('Frecuencia', color='b', fontsize=14)
+ax1.tick_params(axis='y', labelcolor='b')
+ax1.set_xticklabels(df['Problema'], rotation=60, ha='right', fontsize=10)  # Ajustar el tamaño de la fuente y rotación
+
+# Establecer los ticks y límites del eje y
+ax1.set_yticks(range(0, 26))  # Establecer ticks del 0 al 25
+ax1.set_ylim(0, 25)  # Establecer límites del eje y
+
+# Gráfico de línea para el porcentaje acumulado
+ax2 = ax1.twinx()
+ax2.plot(df['Problema'], df['Porcentaje Acumulado'], color='r', marker='o')
+ax2.set_ylabel('Porcentaje Acumulado (%)', color='r', fontsize=14)
+ax2.tick_params(axis='y', labelcolor='r')
+
+# Título y diseño
+plt.title('Diagrama de Pareto de Dificultades en la Inserción de Texto en Excel para Maestro|TX', fontsize=16)
+
+# Ajustar el espacio entre las etiquetas y los ejes
+plt.subplots_adjust(bottom=0.3)  # Aumentar el espacio en la parte inferior
+
+# Guardar el gráfico como un archivo PNG
+plt.savefig('diagrama_pareto_frecuencia_0_25.png', format='png', bbox_inches='tight', dpi=300)
+
+# Mostrar el gráfico
+plt.tight_layout()
+plt.show()
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Diagrama de Pareto de Dificultades en la Inserción de Texto en Excel para AVID Maestro
+
+Problemas y Frecuencias:
+---------------------------------------------------------------------------------------------------------------------------------------------------
+| Problema                                                | Frecuencia | Propuesta de mitigación                                                   |
+---------------------------------------------------------------------------------------------------------------------------------------------------
+| Escasez de recursos para optimización                   |     17     | Desarrollo del aplicativo de visualización de Escaleta-Teclado GC         |
+| Falta de personal con competencias básicas en Excel     |     16     | Capacitación del personal en el aplicativo                                |
+| Falta de soporte técnico para resolver problemas        |     15     | Consideración de alta latencia en el desarrollo y manuales de operación   |
+| Limitaciones en la infraestructura                      |     14     | Portabilidad plena entre ejecutables y componentes en las terminales      |
+| Software incompatibles con otros sistemas de gestión    |     13     | Eje de alimentación con Excel para el aplicativo (intermediación)         |
+| Complicaciones en la gestión de textos                  |     12     | Desarrollo de UX/UI en una ventana desplegable en el aplicativo           |
+| Escalamiento de imágenes y visualización real del texto |     11     | Creación de ventana de edición de alta fidelidad al gráfico real          |
+| Dependencia de múltiples pestañas de Excel              |     10     | Orquestación de todos los contenidos gráficos en una fila                 |
+| Falta de servidor de previo                             |      9     | Manejo de previo en ventana desplegable desde la terminal de alimentación |
+| Limitaciones de orquestación con otros sistemas         |      8     | Centralización de modificaciones en Excel, por medio del aplicativo       |
+| Falta de recursos para adquirir suite completa de AVID  |      7     | -                                                                         |
+| Dificultades en gestión de contenidos visuales          |      6     | Creación de entorno en escala real a la terminal de envío y orquestación  |
+| Ineficiencia en el proceso de inserción de datos        |      5     | Disposición de filas para contenido de escaleta y de celdas Zócalo/Placa  |
+| Transferencia manual de datos                           |      4     | Creación de ejecutables compatibles entre terminales (XML u otros)        |
+| Falta de comunicación de procesos                       |      3     | Manual de operación de usuario                                            |
+| Falta de capacitación en herramientas Office            |      2     | Eliminación de proceso de alimentación directa en hoja de cálculo         |
+| Errores humanos en la inserción de datos                |      1     | -                                                                         |
+| --------------------------------------------------------|------------|---------------------------------------------------------------------------
+| Total de Frecuencia                                     |     25     |
+-----------------------------------------------------------------------
+
+Porcentaje Acumulado:
+--------------------------------------------------------
+| Frecuencia | Porcentaje Acumulado (%)                  |
+--------------------------------------------------------
+|     17     |                     68%                   |
+|     16     |                     84%                   |
+|     15     |                     96%                   |
+|     14     |                    100%                   |
+--------------------------------------------------------
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+
+Dado que la adquisición de más recursos es inviable, se propone desarrollar un aplicativo que orqueste y mejore la visualización de la información desde el usuario que inserta los datos para ser utilizados en AVID Maestro. Este enfoque tiene como objetivo optimizar el proceso de inserción de datos y minimizar los problemas identificados en el Diagrama de Pareto.
+
+#### 1. **Desarrollo de un Aplicativo de Orquestación**
+   - **Objetivo**: Crear una herramienta que facilite la inserción de datos, minimizando errores humanos y mejorando la experiencia del usuario.
+   - **Características del Aplicativo**:
+     - **Interfaz de Usuario Amigable**: Diseñar una interfaz intuitiva que guíe al usuario a través del proceso de inserción de datos, reduciendo la posibilidad de errores.
+     - **Validación de Datos**: Implementar vistas en tiempo real para asegurar que los datos ingresados sean verificables y estén en el formato adecuado antes de ser salvados y enviados a través de la terminal AVID Maestro.
+     - **Integración con Excel**: Permitir la importación directa de datos desde Excel, reduciendo la dependencia de múltiples pestañas y facilitando la transferencia de información; por medio de una orquestación en la escaleta.
+     - **Visualización de Contenidos**: Proporcionar herramientas para visualizar los datos antes de su inserción, lo que permitirá a los usuarios verificar la información y hacer ajustes si es necesario.
+     - **Capacitación Integrada**: Incluir tutoriales y guías dentro del aplicativo para capacitar a los usuarios en el uso y en el manejo del aplicativo.
+
+#### 2. **Prioridades Basadas en el Diagrama de Pareto**
+   - **Enfoque en Problemas Críticos**: Utilizar el Diagrama de Pareto para identificar los problemas más significativos que afectan la inserción de datos. Los problemas con mayor frecuencia deben ser abordados primero en el desarrollo del aplicativo.
+   - **Capacitación y Soporte**: Aunque el desarrollo del aplicativo es una prioridad, también se debe considerar la capacitación del personal en el uso y en el manejo del nuevo aplicativo. Esto ayudará a reducir la falta de competencias básicas en Excel y a mejorar la comunicación de procesos.
+
+#### 3. **Implementación y Evaluación**
+   - **Fases de Desarrollo**: Dividir el desarrollo del aplicativo en fases, comenzando con un prototipo que incluya las características más críticas. Esto permitirá realizar pruebas y ajustes antes de un lanzamiento completo.
+   - **Evaluación Continua**: Implementar un sistema de retroalimentación donde los usuarios puedan reportar problemas y sugerencias sobre el aplicativo. Esto ayudará a realizar mejoras continuas y a asegurar que el aplicativo cumpla con las necesidades de los usuarios.
+
+### Conclusión
+
+El desarrollo de un aplicativo que orqueste y mejore la visualización de la información es una solución viable para abordar las dificultades en la inserción de texto en Excel para AVID Maestro. Al centrarse en la usabilidad y la validación de datos, se espera que este enfoque reduzca significativamente los errores y mejore la eficiencia del proceso. Además, al priorizar los problemas más críticos identificados en el Diagrama de Pareto, se maximizará el impacto positivo del aplicativo en el flujo de trabajo.

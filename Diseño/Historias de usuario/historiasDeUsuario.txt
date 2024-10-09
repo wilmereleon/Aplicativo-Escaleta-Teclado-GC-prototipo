@@ -142,6 +142,7 @@ Historias de usuario:
     - *Quiero* insertar datos en la sección Placas/EQUIPOS,
     - *Para* poder registrar información sobre los equipos, incluyendo POSI, NOMBRES, CABECERA y COLORES.
     - *Criterios de Aceptación*:
+        - Puedo insertar en la CABECERA un “título” de dos líneas, el nombre del LOGO, escoger entre LOGO o FOTO y un “subtítulo” de dos líneas.
         - Puedo insertar hasta 12 datos numéricos en la columna POSI.
         - Puedo insertar texto alfanumérico de hasta 50 caracteres en la columna NOMBRES, con un máximo de 12 datos.
         - La columna CABECERA debe contener el nombre del competidor o equipo, la TEXTURA y el TIPO DE TEXTURA.
