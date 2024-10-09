@@ -1,0 +1,15 @@
+@startuml
+robust "Asistente de Producción" as AP
+@0
+AP is INI : "Inicio"
+@1
+AP is ID : "Evento: Insertar Datos"
+@2
+AP is VD : "Evento: Verificar Datos"
+@3
+AP is AD : "Evento: Ajustar Datos"
+@4
+AP is IE : "Evento: Impronta en Excel"
+@5
+AP is FIN : "Evento: Finalizar"
+@enduml

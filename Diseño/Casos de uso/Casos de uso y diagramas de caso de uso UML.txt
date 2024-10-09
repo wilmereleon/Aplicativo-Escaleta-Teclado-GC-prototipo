@@ -1,0 +1,502 @@
+### Casos de Uso y Diagramas UML en PlantUML
+
+#### Caso de Uso 1: Acceso al Módulo DCSHA
+- *Actor*: Productor
+- *Descripción*: El productor abre la aplicación e ingresa al módulo DCSHA para gestionar la programación de contenidos.
+- *Precondiciones*: El productor tiene acceso a la aplicación.
+- *Postcondiciones*: El productor puede ver y gestionar la programación de contenidos.
+- *Flujo Principal*:
+  1. El productor abre la aplicación.
+  2. El productor selecciona el módulo DCSHA.
+  3. La interfaz del módulo DCSHA se carga correctamente.
+- *Flujos Alternativos*:
+  - Si la aplicación no se abre, se muestra un mensaje de error.
+  - Si el módulo DCSHA no se carga, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+Productor -> (Abrir Aplicación)
+Productor -> (Seleccionar Módulo DCSHA)
+(Abrir Aplicación) --> (Mostrar Mensaje de Error) : [Error]
+(Seleccionar Módulo DCSHA) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 2: Opciones de Plantilla
+- *Actor*: Productor
+- *Descripción*: El productor selecciona una opción de plantilla para la programación de contenidos.
+- *Precondiciones*: El productor está en el módulo DCSHA.
+- *Postcondiciones*: La plantilla seleccionada se carga correctamente.
+- *Flujo Principal*:
+  1. El productor selecciona «plantilla base», «plantilla de día anterior» o importar de Histórico.
+  2. La opción seleccionada se carga en el sistema.
+- *Flujos Alternativos*:
+  - Si la opción seleccionada no se carga, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+Productor -> (Seleccionar Plantilla Base)
+Productor -> (Seleccionar Plantilla Día Anterior)
+Productor -> (Importar de Histórico)
+(Seleccionar Plantilla Base) --> (Mostrar Mensaje de Error) : [Error]
+(Seleccionar Plantilla Día Anterior) --> (Mostrar Mensaje de Error) : [Error]
+(Importar de Histórico) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 3: Uso de Plantilla Base
+- *Actor*: Productor
+- *Descripción*: El productor edita una escaleta basada en la plantilla base.
+- *Precondiciones*: El productor ha seleccionado la opción de «plantilla base».
+- *Postcondiciones*: La escaleta editable se guarda correctamente.
+- *Flujo Principal*:
+  1. El productor selecciona «plantilla base».
+  2. Se despliega una ventana con una escaleta editable.
+  3. El productor asigna nombres, tipos e IDs a las filas.
+- *Flujos Alternativos*:
+  - Si la ventana no se despliega, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+
+rectangle "Escaleta" {
+    (Seleccionar Plantilla Base)
+    (Desplegar Escaleta Editable)
+    (Asignar Nombres, Tipos e IDs)
+    (Editar Escaleta)
+    (Mostrar Mensaje de Error)
+}
+
+Productor -> (Seleccionar Plantilla Base)
+(Seleccionar Plantilla Base) -> (Desplegar Escaleta Editable)
+(Desplegar Escaleta Editable) -> (Asignar Nombres, Tipos e IDs)
+(Asignar Nombres, Tipos e IDs) -> (Editar Escaleta)
+(Seleccionar Plantilla Base) --> (Mostrar Mensaje de Error) : [Error]
+
+@enduml
+
+
+#### Caso de Uso 4: Inserción de ID
+- *Actor*: Productor
+- *Descripción*: El productor inserta IDs alfanuméricos y el sistema verifica duplicados.
+- *Precondiciones*: El productor está editando una escaleta.
+- *Postcondiciones*: Los IDs se guardan sin duplicados.
+- *Flujo Principal*:
+  1. El productor inserta un ID alfanumérico.
+  2. El sistema verifica si el ID ya existe.
+  3. Si el ID no existe, se guarda.
+- *Flujos Alternativos*:
+  - Si el ID ya existe, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+Productor -> (Insertar ID Alfanumérico)
+(Insertar ID Alfanumérico) -> (Verificar ID Existente)
+(Verificar ID Existente) -> (Guardar ID) : [No Existe]
+(Verificar ID Existente) --> (Mostrar Mensaje de Error) : [Existe]
+@enduml
+
+
+#### Caso de Uso 5: Totalidad del Tiempo de Emisión
+- *Actor*: Productor
+- *Descripción*: El productor asigna un tiempo total de emisión al separador de bloque.
+- *Precondiciones*: El productor está editando una escaleta.
+- *Postcondiciones*: El tiempo total de emisión se muestra y cuenta regresivamente.
+- *Flujo Principal*:
+  1. El productor asigna un tiempo total de emisión.
+  2. El tiempo se muestra en el panel superior de la escaleta.
+  3. El tiempo se cuenta regresivamente durante la emisión.
+- *Flujos Alternativos*:
+  - Si el tiempo no se muestra, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+Productor -> (Asignar Tiempo Total de Emisión)
+(Asignar Tiempo Total de Emisión) -> (Mostrar Tiempo en Panel Superior)
+(Mostrar Tiempo en Panel Superior) -> (Contar Regresivamente)
+(Asignar Tiempo Total de Emisión) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 6: Asignación de Tiempos a Bloques
+- *Actor*: Productor
+- *Descripción*: El productor asigna tiempos a cada bloque de contenido.
+- *Precondiciones*: El productor está editando una escaleta.
+- *Postcondiciones*: El tiempo estimado se deduce del tiempo total de emisión y se muestra el tiempo restante.
+- *Flujo Principal*:
+  1. El productor asigna tiempos a los bloques de contenido.
+  2. El tiempo estimado se deduce del tiempo total de emisión.
+  3. El tiempo restante se muestra correctamente.
+- *Flujos Alternativos*:
+  - Si el tiempo no se muestra, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Productor
+Productor -> (Asignar Tiempos a Bloques)
+(Asignar Tiempos a Bloques) -> (Deducir Tiempo Estimado)
+(Deducir Tiempo Estimado) -> (Mostrar Tiempo Restante)
+(Asignar Tiempos a Bloques) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 7: Asignación de Números de Inserción
+- *Actor*: Sistema
+- *Descripción*: El sistema asigna números de inserción de forma ascendente a cada una de las identidades de los Zócalos.
+- *Precondiciones*: El sistema está operativo.
+- *Postcondiciones*: Los números de inserción son únicos y no se repiten.
+- *Flujo Principal*:
+  1. El sistema asigna números de inserción de forma ascendente.
+  2. Los números de inserción son únicos y no se repiten.
+- *Flujos Alternativos*:
+  - Si hay un error en la asignación, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Sistema
+Sistema -> (Asignar Números de Inserción)
+(Asignar Números de Inserción) -> (Verificar Unicidad)
+(Verificar Unicidad) -> (Guardar Números de Inserción)
+(Asignar Números de Inserción) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 8: Acceso del Asistente de Producción
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción accede a cada una de las celdas de la escaleta.
+- *Precondiciones*: El asistente de producción tiene acceso a la escaleta.
+- *Postcondiciones*: Las celdas se gestionan correctamente según su tipo.
+- *Flujo Principal*:
+  1. El asistente de producción accede a las celdas de la escaleta.
+  2. El asistente crea y gestiona celdas de diferentes tipos.
+- *Flujos Alternativos*:
+  - Si hay un error en el acceso, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor AsistenteDeProducción
+AsistenteDeProducción -> (Acceder a Celdas de la Escaleta)
+(Acceder a Celdas de la Escaleta) -> (Crear y Gestionar Celdas)
+(Acceder a Celdas de la Escaleta) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+#### Caso de Uso 9: Inserción de Zócalos
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta Zócalos y escoge entre diferentes tipos.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: Los Zócalos se insertan correctamente en la escaleta.
+- *Flujo Principal*:
+  1. El asistente selecciona el tipo de Zócalo (TITULOS, CATASTROFE, 2 LINEAS, VENTAS, TEXTUALES).
+  2. El asistente inserta el Zócalo en la escaleta.
+- *Flujos Alternativos*:
+  - Si el Zócalo no se inserta correctamente, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor AsistenteDeProducción
+AsistenteDeProducción -> (Seleccionar Tipo de Zócalo)
+AsistenteDeProducción -> (Insertar Zócalo en Escaleta)
+(Seleccionar Tipo de Zócalo) --> (Mostrar Mensaje de Error) : [Error]
+(Insertar Zócalo en Escaleta) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+####Caso de Uso 10: Asignar Números de ID
+- *Actor*: Sistema
+- *Descripción*: El sistema asigna números de inserción de forma ascendente a cada una de las identidades de los Zócalos.
+- *Precondiciones*: Los Zócalos han sido insertados en la escaleta.
+- *Postcondiciones*: Los números de inserción son únicos y se asignan correctamente.
+- *Flujo Principal*:
+  1. El sistema verifica los Zócalos insertados.
+  2. El sistema asigna números de inserción de forma ascendente.
+  3. El sistema asegura que los números de inserción son únicos.
+- *Flujos Alternativos*:
+  - Si hay un error en la asignación, se muestra un mensaje de error.
+
+@startuml
+actor Sistema
+
+rectangle "Zócalo" {
+    (Verificar Zócalos Insertados)
+    (Asignar Números de Inserción)
+    (Asegurar Unicidad de Números)
+    (Mostrar Mensaje de Error)
+}
+
+Sistema -> (Verificar Zócalos Insertados)
+(Verificar Zócalos Insertados) -> (Asignar Números de Inserción)
+(Asignar Números de Inserción) -> (Asegurar Unicidad de Números)
+(Asignar Números de Inserción) --> (Mostrar Mensaje de Error) : [Error]
+
+@enduml
+
+
+#### Caso de Uso 11: Inserción de Zócalos - TITULOS
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta un texto alfanumérico en los campos de SOLAPA y TITULO dentro de Zócalos/TITULOS.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: El texto se ajusta a los límites de caracteres establecidos y se apiña si es necesario.
+- *Flujo Principal*:
+  1. El asistente inserta texto en los campos de SOLAPA y TITULO.
+  2. El texto se ajusta a los límites de caracteres establecidos.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+plantuml
+@startuml
+actor AsistenteDeProducción
+AsistenteDeProducción -> (Insertar Texto en SOLAPA)
+AsistenteDeProducción -> (Insertar Texto en TITULO)
+(Insertar Texto en SOLAPA) -> (Ajustar Texto a Límite)
+(Insertar Texto en TITULO) -> (Ajustar Texto a Límite)
+(Insertar Texto en SOLAPA) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en TITULO) --> (Apiñar Texto) : [Excede Límite]
+@enduml
+
+
+#### Caso de Uso 12: Inserción de Zócalos - CATASTROFE
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta un texto alfanumérico en los campos de SOLAPA y TEXTO dentro de Zócalos/CATASTROFE.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: El texto se ajusta a los límites de caracteres establecidos y se apiña si es necesario.
+- *Flujo Principal*:
+  1. El asistente inserta texto en los campos de SOLAPA y TEXTO.
+  2. El texto se ajusta a los límites de caracteres establecidos.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+@startuml
+actor AsistenteDeProducción
+
+rectangle "Zócalo/CATASTROFE" {
+    (Insertar Texto en SOLAPA) 
+    (Insertar Texto en TEXTO)
+    (Ajustar Texto a Límite)
+    (Apiñar Texto)
+}
+
+AsistenteDeProducción -> (Insertar Texto en SOLAPA)
+AsistenteDeProducción -> (Insertar Texto en TEXTO)
+
+(Insertar Texto en SOLAPA) -> (Ajustar Texto a Límite)
+(Insertar Texto en TEXTO) -> (Ajustar Texto a Límite)
+
+(Insertar Texto en SOLAPA) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en TEXTO) --> (Apiñar Texto) : [Excede Límite]
+
+@enduml
+
+
+#### Caso de Uso 13: Inserción de Zócalos - 2 LINEAS
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta un texto alfanumérico en los campos de SOLAPA, LINEA 1 y LINEA 2 dentro de Zócalos/2 LINEAS.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: El texto se ajusta a los límites de caracteres establecidos y se apiña si es necesario.
+- *Flujo Principal*:
+  1. El asistente inserta texto en los campos de SOLAPA, LINEA 1 y LINEA 2.
+  2. El texto se ajusta a los límites de caracteres establecidos.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+@startuml
+actor AsistenteDeProducción
+
+rectangle "Zócalo/2 LINEAS" {
+    (Insertar Texto en SOLAPA) 
+    (Insertar Texto en LINEA 1) 
+    (Insertar Texto en LINEA 2) 
+    (Ajustar Texto a Límite)
+    (Apiñar Texto)
+}
+
+AsistenteDeProducción -> (Insertar Texto en SOLAPA)
+AsistenteDeProducción -> (Insertar Texto en LINEA 1)
+AsistenteDeProducción -> (Insertar Texto en LINEA 2)
+
+(Insertar Texto en SOLAPA) -> (Ajustar Texto a Límite)
+(Insertar Texto en LINEA 1) -> (Ajustar Texto a Límite)
+(Insertar Texto en LINEA 2) -> (Ajustar Texto a Límite)
+
+(Insertar Texto en SOLAPA) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en LINEA 1) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en LINEA 2) --> (Apiñar Texto) : [Excede Límite]
+
+@enduml
+
+
+#### Caso de Uso 14: Inserción de Zócalos - VENTAS
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta texto numérico y alfanumérico en los campos de Zócalos/VENTAS.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: El texto se ajusta a los límites de caracteres establecidos y se apiña si es necesario.
+- *Flujo Principal*:
+  1. El asistente inserta texto en los campos de Zócalos/VENTAS.
+  2. El texto se ajusta a los límites de caracteres establecidos.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+plantuml
+@startuml
+actor AsistenteDeProducción
+AsistenteDeProducción -> (Insertar Texto en Zócalos/VENTAS)
+(Insertar Texto en Zócalos/VENTAS) -> (Ajustar Texto a Límite)
+(Insertar Texto en Zócalos/VENTAS) --> (Apiñar Texto) : [Excede Límite]
+@enduml
+
+#### Caso de Uso 15: Inserción de Zócalos - TEXTUALES
+plantuml
+@startuml
+actor AsistenteDeProducción
+
+left to right direction
+AsistenteDeProducción -> (Insertar Texto en TEXTUAL 1)
+AsistenteDeProducción -> (Insertar Texto en TEXTUAL 2)
+AsistenteDeProducción -> (Insertar Texto en TEXTUAL 3)
+AsistenteDeProducción -> (Insertar Texto en TEXTUAL 4)
+AsistenteDeProducción -> (Escoger ICONO)
+
+(Insertar Texto en TEXTUAL 1) --> (Ajustar Texto a Límite)
+(Insertar Texto en TEXTUAL 2) --> (Ajustar Texto a Límite)
+(Insertar Texto en TEXTUAL 3) --> (Ajustar Texto a Límite)
+(Insertar Texto en TEXTUAL 4) --> (Ajustar Texto a Límite)
+
+(Insertar Texto en TEXTUAL 1) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en TEXTUAL 2) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en TEXTUAL 3) --> (Apiñar Texto) : [Excede Límite]
+(Insertar Texto en TEXTUAL 4) --> (Apiñar Texto) : [Excede Límite]
+
+
+
+#### Caso de Uso 16: Inserción de Placas por el Asistente de Producción
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta Placas para gestionar diferentes tipos de datos relacionados con los equipos y sus características.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: Las Placas se gestionan correctamente según sus características.
+- *Flujo Principal*:
+  1. El asistente inserta diferentes tipos de Placas.
+  2. La información de las Placas se ajusta a los límites de caracteres establecidos.
+- *Flujos Alternativos*:
+  - Si la Placa no se inserta correctamente, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Asistente de Producción
+Asistente de Producción -> (Insertar Placas)
+(Insertar Placas) -> (Ajustar Información a Límite)
+(Insertar Placas) --> (Mostrar Mensaje de Error) : [Error]
+@enduml
+
+
+#### Caso de Uso 17: Inserción de datos en Placas/EQUIPOS
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta datos en la sección Placas/EQUIPOS para registrar información sobre los equipos.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: La información se ajusta a los límites de caracteres establecidos.
+- *Flujo Principal*:
+  1. El asistente inserta datos en la columna POSI.
+  2. El asistente inserta texto en la columna NOMBRES.
+  3. El asistente inserta datos en la columna CABECERA.
+  4. El asistente selecciona entre NORMAL y DESTACADO en la columna COLORES.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+plantuml
+@startuml
+actor Asistente de Producción
+Asistente de Producción -> (Insertar Datos en POSI)
+Asistente de Producción -> (Insertar Texto en NOMBRES)
+Asistente de Producción -> (Insertar Datos en CABECERA)
+Asistente de Producción -> (Seleccionar COLORES)
+(Insertar Datos en POSI) -> (Ajustar Información a Límite)
+(Insertar Texto en NOMBRES) -> (Ajustar Información a Límite)
+(Insertar Datos en CABECERA) -> (Ajustar Información a Límite)
+(Seleccionar COLORES) -> (Ajustar Información a Límite)
+(Insertar Texto en NOMBRES) --> (Apiñar Texto) : [Excede Límite]
+@enduml
+
+
+#### Caso de Uso 18: Inserción de datos en Placas/DATOS EQUIPOS
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta datos en la sección Placas/DATOS EQUIPOS para registrar información detallada sobre los equipos.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: La información se ajusta a los límites de caracteres establecidos.
+- *Flujo Principal*:
+  1. El asistente inserta datos en la columna NUM.
+  2. El asistente inserta texto en la columna NOMBRES.
+  3. El asistente inserta datos en las columnas PAIS, EQUIPO y TIEMPO.
+  4. El asistente selecciona entre NORMAL y DESTACADO en la columna COLORES.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+plantuml
+@startuml
+actor Asistente de Producción
+Asistente de Producción -> (Insertar Datos en NUM)
+Asistente de Producción -> (Insertar Texto en NOMBRES)
+Asistente de Producción -> (Insertar Datos en PAIS)
+Asistente de Producción -> (Insertar Datos en EQUIPO)
+Asistente de Producción -> (Insertar Datos en TIEMPO)
+Asistente de Producción -> (Seleccionar COLORES)
+(Insertar Datos en NUM) -> (Ajustar Información a Límite)
+(Insertar Texto en NOMBRES) -> (Ajustar Información a Límite)
+(Insertar Datos en PAIS) -> (Ajustar Información a Límite)
+(Insertar Datos en EQUIPO) -> (Ajustar Información a Límite)
+(Insertar Datos en TIEMPO) -> (Ajustar Información a Límite)
+(Seleccionar COLORES) -> (Ajustar Información a Límite)
+(Insertar Texto en NOMBRES) --> (Apiñar Texto) : [Excede Límite]
+@enduml
+
+
+#### Caso de Uso 19: Inserción de datos en Placas/PVENTAX1
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción inserta datos en la sección Placas/PVENTAX1 para gestionar información sobre las ventas.
+- *Precondiciones*: El asistente de producción está editando una escaleta.
+- *Postcondiciones*: La información se ajusta a los límites de caracteres establecidos.
+- *Flujo Principal*:
+  1. El asistente selecciona la TEXTURA en la columna LOGO.
+  2. El asistente inserta texto en la columna TEXTO.
+  3. El asistente inserta datos en la columna INFO.
+- *Flujos Alternativos*:
+  - Si el texto excede el límite de caracteres, se apiña.
+
+plantuml
+@startuml
+actor Asistente de Producción
+Asistente de Producción -> (Seleccionar TEXTURA en LOGO)
+Asistente de Producción -> (Insertar Texto en TEXTO)
+Asistente de Producción -> (Insertar Datos en INFO)
+(Seleccionar TEXTURA en LOGO) -> (Ajustar Información a Límite)
+(Insertar Texto en TEXTO) -> (Ajustar Información a Límite)
+(Insertar Datos en INFO) -> (Ajustar Información a Límite)
+(Insertar Texto en TEXTO) --> (Apiñar Texto) : [Excede Límite]
+@enduml
+
+
+#### Caso de Uso 20: Lectura de celdas de ID para el índice
+- *Actor*: Sistema
+- *Descripción*: El sistema lee las celdas de ID de cada pestaña del documento DE_CICLISMO_2023 para numerar automáticamente el índice y hacer impronta en el Excel.
+- *Precondiciones*: El sistema está operativo.
+- *Postcondiciones*: El índice generado refleja la numeración basada en los ID leídos.
+- *Flujo Principal*:
+  1. El sistema identifica y lee las celdas de ID en cada pestaña.
+  2. El índice generado refleja la numeración basada en los ID leídos.
+  3. La impronta en el Excel es precisa y está alineada con los datos leídos.
+- *Flujos Alternativos*:
+  - Si hay un error en la lectura de las celdas de ID, se muestra un mensaje de error.
+
+plantuml
+@startuml
+actor Sistema
+Sistema -> (Identificar Celdas de ID)
+Sistema -> (Leer Celdas de ID)
+(Identificar Celdas de ID) -> (Generar Índice)
+(Leer Celdas de ID) -> (Generar Índice)
+(Generar Índice) -> (Hacer Impronta en Excel)
+(Identificar Celdas de ID) --> (Mostrar Mensaje de Error) : [Error]
+(Leer Celdas de ID) --> (Mostrar Mensaje de Error) : [Error]
+@enduml

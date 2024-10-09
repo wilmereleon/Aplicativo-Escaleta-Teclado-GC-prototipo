@@ -1,0 +1,115 @@
+@startuml
+package "Sistema de Gestión de Contenidos" {
+    class Aplicación {
+        +abrir()
+        +cerrar()
+    }
+
+    class MóduloDCSHA {
+        +gestionarProgramación()
+    }
+
+    class MóduloPlantillas {
+        +seleccionarPlantilla()
+    }
+
+    class MóduloZócalos {
+        +gestionarZócalos()
+    }
+
+    class MóduloEscaleta {
+        +gestionarEscaleta()
+    }
+
+    Aplicación --> MóduloDCSHA
+    Aplicación --> MóduloPlantillas
+    Aplicación --> MóduloZócalos
+    Aplicación --> MóduloEscaleta
+
+    MóduloDCSHA --> GestiónProgramación
+    MóduloPlantillas --> OpcionesPlantilla
+    MóduloZócalos --> GestiónZócalos
+    MóduloEscaleta --> GestiónEscaleta
+
+    class GestiónProgramación {
+        +programarContenido()
+    }
+
+    class OpcionesPlantilla {
+        +cargarPlantilla()
+    }
+
+    class GestiónZócalos {
+        +insertarZócalo()
+    }
+
+    class GestiónEscaleta {
+        +editarEscaleta()
+    }
+
+    GestiónProgramación --> InterfazProgramación
+    OpcionesPlantilla --> InterfazPlantillas
+    GestiónZócalos --> InterfazZócalos
+    GestiónEscaleta --> InterfazEscaleta
+}
+
+package "Interfaces" {
+    interface InterfazProgramación {
+        +mostrarProgramación()
+    }
+
+    interface InterfazPlantillas {
+        +mostrarPlantillas()
+    }
+
+    interface InterfazZócalos {
+        +mostrarZócalos()
+    }
+
+    interface InterfazEscaleta {
+        +mostrarEscaleta()
+    }
+
+    InterfazProgramación <|-- GestiónProgramación
+    InterfazPlantillas <|-- OpcionesPlantilla
+    InterfazZócalos <|-- GestiónZócalos
+    InterfazEscaleta <|-- GestiónEscaleta
+}
+
+package "Componentes" {
+    class BaseDeDatos {
+        +almacenarDatos()
+        +recuperarDatos()
+    }
+
+    class Servidor {
+        +procesarSolicitudes()
+    }
+
+    class Cliente {
+        +enviarSolicitudes()
+        +recibirRespuestas()
+    }
+
+    Aplicación --> BaseDeDatos
+    BaseDeDatos --> Servidor
+    Servidor --> Cliente
+}
+
+Cliente --> InterfazUsuario
+Servidor --> APIREST
+BaseDeDatos --> GestiónDatos
+
+interface InterfazUsuario {
+    +interactuar()
+}
+
+interface APIREST {
+    +procesar()
+}
+
+interface GestiónDatos {
+    +almacenar()
+    +recuperar()
+}
+@enduml

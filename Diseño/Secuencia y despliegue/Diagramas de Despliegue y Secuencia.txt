@@ -1,0 +1,614 @@
+### Diagramas de Despliegue y Secuencia en PlantUML para Cada Caso de Uso
+
+#### Caso de Uso 1: Acceso al Módulo DCSHA
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo DCSHA]
+}
+
+Cliente --> Servidor : Solicitud de acceso
+Servidor --> Cliente : Respuesta de acceso
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloDCSHA
+
+Productor -> Aplicación : abrir()
+Aplicación -> MóduloDCSHA : seleccionar()
+MóduloDCSHA -> Aplicación : cargarInterfaz()
+Aplicación -> Productor : mostrarInterfaz()
+@enduml
+
+
+#### Caso de Uso 2: Opciones de Plantilla
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Plantillas]
+}
+
+Cliente --> Servidor : Solicitud de plantilla
+Servidor --> Cliente : Respuesta de plantilla
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloPlantillas
+
+Productor -> Aplicación : seleccionarPlantilla()
+Aplicación -> MóduloPlantillas : cargarPlantilla()
+MóduloPlantillas -> Aplicación : mostrarOpciones()
+Aplicación -> Productor : mostrarPlantilla()
+@enduml
+
+
+#### Caso de Uso 3: Uso de Plantilla Base
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Plantillas]
+}
+
+Cliente --> Servidor : Solicitud de plantilla base
+Servidor --> Cliente : Respuesta de plantilla base
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloPlantillas
+
+Productor -> Aplicación : seleccionarPlantillaBase()
+Aplicación -> MóduloPlantillas : cargarPlantillaBase()
+MóduloPlantillas -> Aplicación : desplegarEscaleta()
+Aplicación -> Productor : mostrarEscaletaEditable()
+@enduml
+
+
+#### Caso de Uso 4: Inserción de ID
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Escaleta]
+}
+
+Cliente --> Servidor : Solicitud de inserción de ID
+Servidor --> Cliente : Respuesta de verificación de ID
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloEscaleta
+
+Productor -> Aplicación : insertarID()
+Aplicación -> MóduloEscaleta : verificarID()
+MóduloEscaleta -> Aplicación : resultadoVerificación()
+Aplicación -> Productor : mostrarResultado()
+@enduml
+
+
+#### Caso de Uso 5: Totalidad del Tiempo de Emisión
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Escaleta]
+}
+
+Cliente --> Servidor : Solicitud de asignación de tiempo
+Servidor --> Cliente : Respuesta de tiempo asignado
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloEscaleta
+
+Productor -> Aplicación : asignarTiempoTotal()
+Aplicación -> MóduloEscaleta : mostrarTiempo()
+MóduloEscaleta -> Aplicación : actualizarTiempo()
+Aplicación -> Productor : mostrarTiempoRestante()
+@enduml
+
+#### Caso de Uso 6: Asignación de Tiempos a Bloques
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Escaleta]
+}
+
+Cliente --> Servidor : Solicitud de asignación de tiempos
+Servidor --> Cliente : Respuesta de tiempos asignados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Productor
+participant Aplicación
+participant MóduloEscaleta
+
+Productor -> Aplicación : asignarTiempos()
+Aplicación -> MóduloEscaleta : deducirTiempo()
+MóduloEscaleta -> Aplicación : actualizarTiempoRestante()
+Aplicación -> Productor : mostrarTiempoRestante()
+@enduml
+
+
+#### Caso de Uso 7: Asignación de Números de Inserción
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Sistema" {
+    [Módulo Zócalos]
+}
+
+node "Base de Datos" {
+    [Gestión de Zócalos]
+}
+
+Sistema --> Base de Datos : Solicitud de asignación de números
+Base de Datos --> Sistema : Respuesta de números asignados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Sistema
+participant MóduloZócalos
+participant BaseDeDatos
+
+Sistema -> MóduloZócalos : asignarNúmeros()
+MóduloZócalos -> BaseDeDatos : verificarUnicidad()
+BaseDeDatos -> MóduloZócalos : númerosAsignados()
+MóduloZócalos -> Sistema : mostrarNúmeros()
+@enduml
+
+
+#### Caso de Uso 8: Acceso del Asistente de Producción
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Escaleta]
+}
+
+Cliente --> Servidor : Solicitud de acceso a celdas
+Servidor --> Cliente : Respuesta de acceso a celdas
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloEscaleta
+
+AsistenteProducción -> Aplicación : accederCeldas()
+Aplicación -> MóduloEscaleta : gestionarCeldas()
+MóduloEscaleta -> Aplicación : mostrarCeldas()
+Aplicación -> AsistenteProducción : mostrarCeldas()
+@enduml
+
+
+#### Caso de Uso 9: Inserción de Zócalos
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de zócalos
+Servidor --> Cliente : Respuesta de zócalos insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : seleccionarTipoZócalo()
+Aplicación -> MóduloZócalos : insertarZócalo()
+MóduloZócalos -> Aplicación : confirmarInserción()
+Aplicación -> AsistenteProducción : mostrarConfirmación()
+@enduml
+
+
+#### Caso de Uso 10: Inserción de Zócalos - TITULOS
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de TITULOS
+Servidor --> Cliente : Respuesta de TITULOS insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : insertarTextoTITULOS()
+Aplicación -> MóduloZócalos : verificarTexto()
+MóduloZócalos -> Aplicación : ajustarTexto()
+Aplicación -> AsistenteProducción : mostrarTextoAjustado()
+@enduml
+
+
+#### Caso de Uso 11: Inserción de Zócalos - CATASTROFE
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de CATASTROFE
+Servidor --> Cliente : Respuesta de CATASTROFE insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : insertarTextoCATASTROFE()
+Aplicación -> MóduloZócalos : verificarTexto()
+MóduloZócalos -> Aplicación : ajustarTexto()
+
+alt Texto ajustado correctamente
+    Aplicación -> AsistenteProducción : mostrarTextoAjustado()
+else Error en la inserción
+    Aplicación -> MóduloZócalos : mostrarMensajeError()
+    MóduloZócalos -> Aplicación : errorDetalles()
+    Aplicación -> AsistenteProducción : mostrarMensajeError()
+end
+
+@enduml
+
+#### Caso de Uso 12: Inserción de Zócalos - 2 LINEAS
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de 2 LINEAS
+Servidor --> Cliente : Respuesta de 2 LINEAS insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : insertarTexto2LINEAS()
+Aplicación -> MóduloZócalos : verificarTexto()
+MóduloZócalos -> Aplicación : ajustarTexto()
+Aplicación -> AsistenteProducción : mostrarTextoAjustado()
+@enduml
+
+
+#### Caso de Uso 13: Inserción de Zócalos - VENTAS
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de VENTAS
+Servidor --> Cliente : Respuesta de VENTAS insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : insertarTextoVENTAS()
+Aplicación -> MóduloZócalos : verificarTexto()
+MóduloZócalos -> Aplicación : ajustarTexto()
+Aplicación -> AsistenteProducción : mostrarTextoAjustado()
+@enduml
+
+
+#### Caso de Uso 14: Inserción de Zócalos - TEXTUALES
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Zócalos]
+}
+
+Cliente --> Servidor : Solicitud de inserción de TEXTUALES
+Servidor --> Cliente : Respuesta de TEXTUALES insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloZócalos
+
+AsistenteProducción -> Aplicación : insertarTextoTEXTUALES()
+Aplicación -> MóduloZócalos : verificarTexto()
+MóduloZócalos -> Aplicación : ajustarTexto()
+Aplicación -> AsistenteProducción : mostrarTextoAjustado()
+@enduml
+
+
+#### Caso de Uso 15: Inserción de Placas por el Asistente de Producción
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Placas]
+}
+
+Cliente --> Servidor : Solicitud de inserción de placas
+Servidor --> Cliente : Respuesta de placas insertadas
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloPlacas
+
+AsistenteProducción -> Aplicación : insertarPlacas()
+Aplicación -> MóduloPlacas : verificarPlacas()
+MóduloPlacas -> Aplicación : ajustarPlacas()
+Aplicación -> AsistenteProducción : mostrarPlacasAjustadas()
+@enduml
+
+#### Caso de Uso 16: Inserción de datos en Placas/EQUIPOS (continuación)
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Placas]
+}
+
+Cliente --> Servidor : Solicitud de inserción de datos en EQUIPOS
+Servidor --> Cliente : Respuesta de datos insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloPlacas
+
+AsistenteProducción -> Aplicación : insertarDatosEQUIPOS()
+Aplicación -> MóduloPlacas : verificarDatos()
+MóduloPlacas -> Aplicación : ajustarDatos()
+Aplicación -> AsistenteProducción : mostrarDatosAjustados()
+@enduml
+
+
+#### Caso de Uso 17: Inserción de datos en Placas/DATOS EQUIPOS
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Placas]
+}
+
+Cliente --> Servidor : Solicitud de inserción de datos en DATOS EQUIPOS
+Servidor --> Cliente : Respuesta de datos insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloPlacas
+
+AsistenteProducción -> Aplicación : insertarDatosDATOS_EQUIPOS()
+Aplicación -> MóduloPlacas : verificarDatos()
+MóduloPlacas -> Aplicación : ajustarDatos()
+Aplicación -> AsistenteProducción : mostrarDatosAjustados()
+@enduml
+
+
+#### Caso de Uso 18: Inserción de datos en Placas/PVENTAX1
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Cliente" {
+    [Aplicación]
+}
+
+node "Servidor" {
+    [Módulo Placas]
+}
+
+Cliente --> Servidor : Solicitud de inserción de datos en PVENTAX1
+Servidor --> Cliente : Respuesta de datos insertados
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor AsistenteProducción
+participant Aplicación
+participant MóduloPlacas
+
+AsistenteProducción -> Aplicación : insertarDatosPVENTAX1()
+Aplicación -> MóduloPlacas : verificarDatos()
+MóduloPlacas -> Aplicación : ajustarDatos()
+Aplicación -> AsistenteProducción : mostrarDatosAjustados()
+@enduml
+
+
+#### Caso de Uso 19: Lectura de celdas de ID para el índice
+
+*Diagrama de Despliegue:*
+plantuml
+@startuml
+node "Sistema" {
+    [Módulo Escaleta]
+}
+
+node "Base de Datos" {
+    [Documento DE_CICLISMO_2023]
+}
+
+Sistema --> Base de Datos : Solicitud de lectura de celdas de ID
+Base de Datos --> Sistema : Respuesta de celdas leídas
+@enduml
+
+
+*Diagrama de Secuencia:*
+plantuml
+@startuml
+actor Sistema
+participant MóduloEscaleta
+participant BaseDeDatos
+
+Sistema -> MóduloEscaleta : identificarCeldasID()
+MóduloEscaleta -> BaseDeDatos : leerCeldasID()
+BaseDeDatos -> MóduloEscaleta : celdasLeídas()
+MóduloEscaleta -> Sistema : generarÍndice()
+Sistema -> BaseDeDatos : hacerImpronta()
+@enduml

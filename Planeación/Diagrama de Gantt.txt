@@ -1,0 +1,39 @@
+@startgantt
+Project starts 2024/09/05
+[Inicio de metodología de procesos por proyecto] starts 2024/09/05 and ends 2024/09/05
+[Creación de plantillas de documentos] starts 2024/09/05 and ends 2024/09/06
+[Inserción de PSP0] starts 2024/09/05 and ends 2024/09/05
+[Creación de plan de recursos y Diagramas] starts 2024/09/05 and ends 2024/09/10
+[Montaje de documento] starts 2024/09/10 and ends 2024/09/16
+[Creación de Storyboard en GitB...] starts 2024/09/16 and ends 2024/09/20
+[Montaje de historias de usuario] starts 2024/09/20 and ends 2024/09/26
+[Creación de documento de ERS] starts 2024/09/26 and ends 2024/10/01
+[Envío a plataforma de SGP] starts 2024/09/16 and ends 2024/09/20
+[Montaje y configuración de requisitos] starts 2024/09/05 and ends 2024/09/05
+[Estructura del modelo de dominio] starts 2024/09/26 and ends 2024/09/26
+[Integración de casos de uso a documentación] starts 2024/09/16 and ends 2024/09/17
+[Elaboración de esquemas de casos...] starts 2024/09/16 and ends 2024/09/21
+[Elaboración de diagramas de clases] starts 2024/09/18 and ends 2024/09/19
+[Elaboración de diagramas de secuencia] starts 2024/09/19 and ends 2024/09/20
+[Elaboración de diagramas de componentes] starts 2024/09/20 and ends 2024/09/21
+[Elaboración de diagramas de despliegue] starts 2024/09/21 and ends 2024/09/23
+[Inserción de características de diseño] starts 2024/09/23 and ends 2024/10/19
+[Creación de modelo lógico, relacional y físico] starts 2024/09/24 and ends 2024/09/30
+[Búsqueda de plantilla y montaje base] starts 2024/10/01 and ends 2024/10/04
+[Montaje de estructura de patrón y código...] starts 2024/10/04 and ends 2024/10/05
+[Creación de documentación de la...] starts 2024/09/26 and ends 2024/09/27
+[Descripción general y definición de actividad...] starts 2024/09/26 and ends 2024/09/27
+[Requisitos de E/S y protocolos de comunicación...] starts 2024/09/26 and ends 2024/09/26
+[Ejemplos de uso (casos de uso) y documentación...] starts 2024/09/19 and ends 2024/09/19
+[Entrega de mockup] starts 2024/09/19 and ends 2024/09/19
+[Diagrama de casos de uso] starts 2024/09/19 and ends 2024/09/26
+[Definición de POO para el sistema] starts 2024/09/26 and ends 2024/09/26
+[Informe de calidad del análisis de métricas] starts 2024/11/12 and ends 2024/11/19
+[Montaje de entorno de creación de Hist...] starts 2024/09/25 and ends 2024/10/01
+[Creación de entorno de rejillas en contin...] starts 2024/10/02 and ends 2024/10/08
+[Montaje de sistema de gestión de tiempo...] starts 2024/10/07 and ends 2024/10/12
+[Creación de despliegue de ventana de placa] starts 2024/10/11 and ends 2024/10/17
+[Sistema de inserción de campos en placas] starts 2024/10/11 and ends 2024/10/17
+[Creación de despliegue de venta...] starts 2024/10/14 and ends 2024/10/19
+[Prueba de instalación de aplicativo prototipo] starts 2024/10/16 and ends 2024/10/22
+@endgantt

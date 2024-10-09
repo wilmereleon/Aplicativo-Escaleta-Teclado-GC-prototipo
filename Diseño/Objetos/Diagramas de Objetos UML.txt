@@ -1,0 +1,389 @@
+### Diagramas de Objetos en PlantUML para Cada Caso de Uso
+
+#### Diagrama de Objetos para el Caso de Uso 1: Acceso al Módulo DCSHA
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object Aplicación {
+  nombre: String
+  módulos: List
+}
+
+object MóduloDCSHA {
+  nombre: String
+  contenido: List
+}
+
+Productor -> Aplicación : abre
+Aplicación -> MóduloDCSHA : selecciona
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 2: Opciones de Plantilla
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object PlantillaBase {
+  nombre: String
+  contenido: List
+}
+
+object PlantillaDiaAnterior {
+  nombre: String
+  contenido: List
+}
+
+object Histórico {
+  nombre: String
+  contenido: List
+}
+
+Productor -> PlantillaBase : selecciona
+Productor -> PlantillaDiaAnterior : selecciona
+Productor -> Histórico : importa
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 3: Uso de Plantilla Base
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object PlantillaBase {
+  nombre: String
+  contenido: List
+}
+
+object EscaletaEditable {
+  filas: List
+}
+
+Productor -> PlantillaBase : selecciona
+PlantillaBase -> EscaletaEditable : despliega
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 4: Inserción de ID
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object Escaleta {
+  filas: List
+}
+
+object ID {
+  valor: String
+}
+
+Productor -> Escaleta : inserta
+Escaleta -> ID : verifica
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 5: Totalidad del Tiempo de Emisión
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object Escaleta {
+  tiempoTotal: int
+  bloques: List
+}
+
+object PanelSuperior {
+  tiempoRestante: int
+}
+
+Productor -> Escaleta : asignaTiempo
+Escaleta -> PanelSuperior : muestraTiempo
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 6: Asignación de Tiempos a Bloques
+plantuml
+@startuml
+object Productor {
+  nombre: String
+  rol: String
+}
+
+object Escaleta {
+  tiempoTotal: int
+  bloques: List
+}
+
+object Bloque {
+  tiempoAsignado: int
+}
+
+object PanelSuperior {
+  tiempoRestante: int
+}
+
+Productor -> Escaleta : asignaTiempos
+Escaleta -> Bloque : deduceTiempo
+Bloque -> PanelSuperior : muestraTiempoRestante
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 7: Asignación de Números de Inserción
+plantuml
+@startuml
+object Sistema {
+  nombre: String
+}
+
+object Zócalo {
+  id: String
+  numeroInserción: int
+}
+
+Sistema -> Zócalo : asignaNumero
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 8: Acceso del Asistente de Producción
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object Escaleta {
+  celdas: List
+}
+
+object Celda {
+  tipo: String
+  contenido: String
+}
+
+AsistenteProducción -> Escaleta : accede
+Escaleta -> Celda : gestiona
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 9: Inserción de Zócalos
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object Escaleta {
+  zócalos: List
+}
+
+object Zócalo {
+  tipo: String
+  contenido: String
+}
+
+AsistenteProducción -> Escaleta : inserta
+Escaleta -> Zócalo : seleccionaTipo
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 10: Inserción de Zócalos - TITULOS
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object ZócaloTITULOS {
+  solapa: String
+  titulo: String
+}
+
+AsistenteProducción -> ZócaloTITULOS : insertaTexto
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 11: Inserción de Zócalos - CATASTROFE
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object ZócaloCATASTROFE {
+  solapa: String
+  texto: String
+}
+
+AsistenteProducción -> ZócaloCATASTROFE : insertaTexto
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 12: Inserción de Zócalos - 2 LINEAS
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object Zócalo2LINEAS {
+  solapa: String
+  linea1: String
+  linea2: String
+}
+
+AsistenteProducción -> Zócalo2LINEAS : insertaTexto
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 13: Inserción de Zócalos - VENTAS
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object ZócaloVENTAS {
+  contenido: String
+}
+
+AsistenteProducción -> ZócaloVENTAS : insertaTexto
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 14: Inserción de Zócalos - TEXTUALES
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object ZócaloTEXTUALES {
+  textual1: String
+  textual2: String
+  textual3: String
+  textual4: String
+  icono: String
+}
+
+AsistenteProducción -> ZócaloTEXTUALES : insertaTexto
+AsistenteProducción -> ZócaloTEXTUALES : escogeIcono
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 15: Inserción de Placas por el Asistente de Producción
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object Placa {
+  tipo: String
+  contenido: String
+}
+
+AsistenteProducción -> Placa : inserta
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 16: Inserción de datos en Placas/EQUIPOS
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object PlacaEQUIPOS {
+  posi: List
+  nombres: List
+  cabecera: String
+  colores: String
+}
+
+AsistenteProducción -> PlacaEQUIPOS : insertaDatos
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 17: Inserción de datos en Placas/DATOS EQUIPOS
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object PlacaDATOS_EQUIPOS {
+  num: List
+  nombres: List
+  pais: String
+  equipo: String
+  tiempo: String
+  colores: String
+}
+
+AsistenteProducción -> PlacaDATOS_EQUIPOS : insertaDatos
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 18: Inserción de datos en Placas/PVENTAX1
+plantuml
+@startuml
+object AsistenteProducción {
+  nombre: String
+  rol: String
+}
+
+object PlacaPVENTAX1 {
+  logo: String
+  texto: List
+  info: List
+}
+
+AsistenteProducción -> PlacaPVENTAX1 : insertaDatos
+@enduml
+
+
+#### Diagrama de Objetos para el Caso de Uso 19: Lectura de celdas de ID para el índice
+plantuml
+@startuml
+object Sistema {
+  nombre: String
+}
+
+object Documento {
+  nombre: String
+  pestañas: List
+}
+
+object Pestaña {
+  id: String
+}
+
+Sistema -> Documento : identificaCeldasID
+Documento -> Pestaña : leeCeldasID
+@enduml
