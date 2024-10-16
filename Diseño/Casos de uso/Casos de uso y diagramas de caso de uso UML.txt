@@ -185,6 +185,32 @@ AsistenteDeProducción -> (Acceder a Celdas de la Escaleta)
 (Acceder a Celdas de la Escaleta) --> (Mostrar Mensaje de Error) : [Error]
 @enduml
 
+@startuml
+left to right direction
+actor Productor
+actor AsistenteDeProducción as ADP
+
+ADP -left-> (Acceder a Celdas de la Escaleta)
+Productor -right-> (Acceder a Celdas de la Escaleta)
+
+(Acceder a Celdas de la Escaleta) -> (Crear y Gestionar Celdas)
+(Acceder a Celdas de la Escaleta) -> (Acceder y Crear Celdas)
+
+(Crear y Gestionar Celdas) -down-> (Crear Filas VTR/Nota)
+(Crear y Gestionar Celdas) -down-> (Crear Filas VTR/Full)
+(Crear y Gestionar Celdas) -down-> (Crear Filas Entrada)
+(Crear y Gestionar Celdas) -down-> (Crear Filas Placa)
+
+(Acceder y Crear Celdas) -down-> (Crear Filas Cortina)
+(Acceder y Crear Celdas) -down-> (Crear Filas Promoción/Venta)
+(Acceder y Crear Celdas) -down-> (Crear Filas Voz en off)
+(Acceder y Crear Celdas) -down-> (Crear Filas Reel)
+(Acceder y Crear Celdas) -down-> (Crear Filas Tiempo de corte)
+(Acceder y Crear Celdas) -down-> (Crear Separador bloque)
+(Acceder y Crear Celdas) -down-> (Crear Separador total)
+
+@enduml
+
 #### Caso de Uso 9: Inserción de Zócalos
 - *Actor*: Asistente de Producción
 - *Descripción*: El asistente de producción inserta Zócalos y escoge entre diferentes tipos.
@@ -528,3 +554,25 @@ AsistenteProduccion -> (Conectar con Gestor de Procedimiento de Texturas)
 (Conectar con Gestor de Procedimiento de Texturas) --> (Mostrar Mensaje de Error) : [Error]
 (Almacenar Imagen en Redacción) --> (Mostrar Mensaje de Error) : [Error]
 @enduml
+
+#### Caso de Uso 22: Edición de Datos en la Escaleta
+- *Actor*: Asistente de Producción
+- *Descripción*: El asistente de producción despliega una ventana de edición para manipular los datos que quedarán almacenados en la escaleta dentro de la fila correspondiente, permitiendo realizar ajustes antes de finalizar la inserción de zócalos y placas.
+- *Precondiciones*:
+El asistente de producción ha completado la inserción de zócalos (Caso de Uso 9).
+El asistente de producción ha completado la inserción de placas (Caso de Uso 15).
+El sistema está operativo y permite la edición de datos en la escaleta.
+- *Postcondiciones*:
+Los datos editados se almacenan correctamente en la escaleta.
+La escaleta refleja los cambios realizados por el asistente de producción.
+- *Flujo Principal*:
+  1. El asistente de producción selecciona la opción de editar la fila correspondiente en la escaleta.
+  2. El sistema despliega una ventana de edición con los datos actuales de la fila seleccionada.
+  3. El asistente de producción realiza las modificaciones necesarias en los datos.
+  4. El asistente de producción guarda los cambios realizados.
+  5. El sistema actualiza la escaleta con los nuevos datos y confirma la operación al asistente de producción.
+- *Flujos Alternativos*:
+  - *Flujo Alternativo 1*: Si el asistente de producción cancela la edición:
+  El sistema cierra la ventana de edición sin guardar cambios y regresa a la vista anterior.
+  - *Flujo Alternativo 2*: Si hay un error al guardar los cambios:
+  El sistema muestra un mensaje de error indicando que no se pudieron guardar los cambios y solicita al asistente de producción que intente nuevamente.

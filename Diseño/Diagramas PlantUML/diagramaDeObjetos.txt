@@ -47,6 +47,8 @@ frame "Sistema de Gestión de ETgc: Zócalos, Placas y Filas" {
      class "Fila:Cortina"
      class "Fila:Promocion_Venta"
      class "Fila:Voz_en_Off"
+     class "Fila:Reel"
+     class "Fila:TiempoDeCorte"
      class "Separador_de_bloque:Bloque"
      class "Separador_de_bloque:Total"
 
@@ -61,6 +63,8 @@ frame "Sistema de Gestión de ETgc: Zócalos, Placas y Filas" {
      "Fila" -- "Fila:Promocion_Venta"
      "Fila" -- "Fila:Voz_en_Off"
      "Fila" -- "Separador_de_bloque"
+     "Fila"  -- "Fila:Reel"
+     "Fila"  -- "Fila:TiempoDeCorte"
      "Separador_de_bloque" -- "Separador_de_bloque:Bloque"
      "Separador_de_bloque" -- "Separador_de_bloque:Total"
    }
@@ -84,6 +88,8 @@ frame "Sistema de Gestión de ETgc: Zócalos, Placas y Filas" {
     "Fila:VTR_Full" .. "Módulo de Zócalos"
     "Fila:Voz_en_Off" .. "Módulo de Zócalos"
     "Fila:PLACA" .. "Módulo de Placas"
+    "Fila:Reel" .. "Módulo de Zócalos"
+    "Fila:TiempoDeCorte" .. "Módulo de Zócalos"
     "Tiempo" .. "Fila"
 }
 

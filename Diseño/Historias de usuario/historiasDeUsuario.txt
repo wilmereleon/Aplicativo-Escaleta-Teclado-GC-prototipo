@@ -178,3 +178,39 @@ Historias de usuario:
         - El sistema debe identificar y leer correctamente las celdas de ID en cada pestaña.
         - El índice generado debe reflejar la numeración basada en los ID leídos.
         - La impronta en el Excel debe ser precisa y estar alineada con los datos leídos.
+
+20. *Conectar Placas con Gestor de Procedimiento de Texturas*
+    - *Como* asistente de producción,
+    - *Quiero* conectar las placas con el gestor de procedimiento de texturas,
+    - *Para* poder almacenar y gestionar imágenes relacionadas con el proceso de producción de manera eficiente.
+    - *Criterios de Aceptación*:
+       - El sistema debe permitir al asistente de producción seleccionar la opción de conectar con el gestor de procedimiento de texturas sin inconvenientes.
+       - Las imágenes deben ser almacenadas correctamente en la terminal del asistente de producción en la sección de Redacción.
+       - Al generar el ejecutable de la escaleta guardada, las imágenes deben añadirse a la terminal del asistente en la sección de máster.
+       - El sistema debe realizar una impronta de las imágenes de la carpeta de texturas en el disco G del Maestro | TX de forma precisa.
+       - En caso de error al almacenar la imagen, el sistema debe mostrar un mensaje de error claro y comprensible para el asistente de producción.
+
+21. *Edición de Datos en la Escaleta*
+    - *Como*: Asistente de Producción
+    - *Quiero*: Desplegar una ventana de edición para manipular los datos de la escaleta
+    - *Para*: Realizar ajustes en la información antes de finalizar la inserción de zócalos y placas.
+    - *Criterios de Aceptación*:
+      1. **Acceso a la Edición**:
+         - Dado que he completado la inserción de zócalos y placas,
+         - Cuando selecciono la opción de editar en la fila correspondiente de la escaleta,
+         - Entonces se debe desplegar una ventana de edición con los datos actuales de esa fila.
+      2. **Modificación de Datos**:
+         - Dado que la ventana de edición está abierta,
+         - Cuando realizo cambios en los datos,
+         - Entonces debo poder guardar esos cambios y ver una confirmación de que se han actualizado correctamente en la escaleta.
+      3. **Cancelación de Edición**:
+         - Dado que estoy en la ventana de edición,
+         - Cuando decido cancelar la edición,
+         - Entonces la ventana debe cerrarse sin guardar cambios y regresar a la vista anterior.
+      4. **Manejo de Errores**:
+         - Dado que he realizado cambios en la ventana de edición,
+         - Cuando intento guardar los cambios y ocurre un error,
+         - Entonces el sistema debe mostrar un mensaje de error indicando que no se pudieron guardar los cambios y solicitarme que intente nuevamente.
+      #### Notas:
+      - La ventana de edición debe ser intuitiva y fácil de usar, permitiendo al asistente de producción realizar modificaciones sin complicaciones.
+      - Se debe asegurar que la integridad de los datos en la escaleta se mantenga después de la edición.
