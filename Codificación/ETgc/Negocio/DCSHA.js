@@ -1,3 +1,5 @@
+const IProgramacion = require('../Dominio/IProgramacion');
+
 class DCSHA {
     constructor() {
         this.plantillas = [];

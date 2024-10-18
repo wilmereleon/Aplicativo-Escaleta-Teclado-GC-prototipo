@@ -31,6 +31,27 @@ package "Capa de Presentación" {
         + crearFilaVTRFull()
         + crearFilaPlaca()
     }
+
+    class Aplicacion {
+        + abrir()
+        + cerrar()
+    }
+
+    class ModuloDCSHA {
+        + gestionarProgramacion()
+    }
+
+    class ModuloPlantillas {
+        + seleccionarPlantilla()
+    }
+
+    class ModuloZocalos {
+        + gestionarZocalos()
+    }
+
+    class ModuloEscaleta {
+        + gestionarEscaleta()
+    }
 }
 
 package "Capa de Negocio" {
@@ -46,6 +67,24 @@ package "Capa de Negocio" {
         + crearEscaleta()
     }
 
+    class GestionProgramacion {
+        + programarContenido()
+    }
+
+    class OpcionesPlantilla {
+        + cargarPlantilla()
+    }
+
+    class GestionZocalos {
+        + insertarZocalo()
+    }
+
+    class GestionEscaleta {
+        + editarEscaleta()
+    }
+}
+
+package "Capa de Dominio" {
     class Plantilla {
         - tipo: String
         - escaleta: Escaleta
@@ -140,6 +179,22 @@ package "Capa de Negocio" {
         - texto: String
         + apiñarTexto()
     }
+
+    interface IProgramacion {
+        + mostrarProgramacion()
+    }
+
+    interface IPlantillas {
+        + mostrarPlantillas()
+    }
+
+    interface IZocalos {
+        + mostrarZocalos()
+    }
+
+    interface IEscaleta {
+        + mostrarEscaleta()
+    }
 }
 
 package "Capa de Datos" {
@@ -183,6 +238,22 @@ package "Capa de Datos" {
     }
 }
 
+package "Capa de Persistencia" {
+    class SALApp {
+        + almacenarDatos()
+        + recuperarDatos()
+    }
+
+    class SAL {
+        + procesarSolicitudes()
+    }
+
+    class RutaDocumentoExcel {
+        + insertarRuta()
+        + obtenerRuta()
+    }
+}
+
 Usuario <|-- AsistenteProduccion
 Usuario <|-- Productor
 Usuario --> DCSHA
@@ -198,5 +269,26 @@ Placa "1" o-- "*" Equipo
 Placa "1" o-- "*" DatosEquipos
 Placa "1" o-- "*" PventasX1
 DCSHA --> Historicos
+
+Aplicacion --> ModuloDCSHA
+Aplicacion --> ModuloPlantillas
+Aplicacion --> ModuloZocalos
+Aplicacion --> ModuloEscaleta
+
+ModuloDCSHA --> GestionProgramacion
+ModuloPlantillas --> OpcionesPlantilla
+ModuloZocalos --> GestionZocalos
+ModuloEscaleta --> GestionEscaleta
+
+GestionProgramacion --> IProgramacion
+OpcionesPlantilla --> IPlantillas
+GestionZocalos --> IZocalos
+GestionEscaleta --> IEscaleta
+
+Aplicacion --> SALApp
+SALApp --> SAL
+SAL --> Usuario
+
+Usuario --> RutaDocumentoExcel
 
 @enduml

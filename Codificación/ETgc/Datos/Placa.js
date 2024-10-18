@@ -1,11 +1,17 @@
-class Placa {
+const Placa = require('./Placa');
+
+class Equipo extends Placa {
     constructor() {
-        this.tipo = '';
-        this.campos = [];
+        super();
+        this.posi = [];
+        this.nombres = [];
+        this.cabecera = [];
+        this.textura = '';
+        this.tipoTextura = '';
+        this.colores = '';
     }
 
     insertarDatos() {}
-    asignarIDUnico() {}
 }
 
-module.exports = Placa;
+module.exports = Equipo;

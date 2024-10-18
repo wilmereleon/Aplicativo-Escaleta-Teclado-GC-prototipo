@@ -1,3 +1,5 @@
+const IEscaleta = require('./IEscaleta');
+
 class Escaleta {
     constructor() {
         this.filas = [];
