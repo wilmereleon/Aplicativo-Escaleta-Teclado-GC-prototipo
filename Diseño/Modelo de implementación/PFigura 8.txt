@@ -1,0 +1,10 @@
+@startuml
+package "Capa de Persistencia" {
+    component "SAL" {
+        [SALApp]
+    }
+    component "Histórico" {
+        [HistorialCambios]
+    }
+}
+@enduml

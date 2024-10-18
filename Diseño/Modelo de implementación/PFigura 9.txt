@@ -1,0 +1,16 @@
+@startuml
+frame "ETgc" {
+    package "Capa de Presentación" {
+        [Usuario] --> [InterfazUsuario]
+    }
+    package "Capa de Lógica del Negocio" {
+        [Aplicación] --> [SALApp]
+    }
+    package "Capa de Dominio" {
+        [MóduloDCSHA] --> [GestiónProgramación]
+    }
+    package "Capa de Persistencia" {
+        [SALApp] --> [HistorialCambios]
+    }
+}
+@enduml

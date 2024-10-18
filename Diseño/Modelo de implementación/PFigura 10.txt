@@ -1,0 +1,28 @@
+@startuml
+frame "ETgc" {
+    package "Capa de Presentación" {
+        [Usuario] --> [InterfazUsuario]
+        [VistaPrevioVentana] --> [InterfazZócalos]
+        [VistaPrevioVentana] --> [InterfazPlacas]
+        [Usuario] --> [RutaDocumentoExcel]
+    }
+    package "Capa de Lógica del Negocio" {
+        [Aplicación] --> [SALApp]
+        [Aplicación] --> [MóduloDCSHA]
+        [Aplicación] --> [MóduloPlantillas]
+        [Aplicación] --> [MóduloGráficos]
+        [Aplicación] --> [MóduloEscaleta]
+    }
+    package "Capa de Dominio" {
+        [MóduloDCSHA] --> [GestiónProgramación]
+        [MóduloPlantillas] --> [OpcionesPlantilla]
+        [MóduloGráficos] --> [GestiónZócalos]
+        [MóduloGráficos] --> [GestiónPlacas]
+        [MóduloEscaleta] --> [GestiónEscaleta]
+        [MóduloEscaleta] --> [Reloj]
+    }
+    package "Capa de Persistencia" {
+        [SALApp] --> [HistorialCambios]
+    }
+}
+@enduml

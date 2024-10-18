@@ -1,0 +1,9 @@
+@startuml
+frame "ETgc" {
+    package "Capa de Presentación" {
+        component "Controladores" {
+            [ControladorPrincipal]
+        }
+    }
+}
+@enduml

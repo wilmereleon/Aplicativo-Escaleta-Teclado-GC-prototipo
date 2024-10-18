@@ -1,0 +1,7 @@
+@startuml
+package "Capa de Acceso a Datos" {
+    component "Repositorios" {
+        [SALApp]
+    }
+}
+@enduml

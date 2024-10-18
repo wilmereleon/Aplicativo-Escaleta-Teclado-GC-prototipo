@@ -1,0 +1,13 @@
+package "Capa de Dominio" {
+    component "Modelos de Dominio" {
+        [GestiónProgramación]
+        [OpcionesPlantilla]
+        [GestiónZócalos]
+        [GestiónPlacas]
+        [GestiónEscaleta]
+        [Reloj]
+        [InterfazPlantilla]
+        [InterfazProgramación]
+    }
+}
+@enduml

@@ -1,5 +1,5 @@
 @startuml
-package "Sistema de Gestión de Contenidos" {
+package "Clases Principales de Componentes" {
     class Aplicación {
         +abrir()
         +cerrar()
@@ -47,6 +47,31 @@ package "Sistema de Gestión de Contenidos" {
         +editarEscaleta()
     }
 
+    class SALApp {
+        +almacenarDatos()
+        +recuperarDatos()
+    }
+
+    class SAL {
+        +procesarSolicitudes()
+    }
+
+    class Usuario {
+        +enviarSolicitudes()
+        +recibirRespuestas()
+    }
+
+    class RutaDocumentoExcel {
+        +insertarRuta()
+        +obtenerRuta()
+    }
+
+    Usuario --> RutaDocumentoExcel
+
+    Aplicación --> SALApp
+    SALApp --> SAL
+    SAL --> Usuario
+
     GestiónProgramación --> InterfazProgramación
     OpcionesPlantilla --> InterfazPlantillas
     GestiónZócalos --> InterfazZócalos
@@ -54,62 +79,25 @@ package "Sistema de Gestión de Contenidos" {
 }
 
 package "Interfaces" {
-    interface InterfazProgramación {
+    interface IProgramación {
         +mostrarProgramación()
     }
 
-    interface InterfazPlantillas {
+    interface IPlantillas {
         +mostrarPlantillas()
     }
 
-    interface InterfazZócalos {
+    interface IZócalos {
         +mostrarZócalos()
     }
 
-    interface InterfazEscaleta {
+    interface IEscaleta {
         +mostrarEscaleta()
     }
 
-    InterfazProgramación <|-- GestiónProgramación
-    InterfazPlantillas <|-- OpcionesPlantilla
-    InterfazZócalos <|-- GestiónZócalos
-    InterfazEscaleta <|-- GestiónEscaleta
-}
-
-package "Componentes" {
-    class BaseDeDatos {
-        +almacenarDatos()
-        +recuperarDatos()
-    }
-
-    class Servidor {
-        +procesarSolicitudes()
-    }
-
-    class Cliente {
-        +enviarSolicitudes()
-        +recibirRespuestas()
-    }
-
-    Aplicación --> BaseDeDatos
-    BaseDeDatos --> Servidor
-    Servidor --> Cliente
-}
-
-Cliente --> InterfazUsuario
-Servidor --> APIREST
-BaseDeDatos --> GestiónDatos
-
-interface InterfazUsuario {
-    +interactuar()
-}
-
-interface APIREST {
-    +procesar()
-}
-
-interface GestiónDatos {
-    +almacenar()
-    +recuperar()
+    IProgramación <|-- GestiónProgramación
+    IPlantillas <|-- OpcionesPlantilla
+    IZócalos <|-- GestiónZócalos
+    IEscaleta <|-- GestiónEscaleta
 }
 @enduml

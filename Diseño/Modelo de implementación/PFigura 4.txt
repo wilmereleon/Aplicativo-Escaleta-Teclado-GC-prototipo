@@ -1,0 +1,7 @@
+@startuml
+package "Capa de Presentación" {
+    component "Controladores" {
+        [ControladorPrincipal]
+    }
+}
+@enduml

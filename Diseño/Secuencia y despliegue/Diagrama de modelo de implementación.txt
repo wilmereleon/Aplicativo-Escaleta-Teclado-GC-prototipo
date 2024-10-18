@@ -1,0 +1,132 @@
+@startuml
+skinparam componentStyle uml1
+
+frame "ETgc" {
+    package "Capa de Presentación" {
+        component "Interfaz de Usuario" {
+            [Usuario]
+            [InterfazUsuario]
+            [VistaPrevioVentana]
+            [InterfazZócalos]
+            [InterfazPlacas]
+            [RutaDocumentoExcel]
+        }
+        component "Controladores" {
+            [ControladorPrincipal]
+        }
+        [VistaPrevioVentana] --> [InterfazZócalos]
+        [VistaPrevioVentana] --> [InterfazPlacas]
+        [Usuario] --> [RutaDocumentoExcel]
+    }
+
+    package "Capa de Lógica del Negocio" {
+        component "Servicios" {
+            [Aplicación]
+            [InterfazUsuario] --> [Aplicación]
+            [Aplicación] --> [MóduloDCSHA]
+            [Aplicación] --> [MóduloPlantillas]
+            [Aplicación] --> [MóduloGráficos]
+            [Aplicación] --> [MóduloEscaleta]
+        }
+    }
+
+    package "Capa de Dominio" {
+        component "Modelos de Dominio" {
+            [GestiónProgramación]
+            [OpcionesPlantilla]
+            [GestiónZócalos]
+            [GestiónPlacas]
+            [GestiónEscaleta]
+            [Reloj]
+            [InterfazPlantilla]
+            [InterfazProgramación]
+            [MóduloDCSHA] --> [GestiónProgramación]
+            [MóduloPlantillas] --> [OpcionesPlantilla]
+            [MóduloGráficos] --> [GestiónZócalos]
+            [MóduloGráficos] --> [GestiónPlacas]
+            [MóduloEscaleta] --> [GestiónEscaleta]
+            [MóduloEscaleta] --> [Reloj]
+            [OpcionesPlantilla] --> [InterfazPlantilla]
+            [GestiónProgramación] --> [InterfazProgramación]
+        }
+    }
+
+    package "Capa de Acceso a Datos" {
+        component "Repositorios" {
+            [SALApp]
+        }
+    }
+
+    package "Capa de Persistencia" {
+        component "SAL" {
+            [SALApp]
+        }
+        component "Histórico" {
+            [HistorialCambios]
+        }
+    }
+
+    [Usuario] --> [InterfazUsuario]
+    [Aplicación] --> [SALApp]
+    [MóduloDCSHA] --> [GestiónProgramación]
+    [SALApp] --> [HistorialCambios]
+
+    node "Interfaces" {
+        [IProgramación] <<interface>>
+        [IPlantillas] <<interface>>
+        [IZócalos] <<interface>>
+        [IPlacas] <<interface>>
+        [IEscaleta] <<interface>>
+        [IControladores] <<interface>>
+        [IServicios] <<interface>>
+        [IGestiónArchivos] <<interface>>
+        [IRepositorios] <<interface>>
+        [IDominio] <<interface>>
+        [ISAL] <<interface>>
+        [IRepoDominio] <<interface>>
+    }
+
+    [IProgramación] - [GestiónProgramación]
+    [IPlantillas] - [OpcionesPlantilla]
+    [IZócalos] - [GestiónZócalos]
+    [IPlacas] - [GestiónPlacas]
+    [IEscaleta] - [GestiónEscaleta]
+
+    Interfaces -down-> [IProgramación]
+    Interfaces -down-> [IPlantillas]
+    Interfaces -down-> [IZócalos]
+    Interfaces -down-> [IPlacas]
+    Interfaces -down-> [IEscaleta]
+
+    [GestiónProgramación] --> [IProgramación]
+    [OpcionesPlantilla] --> [IPlantillas]
+    [GestiónZócalos] --> [IZócalos]
+    [GestiónPlacas] --> [IPlacas]
+    [GestiónEscaleta] --> [IEscaleta]
+
+    [ControladorPrincipal] --> [IControladores]
+    [InterfazUsuario] --> [IControladores]
+    [Aplicación] --> [IControladores]
+
+    [Aplicación] --> [IServicios]
+    [ControladorPrincipal] --> [IServicios]
+
+    [Aplicación] --> [IGestiónArchivos]
+    [RutaDocumentoExcel] --> [IGestiónArchivos]
+
+    [SALApp] --> [IRepositorios]
+    [Aplicación] --> [IRepositorios]
+
+    [GestiónProgramación] --> [IDominio]
+    [OpcionesPlantilla] --> [IDominio]
+    [GestiónZócalos] --> [IDominio]
+    [GestiónPlacas] --> [IDominio]
+    [GestiónEscaleta] --> [IDominio]
+
+    [SALApp] --> [ISAL]
+    [GestiónProgramación] --> [ISAL]
+
+    [Repositorios] --> [IRepoDominio]
+    [GestiónProgramación] --> [IRepoDominio]
+}
+@enduml

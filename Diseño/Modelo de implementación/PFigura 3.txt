@@ -1,0 +1,12 @@
+@startuml
+package "Capa de Presentación" {
+    component "Interfaz de Usuario" {
+        [Usuario]
+        [InterfazUsuario]
+        [VistaPrevioVentana]
+        [InterfazZócalos]
+        [InterfazPlacas]
+        [RutaDocumentoExcel]
+    }
+}
+@enduml

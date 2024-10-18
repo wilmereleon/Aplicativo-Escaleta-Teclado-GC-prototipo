@@ -1,0 +1,38 @@
+@startuml
+skinparam handwritten true
+
+rectangle "Header" {
+    rectangle "Notificación" as Notificacion
+    rectangle "Settings" as Settings
+    rectangle "Profile" as Profile
+}
+
+rectangle "Body" {
+    rectangle "Sección Angosta" {
+        rectangle "Inicio" as Inicio
+        rectangle "Plantillas" as Plantillas
+        rectangle "Históricos" as Historicos
+        rectangle "Accesos Rápidos" {
+            rectangle "Crear nueva escaleta" as CrearNuevaEscaleta
+            rectangle "Reciente" as Reciente
+        }
+    }
+    rectangle "Sección Ancha" {
+        rectangle "+Crear nuevo" as CrearNuevo
+        rectangle "Programas" {
+            rectangle "DCSHA" {
+                rectangle "Ingresar" as Ingresar
+                rectangle "Importar proyecto" as ImportarProyecto
+            }
+        }
+    }
+}
+
+Notificacion -[hidden]-> Settings
+Settings -[hidden]-> Profile
+Inicio -[hidden]-> Plantillas
+Plantillas -[hidden]-> Historicos
+Historicos -[hidden]-> CrearNuevaEscaleta
+CrearNuevaEscaleta -[hidden]-> Reciente
+Ingresar -[hidden]-> ImportarProyecto
+@enduml

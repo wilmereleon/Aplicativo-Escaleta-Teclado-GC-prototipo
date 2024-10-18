@@ -1,0 +1,11 @@
+@startuml
+package "Capa de Lógica del Negocio" {
+    component "Servicios" {
+        [Aplicación]
+        [MóduloDCSHA]
+        [MóduloPlantillas]
+        [MóduloGráficos]
+        [MóduloEscaleta]
+    }
+}
+@enduml
