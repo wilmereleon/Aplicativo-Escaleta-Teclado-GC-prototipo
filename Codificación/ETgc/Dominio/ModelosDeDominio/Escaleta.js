@@ -1,4 +1,4 @@
-const IEscaleta = require('./IEscaleta');
+const Fila = require('./Fila');
 
 class Escaleta {
     constructor() {

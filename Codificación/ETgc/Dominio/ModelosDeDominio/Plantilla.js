@@ -1,3 +1,5 @@
+const Escaleta = require('./Escaleta');
+
 class Plantilla {
     constructor() {
         this.tipo = '';

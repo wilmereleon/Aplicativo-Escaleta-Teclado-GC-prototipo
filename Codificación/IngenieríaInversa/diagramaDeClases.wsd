@@ -1,294 +1,371 @@
-@startuml
+@startuml diagramaDeClases
+skinparam componentStyle uml1
 
-package "Capa de Presentación" {
-    class Usuario {
-        - rol: String
-        + accederModulo()
-        + seleccionarPlantilla()
+frame "ETgc" {
+    package "Presentación" {
+        component "Interfaz de Usuario" {
+            class Usuario {
+                - rol: String
+                + accederModulo()
+                + seleccionarPlantilla()
+            }
+
+            class InterfazUsuario {
+                + mostrarInterfaz()
+            }
+
+            class VistaPrevioVentana {
+                + mostrarVistaPrevia()
+            }
+
+            class InterfazZocalos {
+                + mostrarZocalos()
+            }
+
+            class InterfazPlacas {
+                + mostrarPlacas()
+            }
+
+            class RutaDocumentoExcel {
+                + insertarRuta()
+                + obtenerRuta()
+            }
+
+            class AsistenteProduccion {
+                + crearCelda()
+                + insertarZocalo()
+                + insertarPlaca()
+                + accederCelda()
+                + crearCeldaEspecifica()
+                + insertarZocaloTitulo()
+                + insertarZocaloCatastrofe()
+                + insertarZocaloDosLineas()
+                + insertarZocaloVentas()
+                + insertarZocaloTextuales()
+                + crearFilaEntrada()
+                + crearFilaVTRNota()
+                + crearFilaVTRFull()
+                + crearFilaPlaca()
+            }
+
+            class Productor {
+                + abrirAplicacion()
+                + seleccionarPlantillaBase()
+                + seleccionarPlantillaDiaAnterior()
+                + importarHistorico()
+                + asignarTiempo()
+            }
+        }
+
+        component "Controladores" {
+            class ControladorPrincipal {
+                + gestionarAplicacion()
+            }
+        }
+
+        VistaPrevioVentana --> InterfazZocalos
+        VistaPrevioVentana --> InterfazPlacas
+        Usuario --> RutaDocumentoExcel
     }
 
-    class Productor {
-        + abrirAplicacion()
-        + seleccionarPlantillaBase()
-        + seleccionarPlantillaDiaAnterior()
-        + importarHistorico()
-        + asignarTiempo()
+    package "Negocio" {
+        component "Servicios" {
+            class Aplicacion {
+                + abrir()
+                + cerrar()
+            }
+
+            class DCSHA {
+                - plantillas: List<Plantilla>
+                + mostrarOpciones()
+                + crearEscaleta()
+                + gestionarPlantillaBase()
+                + gestionarPlantillaDiaAnterior()
+                + importarHistorico()
+                + leerCeldasID()
+                + crearPlantilla()
+                + crearEscaleta()
+            }
+
+            InterfazUsuario --> Aplicacion
+            Aplicacion --> ModuloDCSHA
+            Aplicacion --> ModuloPlantillas
+            Aplicacion --> ModuloZocalos
+            Aplicacion --> ModuloEscaleta
+        }
     }
 
-    class AsistenteProduccion {
-        + crearCelda()
-        + insertarZocalo()
-        + insertarPlaca()
-        + accederCelda()
-        + crearCeldaEspecifica()
-        + insertarZocaloTitulo()
-        + insertarZocaloCatastrofe()
-        + insertarZocaloDosLineas()
-        + insertarZocaloVentas()
-        + insertarZocaloTextuales()
-        + crearFilaEntrada()
-        + crearFilaVTRNota()
-        + crearFilaVTRFull()
-        + crearFilaPlaca()
+    package "Dominio" {
+        component "Modelos de Dominio" {
+            class Plantilla {
+                - tipo: String
+                - escaleta: Escaleta
+                + cargarDatos()
+            }
+
+            class Escaleta {
+                - filas: List<Fila>
+                - tiempoTotal: int
+                - tiempoRestante: int
+                + agregarFila()
+                + calcularTiempoRestante()
+                + asignarNombreFila()
+                + asignarTipoFila()
+                + asignarTiempoTotal()
+                + mostrarTiempoRestante()
+                + asignarTiempoBloque()
+                + crearFila()
+            }
+
+            abstract class Fila {
+                - nombre: String
+                - tipo: String
+                - id: String
+                + validarID()
+            }
+
+            class FilaEntrada extends Fila {
+                + especificoEntrada()
+            }
+
+            class FilaVTRNota extends Fila {
+                + especificoVTRNota()
+            }
+
+            class FilaVTRFull extends Fila {
+                + especificoVTRFull()
+            }
+
+            class FilaPlaca extends Fila {
+                + especificoPlaca()
+            }
+
+            abstract class Zocalo {
+                - tipo: String
+                - campos: List<Campo>
+                - numeroInsercion: int
+                + insertarCampo()
+                + asignarNumeroInsercion()
+                + asignarIDUnico()
+            }
+
+            class ZocaloTitulo extends Zocalo {
+                + insertarTitulo()
+                - solapa: String
+                - titulo: String
+            }
+
+            class ZocaloCatastrofe extends Zocalo {
+                + insertarCatastrofe()
+                - solapa: String
+                - texto: String
+            }
+
+            class ZocaloDosLineas extends Zocalo {
+                + insertarDosLineas()
+                - solapa: String
+                - linea1: String
+                - linea2: String
+            }
+
+            class ZocaloVentas extends Zocalo {
+                + insertarVentas()
+                - dia: String
+                - textoArriba: String
+                - textoAbajo: String
+                - horaCanal: String
+            }
+
+            class ZocaloTextuales extends Zocalo {
+                + insertarTextuales()
+                - textual1: String
+                - textual2: String
+                - textual3: String
+                - textual4: String
+                - icono: String
+            }
+
+            class Campo {
+                - nombre: String
+                - maxCaracteres: int
+                - texto: String
+                + apiñarTexto()
+            }
+
+            class GestionProgramacion {
+                + programarContenido()
+            }
+
+            class OpcionesPlantilla {
+                + cargarPlantilla()
+            }
+
+            class GestionZocalos {
+                + insertarZocalo()
+            }
+
+            class GestionPlacas {
+                + gestionarPlacas()
+            }
+
+            class GestionEscaleta {
+                + editarEscaleta()
+            }
+
+            class Reloj {
+                + mostrarHora()
+            }
+
+            interface IProgramacion {
+                + mostrarProgramacion()
+            }
+
+            interface IPlantillas {
+                + mostrarPlantillas()
+            }
+
+            interface IZocalos {
+                + mostrarZocalos()
+            }
+
+            interface IPlacas {
+                + mostrarPlacas()
+            }
+
+            interface IEscaleta {
+                + mostrarEscaleta()
+            }
+
+            ModuloDCSHA --> GestionProgramacion
+            ModuloPlantillas --> OpcionesPlantilla
+            ModuloZocalos --> GestionZocalos
+            ModuloZocalos --> GestionPlacas
+            ModuloEscaleta --> GestionEscaleta
+            ModuloEscaleta --> Reloj
+            OpcionesPlantilla --> IPlantillas
+            GestionProgramacion --> IProgramacion
+        }
     }
 
-    class Aplicacion {
-        + abrir()
-        + cerrar()
+    package "Datos" {
+        component "Repositorios" {
+            class Placa {
+                - tipo: String
+                - campos: List<Campo>
+                + insertarDatos()
+                + asignarIDUnico()
+            }
+
+            class Equipo extends Placa {
+                - posi: List<String>
+                - nombres: List<String>
+                - cabecera: List<String>
+                - textura: String
+                - tipoTextura: String
+                - colores: String
+                + insertarDatos()
+            }
+
+            class DatosEquipos extends Placa {
+                - num: List<String>
+                - nombres: List<String>
+                - pais: List<String>
+                - equipo: List<String>
+                - tiempo: List<String>
+                - colores: String
+                + insertarDatos()
+            }
+
+            class PventasX1 extends Placa {
+                - logo: String
+                - texto: List<String>
+                - info: List<String>
+                + insertarDatos()
+            }
+
+            class Historicos {
+                - datos: List<String>
+                + accederDatos()
+            }
+        }
     }
 
-    class ModuloDCSHA {
-        + gestionarProgramacion()
+    package "Persistencia" {
+        component "SistemaAlmacenamientoLocal" {
+            class SALApp {
+                + almacenarDatos()
+                + recuperarDatos()
+            }
+
+            class SAL {
+                + procesarSolicitudes()
+            }
+        }
+
+        component "Histórico" {
+            class HistorialCambios {
+                + registrarCambio()
+                + obtenerHistorial()
+            }
+        }
     }
 
-    class ModuloPlantillas {
-        + seleccionarPlantilla()
-    }
+    Usuario <|-- AsistenteProduccion
+    Usuario <|-- Productor
+    Usuario --> DCSHA
+    AsistenteProduccion --> Placa
+    Placa "1" o-- "*" Equipo
+    Placa "1" o-- "*" DatosEquipos
+    Placa "1" o-- "*" PventasX1
+    DCSHA --> Historicos
 
-    class ModuloZocalos {
-        + gestionarZocalos()
-    }
+    Aplicacion --> ModuloDCSHA
+    Aplicacion --> ModuloPlantillas
+    Aplicacion --> ModuloZocalos
+    Aplicacion --> ModuloEscaleta
 
-    class ModuloEscaleta {
-        + gestionarEscaleta()
-    }
+    ModuloDCSHA --> GestionProgramacion
+    ModuloPlantillas --> OpcionesPlantilla
+    ModuloZocalos --> GestionZocalos
+    ModuloZocalos --> GestionPlacas
+    ModuloEscaleta --> GestionEscaleta
+    ModuloEscaleta --> Reloj
+
+    GestionProgramacion --> IProgramacion
+    OpcionesPlantilla --> IPlantillas
+    GestionZocalos --> IZocalos
+    GestionPlacas --> IPlacas
+    GestionEscaleta --> IEscaleta
+
+    Aplicacion --> SALApp
+    SALApp --> SAL
+    SAL --> Usuario
+
+    Usuario --> RutaDocumentoExcel
+
+    ControladorPrincipal --> IControladores
+    InterfazUsuario --> IControladores
+    Aplicacion --> IControladores
+
+    Aplicacion --> IServicios
+    ControladorPrincipal --> IServicios
+
+    Aplicacion --> IGestiónArchivos
+    RutaDocumentoExcel --> IGestiónArchivos
+
+    SALApp --> IRepositorios
+    Aplicacion --> IRepositorios
+
+    GestionProgramacion --> IDominio
+    OpcionesPlantilla --> IDominio
+    GestionZocalos --> IDominio
+    GestionPlacas --> IDominio
+    GestionEscaleta --> IDominio
+
+    SALApp --> ISAL
+    GestionProgramacion --> ISAL
+
+    Repositorios --> IRepoDominio
+    GestionProgramacion --> IRepoDominio
 }
-
-package "Capa de Negocio" {
-    class DCSHA {
-        - plantillas: List<Plantilla>
-        + mostrarOpciones()
-        + crearEscaleta()
-        + gestionarPlantillaBase()
-        + gestionarPlantillaDiaAnterior()
-        + importarHistorico()
-        + leerCeldasID()
-        + crearPlantilla()
-        + crearEscaleta()
-    }
-
-    class GestionProgramacion {
-        + programarContenido()
-    }
-
-    class OpcionesPlantilla {
-        + cargarPlantilla()
-    }
-
-    class GestionZocalos {
-        + insertarZocalo()
-    }
-
-    class GestionEscaleta {
-        + editarEscaleta()
-    }
-}
-
-package "Capa de Dominio" {
-    class Plantilla {
-        - tipo: String
-        - escaleta: Escaleta
-        + cargarDatos()
-    }
-
-    class Escaleta {
-        - filas: List<Fila>
-        - tiempoTotal: int
-        - tiempoRestante: int
-        + agregarFila()
-        + calcularTiempoRestante()
-        + asignarNombreFila()
-        + asignarTipoFila()
-        + asignarTiempoTotal()
-        + mostrarTiempoRestante()
-        + asignarTiempoBloque()
-        + crearFila()
-    }
-
-    abstract class Fila {
-        - nombre: String
-        - tipo: String
-        - id: String
-        + validarID()
-    }
-
-    class FilaEntrada extends Fila {
-        + especificoEntrada()
-    }
-
-    class FilaVTRNota extends Fila {
-        + especificoVTRNota()
-    }
-
-    class FilaVTRFull extends Fila {
-        + especificoVTRFull()
-    }
-
-    class FilaPlaca extends Fila {
-        + especificoPlaca()
-    }
-
-    abstract class Zocalo {
-        - tipo: String
-        - campos: List<Campo>
-        - numeroInsercion: int
-        + insertarCampo()
-        + asignarNumeroInsercion()
-        + asignarIDUnico()
-    }
-
-    class ZocaloTitulo extends Zocalo {
-        + insertarTitulo()
-        - solapa: String
-        - titulo: String
-    }
-
-    class ZocaloCatastrofe extends Zocalo {
-        + insertarCatastrofe()
-        - solapa: String
-        - texto: String
-    }
-
-    class ZocaloDosLineas extends Zocalo {
-        + insertarDosLineas()
-        - solapa: String
-        - linea1: String
-        - linea2: String
-    }
-
-    class ZocaloVentas extends Zocalo {
-        + insertarVentas()
-        - dia: String
-        - textoArriba: String
-        - textoAbajo: String
-        - horaCanal: String
-    }
-
-    class ZocaloTextuales extends Zocalo {
-        + insertarTextuales()
-        - textual1: String
-        - textual2: String
-        - textual3: String
-        - textual4: String
-        - icono: String
-    }
-
-    class Campo {
-        - nombre: String
-        - maxCaracteres: int
-        - texto: String
-        + apiñarTexto()
-    }
-
-    interface IProgramacion {
-        + mostrarProgramacion()
-    }
-
-    interface IPlantillas {
-        + mostrarPlantillas()
-    }
-
-    interface IZocalos {
-        + mostrarZocalos()
-    }
-
-    interface IEscaleta {
-        + mostrarEscaleta()
-    }
-}
-
-package "Capa de Datos" {
-    abstract class Placa {
-        - tipo: String
-        - campos: List<Campo>
-        + insertarDatos()
-        + asignarIDUnico()
-    }
-
-    class Equipo extends Placa {
-        - posi: List<String>
-        - nombres: List<String>
-        - cabecera: List<String>
-        - textura: String
-        - tipoTextura: String
-        - colores: String
-        + insertarDatos()
-    }
-
-    class DatosEquipos extends Placa {
-        - num: List<String>
-        - nombres: List<String>
-        - pais: List<String>
-        - equipo: List<String>
-        - tiempo: List<String>
-        - colores: String
-        + insertarDatos()
-    }
-
-    class PventasX1 extends Placa {
-        - logo: String
-        - texto: List<String>
-        - info: List<String>
-        + insertarDatos()
-    }
-
-    class Historicos {
-        - datos: List<String>
-        + accederDatos()
-    }
-}
-
-package "Capa de Persistencia" {
-    class SALApp {
-        + almacenarDatos()
-        + recuperarDatos()
-    }
-
-    class SAL {
-        + procesarSolicitudes()
-    }
-
-    class RutaDocumentoExcel {
-        + insertarRuta()
-        + obtenerRuta()
-    }
-}
-
-Usuario <|-- AsistenteProduccion
-Usuario <|-- Productor
-Usuario --> DCSHA
-AsistenteProduccion --> DCSHA
-Productor --> DCSHA
-DCSHA "1" o-- "*" Plantilla
-Plantilla "1" -- "*" Escaleta
-Escaleta "1" -- "*" Fila
-Fila "1" -- "*" Zocalo
-Zocalo "1" -- "*" Campo
-AsistenteProduccion --> Placa
-Placa "1" o-- "*" Equipo
-Placa "1" o-- "*" DatosEquipos
-Placa "1" o-- "*" PventasX1
-DCSHA --> Historicos
-
-Aplicacion --> ModuloDCSHA
-Aplicacion --> ModuloPlantillas
-Aplicacion --> ModuloZocalos
-Aplicacion --> ModuloEscaleta
-
-ModuloDCSHA --> GestionProgramacion
-ModuloPlantillas --> OpcionesPlantilla
-ModuloZocalos --> GestionZocalos
-ModuloEscaleta --> GestionEscaleta
-
-GestionProgramacion --> IProgramacion
-OpcionesPlantilla --> IPlantillas
-GestionZocalos --> IZocalos
-GestionEscaleta --> IEscaleta
-
-Aplicacion --> SALApp
-SALApp --> SAL
-SAL --> Usuario
-
-Usuario --> RutaDocumentoExcel
-
 @enduml

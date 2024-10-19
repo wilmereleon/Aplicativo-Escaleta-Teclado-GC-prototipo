@@ -1,3 +1,5 @@
+const Campo = require('./Campo');
+
 class Zocalo {
     constructor() {
         this.tipo = '';

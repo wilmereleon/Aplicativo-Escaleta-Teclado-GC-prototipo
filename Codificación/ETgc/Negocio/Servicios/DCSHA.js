@@ -1,4 +1,5 @@
-const IProgramacion = require('../Dominio/IProgramacion');
+const Plantilla = require('../../Dominio/ModelosDeDominio/Plantilla');
+const Historicos = require('../../Datos/Repositorios/Historicos');
 
 class DCSHA {
     constructor() {

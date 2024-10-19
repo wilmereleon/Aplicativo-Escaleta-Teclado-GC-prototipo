@@ -1,4 +1,5 @@
 const Usuario = require('./Usuario');
+const Placa = require('../../Datos/Repositorios/Placa');
 
 class AsistenteProduccion extends Usuario {
     crearCelda() {}
