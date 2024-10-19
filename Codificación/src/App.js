@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="container" style={{ width: 1366, height: 1024, background: 'white' }}>
+    <div className="container" style={{ width: 1366, height: 1024, background: 'white' }} data-testid="app">
       <div className="d-flex justify-content-between align-items-center p-3" style={{ background: '#F3F4F6' }}>
         <div className="d-flex align-items-center">
           <img src="https://via.placeholder.com/34x35" alt="Logo" className="me-3" />
