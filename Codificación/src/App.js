@@ -1,113 +1,135 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './App.css';
+import { Bell, Settings, User, Home as HomeIcon, FileText, Archive, Plus, ArrowRight, Download, Clock } from 'lucide-react';
 import VistaPlantillas from './components/VistaPlantillas';
+import PlantillaBase from './components/PlantillaBase';
+import './App.css'; // Asegúrate de importar el archivo CSS aquí
 
-function App() {
+export default function App() {
+  const fileInputRef = useRef(null);
+
+  const handleImportClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Aquí puedes manejar la importación del archivo
+      console.log('Archivo seleccionado:', file);
+    }
+  };
+
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/vista-plantillas" element={<VistaPlantillas />} />
-        </Routes>
+      <div className="flex flex-col min-h-screen bg-gray-100">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div className="flex items-center">
+              <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
+              <span className="text-xl font-bold">ETgc</span>
+            </div>
+            <nav className="flex items-center space-x-4">
+              <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+                <Bell className="h-5 w-5 mr-2" />
+                <span className="hidden md:inline">Notifications</span>
+              </button>
+              <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+                <Settings className="h-5 w-5 mr-2" />
+                <span className="hidden md:inline">Settings</span>
+              </button>
+              <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+                <User className="h-5 w-5 mr-2" />
+                <span className="hidden md:inline">Profile</span>
+              </button>
+            </nav>
+          </div>
+        </header>
+
+        <div className="flex-grow flex">
+          <aside className="w-64 bg-white shadow-md">
+            <nav className="mt-5 px-2">
+              <Link to="/" className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <HomeIcon className="mr-4 h-6 w-6" />
+                Inicio
+              </Link>
+              <Link to="/vista-plantillas" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <FileText className="mr-4 h-6 w-6" />
+                Plantillas
+              </Link>
+              <button className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <Archive className="mr-4 h-6 w-6" />
+                Históricos
+              </button>
+              <div className="mt-5">
+                <h3 className="px-2 py-2 text-sm font-medium text-gray-500 uppercase tracking-wider">Accesos rápidos</h3>
+                <Link to="/crear-nueva-escaleta" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                  <Plus className="mr-4 h-6 w-6" />
+                  Crear nueva escaleta
+                </Link>
+                <Link to="/reciente" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                  <Clock className="mr-4 h-6 w-6" />
+                  Reciente
+                </Link>
+              </div>
+            </nav>
+          </aside>
+
+          <main className="flex-1 overflow-y-auto p-8">
+            <Routes>
+              <Route path="/" element={<Home handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
+              <Route path="/vista-plantillas" element={<VistaPlantillas />} />
+              <Route path="/plantilla-base" element={<PlantillaBase />} />
+            </Routes>
+          </main>
+        </div>
+
+        <footer className="bg-white border-t border-gray-200 py-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
+              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
+              <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );
 }
 
-const Home = () => (
-  <div className="container" data-testid="app">
-    <header className="header d-flex justify-content-between align-items-center">
-      <div className="logo d-flex align-items-center">
-        <img src="/images/logo.png" alt="Logo" />
-        <h1 className="h4 mb-0">ETgc</h1>
+function Home({ handleImportClick, fileInputRef, handleFileChange }) {
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-semibold text-gray-900">Programas</h1>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+          <Plus className="mr-2 h-5 w-5" />
+          Crear nuevo
+        </button>
       </div>
-      <nav className="menu d-flex align-items-center gap-4">
-        <div className="menu-item d-flex align-items-center gap-2">
-          <div className="position-relative">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 4.5, height: 2.25, left: 6.75, top: 13.5, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 12.37, height: 11.25, left: 2.82, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Notifications</span>
-        </div>
-        <div className="menu-item d-flex align-items-center gap-2">
-          <div className="position-relative">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 5.62, height: 5.62, left: 6.19, top: 6.19, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 14.62, height: 13.5, left: 1.69, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Settings</span>
-        </div>
-        <div className="menu-item d-flex align-items-center gap-2">
-          <div className="position-relative">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 9, height: 9, left: 4.5, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 13.5, height: 3.94, left: 2.25, top: 11.25, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Profile</span>
-        </div>
-      </nav>
-    </header>
-    <div className="d-flex">
-      <aside className="sidebar">
-        <div className="menu-item">
-          <div className="position-relative me-2">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 12.38, height: 12.94, left: 2.81, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Inicio</span>
-        </div>
-        <div className="menu-item">
-          <div className="position-relative me-2">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 11.25, height: 13.5, left: 3.38, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 3.94, height: 3.94, left: 10.69, top: 2.25, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 4.5, height: 0, left: 6.75, top: 11.81, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 4.5, height: 0, left: 6.75, top: 9.56, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Plantillas</span>
-        </div>
-        <div className="menu-item">
-          <div className="position-relative me-2">
-            <div className="position-absolute" style={{ width: 18, height: 18, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 1.69, height: 1.69, left: 5.62, top: 9, background: '#1F2937' }}></div>
-            <div className="position-absolute" style={{ width: 1.69, height: 1.69, left: 10.69, top: 9, background: '#1F2937' }}></div>
-            <div className="position-absolute" style={{ width: 6.54, height: 11.82, left: 10.34, top: 3.37, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 6.54, height: 11.82, left: 1.13, top: 3.37, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 6.75, height: 0.44, left: 5.62, top: 5.06, border: '1.12px #1F2937 solid' }}></div>
-            <div className="position-absolute" style={{ width: 6.75, height: 0.44, left: 5.62, top: 12.49, border: '1.12px #1F2937 solid' }}></div>
-          </div>
-          <span>Históricos</span>
-        </div>
-      </aside>
-      <main className="content">
-        <div className="mb-3">
-          <div className="d-flex justify-content-between align-items-center">
-            <h2 className="h4">Programas</h2>
-            <button className="btn btn-primary">Crear nuevo</button>
-          </div>
-        </div>
-        <div className="programs">
-          <h3 className="h5">DCSHA</h3>
-          <p>De ciclismo de habla así</p>
-          <div className="d-flex align-items-center gap-2">
-            <Link to="/vista-plantillas" className="btn btn-link">Ingresar</Link>
-            <button className="btn btn-link">Importar proyecto</button>
-          </div>
-        </div>
-      </main>
-    </div>
-    <footer className="footer">
-      <span>© 2024 Torneos SAS | Colombia</span>
-      <div className="d-flex gap-4">
-        <a href="#">Políticas</a>
-        <a href="#">Términos de servicio</a>
-        <a href="#">Contacto</a>
-      </div>
-    </footer>
-  </div>
-);
 
-export default App;
+      <div className="bg-white shadow rounded-lg p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">DCSHA</h2>
+        <p className="text-gray-600 mb-4">De ciclismo de habla así</p>
+        <div className="flex space-x-4">
+          <Link to="/vista-plantillas" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+            <ArrowRight className="mr-2 h-5 w-5" />
+            Ingresar
+          </Link>
+          <button onClick={handleImportClick} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center">
+            <Download className="mr-2 h-5 w-5" />
+            Importar proyecto
+          </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
