@@ -1,90 +1,147 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Home as HomeIcon, FileText, Archive, Plus, Clock } from 'lucide-react';
+import Footer from './Footer'; // Importar el componente Footer
 import './VistaPlantillas.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const VistaPlantillas = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <main className="flex-1 overflow-y-auto p-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Plantillas</h1>
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
+            <span className="text-xl font-bold">ETgc</span>
+          </div>
+          <nav className="flex items-center space-x-4">
+            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <i className="bi bi-bell h-5 w-5 mr-2"></i>
+              <span className="hidden md:inline">Notifications</span>
+            </button>
+            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <i className="bi bi-gear h-5 w-5 mr-2"></i>
+              <span className="hidden md:inline">Settings</span>
+            </button>
+            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <i className="bi bi-person h-5 w-5 mr-2"></i>
+              <span className="hidden md:inline">Profile</span>
+            </button>
+          </nav>
         </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla base</h2>
-            <p className="text-gray-600 mb-4">Esquema base de escaleta para DCSHA</p>
-            <div className="flex space-x-4">
-              <Link to="/plantilla-base" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                Traer
+      <div className="flex-grow flex">
+        <aside className="w-64 bg-white shadow-md">
+          <nav className="mt-5 px-2">
+            <Link to="/" className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+              <HomeIcon className="mr-4 h-6 w-6" />
+              Inicio
+            </Link>
+            <Link to="/vista-plantillas" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+              <FileText className="mr-4 h-6 w-6" />
+              Plantillas
+            </Link>
+            <button className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+              <Archive className="mr-4 h-6 w-6" />
+              Históricos
+            </button>
+            <div className="mt-5">
+              <h3 className="px-2 py-2 text-sm font-medium text-gray-500 uppercase tracking-wider">Accesos rápidos</h3>
+              <Link to="/crear-nueva-escaleta" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <Plus className="mr-4 h-6 w-6" />
+                Crear nueva escaleta
+              </Link>
+              <Link to="/reciente" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                <Clock className="mr-4 h-6 w-6" />
+                Reciente
               </Link>
             </div>
+          </nav>
+        </aside>
+
+        <main className="flex-1 overflow-y-auto p-8">
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-gray-900">Plantillas</h1>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="bg-white shadow rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla base</h2>
+              <p className="text-gray-600 mb-4">Esquema base de escaleta para DCSHA</p>
+              <div className="flex space-x-4">
+                <Link to="/plantilla-base" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                  Traer
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-white shadow rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Última plantilla usada</h2>
+              <p className="text-gray-600 mb-4">Esquema de último programa realizado</p>
+              <div className="flex space-x-4">
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                  Traer
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white shadow rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla Histórico</h2>
+              <p className="text-gray-600 mb-4">Esquemas de programas hechos anteriormente</p>
+              <div className="flex space-x-4">
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                  Traer
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-gray-900">Históricos</h1>
           </div>
 
           <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Última plantilla usada</h2>
-            <p className="text-gray-600 mb-4">Esquema de último programa realizado</p>
-            <div className="flex space-x-4">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                Traer
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla Histórico</h2>
-            <p className="text-gray-600 mb-4">Esquemas de programas hechos anteriormente</p>
-            <div className="flex space-x-4">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                Traer
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Históricos</h1>
-        </div>
-
-        <div className="bg-white shadow rounded-lg p-6">
-          <div className="grid grid-cols-1 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="grid grid-cols-4 gap-4">
-                <div className="text-sm text-gray-500">2024-10-11</div>
-                <div className="text-sm text-gray-500">Programa Gran Piemonte | Etapa única</div>
-                <div className="text-sm text-gray-500">59 minutos</div>
-                <div className="text-sm text-blue-600 hover:text-blue-900">
-                  <a href="#">View</a>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-sm text-gray-500">2024-10-11</div>
+                  <div className="text-sm text-gray-500">Programa Gran Piemonte | Etapa única</div>
+                  <div className="text-sm text-gray-500">59 minutos</div>
+                  <div className="text-sm text-blue-600 hover:text-blue-900">
+                    <a href="#">View</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="grid grid-cols-4 gap-4">
-                <div className="text-sm text-gray-500">2024-03-07</div>
-                <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 4</div>
-                <div className="text-sm text-gray-500">58 minutos</div>
-                <div className="text-sm text-blue-600 hover:text-blue-900">
-                  <a href="#">View</a>
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-sm text-gray-500">2024-03-07</div>
+                  <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 4</div>
+                  <div className="text-sm text-gray-500">58 minutos</div>
+                  <div className="text-sm text-blue-600 hover:text-blue-900">
+                    <a href="#">View</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="grid grid-cols-4 gap-4">
-                <div className="text-sm text-gray-500">2024-07-01</div>
-                <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 3</div>
-                <div className="text-sm text-gray-500">57 minutos</div>
-                <div className="text-sm text-blue-600 hover:text-blue-900">
-                  <a href="#">View</a>
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-sm text-gray-500">2024-07-01</div>
+                  <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 3</div>
+                  <div className="text-sm text-gray-500">57 minutos</div>
+                  <div className="text-sm text-blue-600 hover:text-blue-900">
+                    <a href="#">View</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
+
+      <Footer />
     </div>
   );
 };

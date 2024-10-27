@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Home } from 'lucide-react';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -11,9 +13,14 @@ const PlantillaBase = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
+      <header className="bg-white shadow-sm p-4 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-gray-900">Programa de Escaleta</h1>
+        <Link to="/" className="text-gray-600 hover:text-gray-900">
+          <Home className="h-6 w-6" />
+        </Link>
+      </header>
       <main className="flex-1 overflow-y-auto p-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Programa de Escaleta</h1>
           <p className="text-gray-600">{fechaActual}</p>
         </div>
 
@@ -88,6 +95,16 @@ const PlantillaBase = () => {
           </button>
         </div>
       </main>
+      <footer className="bg-white border-t border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
+          <div className="flex space-x-4">
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
