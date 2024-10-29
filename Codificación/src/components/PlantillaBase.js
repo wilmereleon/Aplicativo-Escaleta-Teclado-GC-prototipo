@@ -144,23 +144,22 @@ const PlantillaBase = () => {
             <div className="row">
               <div className="col">
                 <label className="block text-sm font-medium text-gray-700">Al aire</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
               </div>
               <div className="col">
                 <label className="block text-sm font-medium text-gray-700">Tiempo recorrido</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-recorrido" />
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" />
               </div>
               <div className="col">
                 <label className="block text-sm font-medium text-gray-700">Tiempo de más</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-mas" />
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" />
               </div>
               <div className="col">
                 <label className="block text-sm font-medium text-gray-700">Tiempo en curso</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-curso" />
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" />
               </div>
               <div className="col">
                 <label className="block text-sm font-medium text-gray-700">Tiempo total</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-total" />
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" />
               </div>
             </div>
           </div>
@@ -233,8 +232,8 @@ const PlantillaBase = () => {
                     </td>
                     <td className="actions">
                       <a href="#" className="view-link"><Eye /> View</a>
-                      <a href="#" className="zcpl-link" onClick={() => toggleZcPl(element.id)}><Download /> Traer</a>
-                      <a href="#" className="add-link" onClick={addElement}><Plus /> Añadir</a>
+                      <a href="#" className="zcpl-link" onClick={() => toggleZcPl(element.id)}><Download /> ZcPl</a>
+                      <a href="#" className="add-link" onClick={addElement}><Plus /> </a>
                       <a href="#" className="delete-link" onClick={() => removeElement(element.id)}><Trash2 /> Eliminar</a>
                     </td>
                   </tr>

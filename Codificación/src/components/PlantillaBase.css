@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #f0f0f0;
   color: #333;
 }
@@ -80,6 +80,7 @@ header {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Helvetica Rounded LT Std', sans-serif;
 }
 
 .zocalos-btn {
@@ -98,21 +99,25 @@ header {
 }
 
 .tiempo-recorrido {
-  color: green;
+  color: #16D95A;
   background-color: black;
+  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
 }
 
 .tiempo-mas {
-  color: red;
+  color: #BA2E17;
   background-color: black;
+  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
 }
 
 .tiempo-curso {
-  color: blue;
+  color: #3211B2;
   background-color: black;
+  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
 }
 
 .tiempo-total {
-  color: purple;
+  color: #9C30FF;
   background-color: black;
+  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
 }
