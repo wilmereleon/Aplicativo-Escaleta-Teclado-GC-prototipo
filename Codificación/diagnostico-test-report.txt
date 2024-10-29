@@ -1,0 +1,17 @@
+Resumen de lo Más Relevante
+Total de Suites de Pruebas: 3
+Suites de Pruebas Pasadas: 1
+Suites de Pruebas Fallidas: 2
+Total de Pruebas: 3
+Pruebas Pasadas: 2
+Pruebas Fallidas: 1
+Detalles de las Pruebas Fallidas
+Test Suite: C:\xampp\htdocs\Aplicativo Escaleta-Teclado GC prototipo\Codificación\src\components\App.test.js
+Prueba Fallida: renders app component
+Mensaje de Error: TestingLibraryElementError: Unable to find an element by: [data-testid="app"]
+Detalles: La prueba no pudo encontrar un elemento con el atributo data-testid="app" en el DOM.
+Determinación del Problema
+El problema principal es que la prueba renders app component no pudo encontrar el elemento con data-testid="app". Esto puede deberse a varias razones:
+
+El elemento no está presente en el DOM: Asegúrate de que el componente App renderice un elemento con data-testid="app".
+Problemas de configuración de Jest: Asegúrate de que Jest esté configurado correctamente para transformar y ejecutar tu código.

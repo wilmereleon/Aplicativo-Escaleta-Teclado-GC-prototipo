@@ -7,6 +7,7 @@ import Home from './components/Home'; // Importar el componente Home
 import Footer from './components/Footer'; // Importar el componente Footer
 import './App.css'; // Asegúrate de importar el archivo CSS aquí
 
+
 export default function App() {
   const fileInputRef = useRef(null);
 

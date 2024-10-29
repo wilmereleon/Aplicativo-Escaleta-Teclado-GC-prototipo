@@ -1,15 +1,24 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import PlantillaBase from './PlantillaBase';
 
 test('renders PlantillaBase component', () => {
-  render(<PlantillaBase />);
+  render(
+    <Router>
+      <PlantillaBase />
+    </Router>
+  );
   const linkElement = screen.getByText(/Elementos de la Escaleta/i);
   expect(linkElement).toBeInTheDocument();
 });
 
 test('adds a new row when "(+) Añadir" is clicked', () => {
-  render(<PlantillaBase />);
+  render(
+    <Router>
+      <PlantillaBase />
+    </Router>
+  );
   
   // Initial number of rows
   const initialRows = screen.getAllByRole('row').length;
