@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home as HomeIcon, FileText, Archive, Plus, Clock } from 'lucide-react';
-import Footer from './Footer'; // Importar el componente Footer
 import './VistaPlantillas.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -65,37 +64,39 @@ const VistaPlantillas = () => {
             <h1 className="text-2xl font-semibold text-gray-900">Plantillas</h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla base</h2>
-              <p className="text-gray-600 mb-4">Esquema base de escaleta para DCSHA</p>
-              <div className="flex space-x-4">
-                <Link to="/plantilla-base" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                  Traer
-                </Link>
+          <div className="container text-center">
+            <div className="row">
+              <div className="col bg-white shadow rounded-xl p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla base</h2>
+                <p className="text-gray-600 mb-4">Esquema base de escaleta para DCSHA</p>
+                <div className="flex space-x-4">
+                  <Link to="/plantilla-base" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                    <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                    Traer
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Última plantilla usada</h2>
-              <p className="text-gray-600 mb-4">Esquema de último programa realizado</p>
-              <div className="flex space-x-4">
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                  Traer
-                </button>
+              <div className="col bg-white shadow rounded-xl p-6 order-5">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">Última plantilla usada</h2>
+                <p className="text-gray-600 mb-4">Esquema de último programa realizado</p>
+                <div className="flex space-x-4">
+                  <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                    <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                    Traer
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla Histórico</h2>
-              <p className="text-gray-600 mb-4">Esquemas de programas hechos anteriormente</p>
-              <div className="flex space-x-4">
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-                  <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
-                  Traer
-                </button>
+              <div className="col bg-white shadow rounded-xl p-6 order-1">
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">Plantilla Histórico</h2>
+                <p className="text-gray-600 mb-4">Esquemas de programas hechos anteriormente</p>
+                <div className="flex space-x-4">
+                  <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+                    <i className="bi bi-arrow-right-circle mr-2 h-5 w-5"></i>
+                    Traer
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -104,34 +105,40 @@ const VistaPlantillas = () => {
             <h1 className="text-2xl font-semibold text-gray-900">Históricos</h1>
           </div>
 
-          <div className="bg-white shadow rounded-lg p-6">
-            <div className="grid grid-cols-1 gap-4">
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-sm text-gray-500">2024-10-11</div>
-                  <div className="text-sm text-gray-500">Programa Gran Piemonte | Etapa única</div>
-                  <div className="text-sm text-gray-500">59 minutos</div>
-                  <div className="text-sm text-blue-600 hover:text-blue-900">
+          <div className="bg-white shadow rounded-xl p-6">
+            <div className="row g-0 text-center mb-2">
+              <div className="col text-sm font-semibold text-gray-700">Fecha</div>
+              <div className="col text-sm font-semibold text-gray-700">Contenido</div>
+              <div className="col text-sm font-semibold text-gray-700">Duración</div>
+              <div className="col text-sm font-semibold text-gray-700">Acciones</div>
+            </div>
+            <div className="row g-0 text-center">
+              <div className="col-12 mb-2">
+                <div className="row g-0 bg-gray-100 p-4 rounded-xl">
+                  <div className="col text-sm text-gray-500">2024-10-11</div>
+                  <div className="col text-sm text-gray-500">Programa Gran Piemonte | Etapa única</div>
+                  <div className="col text-sm text-gray-500">59 minutos</div>
+                  <div className="col text-sm text-blue-600 hover:text-blue-900">
                     <a href="#">View</a>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-sm text-gray-500">2024-03-07</div>
-                  <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 4</div>
-                  <div className="text-sm text-gray-500">58 minutos</div>
-                  <div className="text-sm text-blue-600 hover:text-blue-900">
+              <div className="col-12 mb-2">
+                <div className="row g-0 bg-gray-100 p-4 rounded-xl">
+                  <div className="col text-sm text-gray-500">2024-03-07</div>
+                  <div className="col text-sm text-gray-500">Programa Tour de Francia | Etapa 4</div>
+                  <div className="col text-sm text-gray-500">58 minutos</div>
+                  <div className="col text-sm text-blue-600 hover:text-blue-900">
                     <a href="#">View</a>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-sm text-gray-500">2024-07-01</div>
-                  <div className="text-sm text-gray-500">Programa Tour de Francia | Etapa 3</div>
-                  <div className="text-sm text-gray-500">57 minutos</div>
-                  <div className="text-sm text-blue-600 hover:text-blue-900">
+              <div className="col-12 mb-2">
+                <div className="row g-0 bg-gray-100 p-4 rounded-xl">
+                  <div className="col text-sm text-gray-500">2024-07-01</div>
+                  <div className="col text-sm text-gray-500">Programa Tour de Francia | Etapa 3</div>
+                  <div className="col text-sm text-gray-500">57 minutos</div>
+                  <div className="col text-sm text-blue-600 hover:text-blue-900">
                     <a href="#">View</a>
                   </div>
                 </div>
@@ -140,8 +147,6 @@ const VistaPlantillas = () => {
           </div>
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 };

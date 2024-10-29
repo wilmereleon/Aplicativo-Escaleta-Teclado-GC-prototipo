@@ -1,168 +1,118 @@
-/* Estilos generales */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #F3F4F6;
-    color: #1F2937;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .flex-col {
-    flex-direction: column;
-  }
-  
-  .min-h-screen {
-    min-height: 100vh;
-  }
-  
-  .bg-gray-100 {
-    background-color: #F3F4F6;
-  }
-  
-  /* Header */
-  header {
-    background-color: #FFFFFF;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .max-w-7xl {
-    max-width: 80rem;
-  }
-  
-  .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .py-4 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  
-  .justify-between {
-    justify-content: space-between;
-  }
-  
-  .items-center {
-    align-items: center;
-  }
-  
-  .h-8 {
-    height: 2rem;
-  }
-  
-  .w-8 {
-    width: 2rem;
-  }
-  
-  .mr-2 {
-    margin-right: 0.5rem;
-  }
-  
-  .text-xl {
-    font-size: 1.25rem;
-  }
-  
-  .font-bold {
-    font-weight: 700;
-  }
-  
-  .space-x-4 > * + * {
-    margin-left: 1rem;
-  }
-  
-  .rounded-full {
-    border-radius: 9999px;
-  }
-  
-  .hover\:bg-gray-200:hover {
-    background-color: #E5E7EB;
-  }
-  
-  /* Main content */
-  .flex-grow {
-    flex-grow: 1;
-  }
-  
-  /* Main content area */
-  main {
-    flex: 1;
-    overflow-y: auto;
-    padding: 2rem;
-  }
-  
-  .mb-6 {
-    margin-bottom: 1.5rem;
-  }
-  
-  .text-2xl {
-    font-size: 1.5rem;
-  }
-  
-  .font-semibold {
-    font-weight: 600;
-  }
-  
-  .text-gray-900 {
-    color: #111827;
-  }
-  
-  .bg-blue-600 {
-    background-color: #2563EB;
-  }
-  
-  .text-white {
-    color: #FFFFFF;
-  }
-  
-  .hover\:bg-blue-700:hover {
-    background-color: #1D4ED8;
-  }
-  
-  .shadow {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  }
-  
-  .p-6 {
-    padding: 1.5rem;
-  }
-  
-  .mb-2 {
-    margin-bottom: 0.5rem;
-  }
-  
-  .mb-4 {
-    margin-bottom: 1rem;
-  }
-  
-  .border {
-    border-width: 1px;
-  }
-  
-  .border-gray-300 {
-    border-color: #D1D5DB;
-  }
-  
-  .hover\:bg-gray-50:hover {
-    background-color: #F9FAFB;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .hidden {
-      display: none;
-    }
-  
-    .md\:inline {
-      display: inline;
-    }
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+}
+
+.notifications, .settings, .profile {
+  margin: 0 10px;
+}
+
+.program-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.5em;
+}
+
+.time-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.schedule-table th, .schedule-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.schedule-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.program-row:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.actions a {
+  margin: 0 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.zcpl-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.zcpl-section {
+  width: 48%;
+}
+
+.zcpl-section h3 {
+  margin-bottom: 10px;
+}
+
+.zcpl-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.zocalos-btn {
+  background-color: #0830D3;
+  color: #FF00E1;
+}
+
+.zocalos-btn:nth-child(1) {
+  background-color: #DFFA04;
+  color: #0830D3;
+}
+
+.placas-btn {
+  background-color: #0830D3;
+  color: #DFFA04;
+}
+
+.tiempo-recorrido {
+  color: green;
+  background-color: black;
+}
+
+.tiempo-mas {
+  color: red;
+  background-color: black;
+}
+
+.tiempo-curso {
+  color: blue;
+  background-color: black;
+}
+
+.tiempo-total {
+  color: purple;
+  background-color: black;
+}
