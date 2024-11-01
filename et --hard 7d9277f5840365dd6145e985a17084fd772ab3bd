@@ -1,0 +1,412 @@
+[33mcommit 7d9277f5840365dd6145e985a17084fd772ab3bd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Nov 1 12:19:14 2024 -0500
+
+    Implementación de opciones de filas en escaleta
+    
+    Se añaden las preferencias de visualización según el tipo de fila en el contenido gráfico
+
+[33mcommit 793c3fd9108a50b69757388948edb5235d09626c[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Oct 29 16:44:00 2024 -0500
+
+    Primeras pruebas
+    
+    Pruebas de primeras vistas
+
+[33mcommit 2abed44663b33830ec3197a30113787b90bd40c8[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Oct 29 15:43:32 2024 -0500
+
+    Ajustes al index
+    
+    Se ajusta la importación de fuentes y el favicon en el Index.html
+
+[33mcommit 2897a635529a3391b8a493142ca441997853e9cd[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Oct 29 15:42:37 2024 -0500
+
+    Ajuste de favicon
+    
+    Se incorpora un favicon
+
+[33mcommit 2a0780f41f85156421bf494079238d1f33fe0911[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Oct 29 15:26:24 2024 -0500
+
+    Creación de entorno base de PlantillaBase
+    
+    Se crean las funcionalidades básicas para crear filas y algunas características
+
+[33mcommit d7b38c9d53cc8c3558c72cdd35d0b6ebade45978[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sun Oct 27 13:01:04 2024 -0500
+
+    Ajuste de vistas fijas
+    
+    Header y footer con las características del diseño
+
+[33mcommit 005c7ef7f48659e9c0fa3708bd406708299ca5d9[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sun Oct 27 12:32:21 2024 -0500
+
+    Implementación de las primeras vistas
+    
+    La vista inicial, la vista de plantillas y la vista de plantilla base
+
+[33mcommit 71e51369e40df7c46f2ade730fb32fec7369fa76[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 20:18:46 2024 -0500
+
+    Create 3.pack
+
+[33mcommit 6bca917bfe39d0d319585901616fcbe326f04912[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 20:18:31 2024 -0500
+
+    Reparación de contenedores
+    
+    Se organizan los contenedores de la página inicial
+
+[33mcommit ad7806ae432187f70ea32b6dbe3e0da4c315790a[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 20:10:23 2024 -0500
+
+    Inserción de estilos Bootstrap
+
+[33mcommit 3bba9248cbd0403655e6af73ea97cbb40ea9bcbd[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 18:01:38 2024 -0500
+
+    Suite de pruebas Jest (funcionando)
+    
+    npx jest
+     PASS  src/__tests__/App.test.js
+      √ renders app component (68 ms)
+    
+    Test Suites: 1 passed, 1 total
+    Tests:       1 passed, 1 total
+    Snapshots:   0 total
+    Time:        2.48 s
+    Ran all test suites.
+
+[33mcommit 3760650f61c995c4b588ddb4275198f53fc96a29[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:54:13 2024 -0500
+
+    Cambo de modelo de testing
+
+[33mcommit 3e6e3d2c1167eb0333c6c8b45d2f34157479c2b2[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:49:04 2024 -0500
+
+    Prueba de Jest
+
+[33mcommit 193b420992caae0eecb2c77a5f9e95968e2c22ae[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:42:35 2024 -0500
+
+    Instalación de Jest (framework de testing)
+
+[33mcommit 1b7193fd5c771a4ca3572e4a6ae4b8f5de4a0c4b[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:30:40 2024 -0500
+
+    Reparación de vulnerabilidades de entorno
+
+[33mcommit f9f510df23f22d72f4507eb871352a392f765fce[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:26:10 2024 -0500
+
+    Fixed
+
+[33mcommit 5fd595f5c17824cd0e0ae4e2286e6973937faa07[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:16:08 2024 -0500
+
+    Reparación de src
+
+[33mcommit 24630ab9fa773c7ddeb6ab6866db350f0db61fb3[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 17:01:16 2024 -0500
+
+    SRC
+
+[33mcommit 3f97f789673742a374f2f58d9f2806edb4c19699[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 16:59:17 2024 -0500
+
+    Corrección de dependencias React
+
+[33mcommit c339b0295a792ae85471b96a0de4d439b928e65a[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 16:55:57 2024 -0500
+
+    Cambios en dependencias
+
+[33mcommit 2d0c207a0a179b87e78e6f016cfa86f4b0fdd400[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 16:28:13 2024 -0500
+
+    Creación de entorno html
+    
+    Se crea html para visualizar el trabajo de la pàgina
+
+[33mcommit 415cbe3a401c8b12780fd38cbdcda6fa2685a407[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 16:22:58 2024 -0500
+
+    Instalación de dependencias
+
+[33mcommit 7dd12cad53a7db2b8f987b5833e05a29c78af542[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 16:07:03 2024 -0500
+
+    Entorno de React y servidor
+    
+    Se implementan dependencias de React
+
+[33mcommit bdd6a41c7a8979e29ecedbde94793865576b42e9[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 15:15:26 2024 -0500
+
+    Implementación de entorno de aplicación React
+    
+    Se añaden las características de React para el Frontend
+
+[33mcommit 0ed5d317d78df777f77e47c269a97e4a1cf5cd28[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Oct 19 14:35:55 2024 -0500
+
+    Refactorización
+    
+    Optimización de código con patrones GRAPS y SOLID: Principios SOLID
+    Single Responsibility Principle (SRP):
+    
+    Cada clase tiene una única responsabilidad. Por ejemplo, la clase InterfazUsuario solo se encarga de mostrar la interfaz de usuario, mientras que la clase Aplicacion se encarga de abrir y cerrar la aplicación.
+    Las clases GestionProgramacion, OpcionesPlantilla, GestionZocalos, GestionPlacas, y GestionEscaleta tienen responsabilidades específicas relacionadas con la gestión de diferentes aspectos del dominio.
+    Open/Closed Principle (OCP):
+    
+    Las clases están abiertas para la extensión pero cerradas para la modificación. Por ejemplo, si necesitamos agregar nuevas funcionalidades a la clase Aplicacion, podemos extenderla sin modificar su código existente.
+    Las interfaces como IProgramacion, IPlantillas, IZocalos, IPlacas, e IEscaleta permiten la extensión de funcionalidades sin modificar las clases que las implementan.
+    Liskov Substitution Principle (LSP):
+    
+    Las clases derivadas pueden ser sustituidas por sus clases base sin alterar el comportamiento del programa. Por ejemplo, AsistenteProduccion y Productor extienden Usuario y pueden ser utilizadas en lugar de Usuario sin problemas.
+    Interface Segregation Principle (ISP):
+    
+    Las interfaces están divididas en partes más pequeñas y específicas. Por ejemplo, IProgramacion, IPlantillas, IZocalos, IPlacas, e IEscaleta son interfaces específicas que definen métodos relacionados con sus respectivas responsabilidades.
+    Dependency Inversion Principle (DIP):
+    
+    Las clases dependen de abstracciones en lugar de implementaciones concretas. Por ejemplo, InterfazUsuario depende de la abstracción Aplicacion en lugar de una implementación concreta.
+    Patrones GRASP
+    Information Expert:
+    
+    Las responsabilidades se asignan a las clases que tienen la información necesaria para cumplirlas. Por ejemplo, Aplicacion tiene la responsabilidad de abrir y cerrar la aplicación porque tiene acceso a SALApp.
+    Creator:
+    
+    Las clases que necesitan instancias de otras clases son responsables de crearlas. Por ejemplo, ModuloDCSHA crea una instancia de GestionProgramacion.
+    Controller:
+    
+    ControladorPrincipal actúa como un controlador que maneja la lógica de la aplicación y coordina las interacciones entre las clases.
+    Low Coupling:
+    
+    Las clases están diseñadas para tener baja dependencia entre sí. Por ejemplo, InterfazUsuario solo depende de Aplicacion y no de otras clases.
+    High Cohesion:
+    
+    Las clases tienen responsabilidades relacionadas y enfocadas. Por ejemplo, GestionZocalos solo se encarga de la gestión de zócalos
+
+[33mcommit bcc6229fd5e305dcb2db5a3c0a10115f34da0963[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Oct 18 17:32:15 2024 -0500
+
+    Inserción de capas restantes Persistencia, Dominio y Datos
+    
+    Se redistribuyen las clases en las capas... más adelante, se agruparán las clases dentro de los componentes; y los componentes dentro de las capas
+
+[33mcommit 87afe290e31c27504473e506bb6ef836c46510a5[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Oct 18 17:00:00 2024 -0500
+
+    Maqueta inicial de capas de Presentación, Negocio y Datos
+    
+    Se insertan las primeras clases
+
+[33mcommit e0ca227e7b661bfa4be06d8aeed28b534968dd33[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Oct 18 16:20:54 2024 -0500
+
+    Consolidado de mockup
+    
+    Se insertan los anexos de la fase de diseño
+
+[33mcommit 23c9092239c74540e6dddadaf142a95e8d88bbdd[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Oct 16 13:42:51 2024 -0500
+
+    Organización de carpetas
+    
+    Se organizan las carpetas del entorno de artefactos
+
+[33mcommit e07503b8828dde975305582c28160b1c028a1776[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Oct 16 10:35:28 2024 -0500
+
+    Componentes de interés
+    
+    Se insertan otros materiales importantes para el montaje y se optimiza el diseño web
+
+[33mcommit c11e85e72e37747198d87313d13bb7a81c3a4c34[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Oct 9 18:10:41 2024 -0500
+
+    Terminación de fase diseño
+    
+    Se termina toda la fase de diseño.
+
+[33mcommit 37bd85689bb29f4458ad25f6a29a6e487c45a069[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Oct 9 11:49:59 2024 -0500
+
+    Montaje de diagramas
+    
+    Se crean el diagrama de Gantt y diagrama espina de pescado para documento final
+
+[33mcommit c3e4af6f5554ece00f53d9c276ba631178b5b574[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Oct 2 13:16:42 2024 -0500
+
+    Modificaciones e historia de usuario
+    
+    Se crean diversos diagramas... se modifican muchos otros y se crean las historias de usuario
+
+[33mcommit ff4cb17c94ceae9a874147b815fec671c6cece78[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Sep 28 13:11:28 2024 -0500
+
+    Adciones
+    
+    Se adicionan correcciones
+
+[33mcommit 34465ad7992299663874831e8b318948a27e8879[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Sep 24 12:28:56 2024 -0500
+
+    Carpeta de diagramas en PlantUML
+    
+    Se agregan los primeros diagramas en PlantUML para ser usados en la fase de Programación
+
+[33mcommit d05b5892912d7fc1afda831ff9317f2c74f3777d[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Sep 24 12:00:37 2024 -0500
+
+    Documento de Especificación de casos de uso del sisteme
+    
+    Se termina el documento que agrupa todos los casos de uso por paquetes y sus diagramas anexos
+
+[33mcommit bc8a8f24b2c547d60183243d25e70d88a0c3b3c1[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Sep 18 20:36:47 2024 -0500
+
+    Montaje de Especificaciones de casos de uso del sistema
+    
+    Se monta la estructura base del documento Especificaciones de casos de uso del sistema en el que se especifican los casos de uso por paquetes y despliegues
+
+[33mcommit 3c16fee780b549bcbf47eaefdc91a28f83d22314[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Mon Sep 16 10:54:30 2024 -0500
+
+    Aportes a la fase de Diseño
+    
+    Montaje de tres primeros casos de uso del documento de Especificación de realización de casos de uso
+
+[33mcommit 9fd3735e1d7c4db25d84d60302830e466c428bcd[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Sep 13 13:01:51 2024 -0500
+
+    Montaje de documentos
+    
+    Se montan los cuatro documentos de la fase de diseño
+
+[33mcommit bfcf601eeb021ce332a8427b909be0edc660d392[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Fri Sep 13 11:24:50 2024 -0500
+
+    Inyección de corrección en fase de diseño
+    
+    Se corrigen las representaciones de las interfaces y nodos en el diagrama de arquitectura de software (patrón en capas)
+
+[33mcommit 9a905d2d53064941ca29d49da5cad7350d11b939[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Thu Sep 12 22:59:52 2024 -0500
+
+    Creación de documento de arquitectura de software
+    
+    Se crea  el documento junto con los diagramas de patrón de capas, diagrama de despliegue, de actividades y modelo físico.
+
+[33mcommit b7ac388a7e1853e6cedcbb28fbaa8a9bdab4419c[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Sep 11 22:29:05 2024 -0500
+
+    Inicio de la fase de diseño
+    
+    Se crea la plantilla de documento de arquitectura de software del sistema y se elabora el primer diagrama
+
+[33mcommit d74febc4500fb60504c9592407012123c71a9f23[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Sep 11 14:40:28 2024 -0500
+
+    Inserción de Gantt segmentado
+    
+    Elementos de Excel de los proyectos segmentados por partes
+
+[33mcommit a2f528ecfe25c1db514508d1441b64e3e07ae513[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Wed Sep 11 12:22:06 2024 -0500
+
+    Anexos de Planeación
+    
+    Inserción de comprobantes de desarrollo de tiempos y bitácoras de la fase de Planeación
+
+[33mcommit c0f147957129c62a74983d2a38d44ebf84810202[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Sep 10 14:43:41 2024 -0500
+
+    #2 y #3 Terminados y a espera de aprobación final
+    
+    Se termina toda la fase de Planeación
+
+[33mcommit 08dfa57a6db637046ed3a24151e8c7482a83c45b[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Sat Sep 7 17:27:55 2024 -0500
+
+    Terminación de montaje de PLan de mejora (técnico)
+    
+    Se termina el documento que va para el ingeniero jefe
+
+[33mcommit b123d92cdee0a7486cfb06a96d75ef70f03ac5c6[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Thu Sep 5 22:45:05 2024 -0500
+
+    Inserción de Diagrama de Gantt y mejoras a formatos
+    
+    Se inserta el diagrama de Gantt creado en Primavera 6 Oracle, en formato PDF y se hacen mejoras a la estructura del documento del plan de mejoramiento
+
+[33mcommit 18baeb321f62f3ceecd2006478b8d3351ae00411[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Thu Sep 5 12:22:06 2024 -0500
+
+    Modificación de plantillas de documentos de entrega
+    
+    En total, son tres los documentos que se integran al plan de proyecto: plan de proyecto (plan de mejora del nivel tecnológico), project charter y documento de especificación de requerimientos funcionales y no funcionales
+
+[33mcommit ae03ff9b9790cd84d04334d7207fcc54a0429bd4[m
+Author: Wílmer E. León Díaz <42726764+wilmereleon@users.noreply.github.com>
+Date:   Tue Sep 3 21:18:38 2024 -0500
+
+    Inserción de artefactos de la fase de planeación
+    
+    Se inserta el Plan de proyecto (Formato de Mejora 1 - 2 - 3), la Propuesta de Plan de Mejoramiento Ing Sistemas (estimaciones de tiempo y recursos) y la Especificación de requerimientos (Lista de requisitos).
+         Artefactos:
+         1. Plan de proyecto
+         2. Estimaciones de tiempo y recursos
+         3. Lista de requisitos
