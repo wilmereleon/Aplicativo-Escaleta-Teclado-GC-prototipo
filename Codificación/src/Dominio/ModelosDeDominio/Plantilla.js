@@ -1,28 +1,15 @@
-const Escaleta = require('./Escaleta');
-const SAL = require('../../Persistencia/SistemaAlmacenamientoLocal/SAL');
-
 class Plantilla {
     constructor() {
-        this.tipo = '';
-        this.escaleta = null;
-        this.sal = new SAL();
+      this.ultimaPlantilla = null;
     }
-
-    cargarDatos() {
-        const datos = this.sal.recuperarDatos();
-        if (datos) {
-            this.tipo = datos.tipo;
-            this.escaleta = datos.escaleta;
-        }
+  
+    setUltimaPlantilla(plantilla) {
+      this.ultimaPlantilla = plantilla;
     }
-
-    guardarDatos() {
-        const datos = {
-            tipo: this.tipo,
-            escaleta: this.escaleta,
-        };
-        this.sal.almacenarDatos(datos);
+  
+    getUltimaPlantilla() {
+      return this.ultimaPlantilla;
     }
-}
-
-module.exports = Plantilla;
+  }
+  
+  module.exports = Plantilla;
