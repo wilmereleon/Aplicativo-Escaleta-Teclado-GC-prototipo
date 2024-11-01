@@ -140,6 +140,46 @@ frame "ETgc" {
                 + especificoPlaca()
             }
 
+            class FilaTitulo extends Fila {
+                + especificoTitulo()
+            }
+
+            class FilaVozEnOff extends Fila {
+                + especificoVozEnOff()
+            }
+
+            class FilaCortina extends Fila {
+                + especificoCortina()
+            }
+
+            class FilaReel extends Fila {
+                + especificoReel()
+            }
+
+            class FilaPromocionVenta extends Fila {
+                + especificoPromocionVenta()
+            }
+
+            class FilaTiempoDeCorte extends Fila {
+                + especificoTiempoDeCorte()
+            }
+
+            class FilaBloque extends Fila {
+                + especificoBloque()
+            }
+
+            class FilaTotal extends Fila {
+                + especificoTotal()
+            }
+
+            class GestionFila {
+                + mostrarOpciones()
+            }
+
+            class GestionAcciones {
+                + mostrarAcciones()
+            }
+
             abstract class Zocalo {
                 - tipo: String
                 - campos: List<Campo>

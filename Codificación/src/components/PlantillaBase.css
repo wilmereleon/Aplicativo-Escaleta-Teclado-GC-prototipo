@@ -44,8 +44,19 @@ header {
   color: white;
 }
 
+.schedule-table th.actions-header,
+.schedule-table td.actions {
+  width: 200px; /* Ajustar el ancho de la columna de acciones */
+}
+
 .program-row:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .actions a {
@@ -101,23 +112,51 @@ header {
 .tiempo-recorrido {
   color: #16D95A;
   background-color: black;
-  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
+  font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+  padding: 2.5px; /* Mantener el padding */
+  width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
+  height: 60%; /* Asegurar que el contenedor ocupe toda la altura disponible */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar el texto */
 }
 
 .tiempo-mas {
   color: #BA2E17;
   background-color: black;
-  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
+  font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+  padding: 2.5px; /* Mantener el padding */
+  width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
+  height: 60%; /* Asegurar que el contenedor ocupe toda la altura disponible */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar el texto */
 }
 
 .tiempo-curso {
   color: #3211B2;
   background-color: black;
-  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
+  font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+  padding: 2.5px; /* Mantener el padding */
+  width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
+  height: 60%; /* Asegurar que el contenedor ocupe toda la altura disponible */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar el texto */
 }
 
 .tiempo-total {
   color: #9C30FF;
   background-color: black;
-  font-size: 1.25rem; /* Aumenta el tamaño de la fuente en 5 puntos */
+  font-size: 2.5rem; /* Aumentar el tamaño de la fuente */
+  padding: 2.5px; /* Mantener el padding */
+  width: 100%; /* Asegurar que el contenedor ocupe todo el ancho disponible */
+  height: 60%; /* Asegurar que el contenedor ocupe toda la altura disponible */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar el texto */
 }

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Settings, User, Home as HomeIcon, Plus, Eye, Trash2, Download } from 'lucide-react';
+import { Bell, Settings, User, Home as HomeIcon, Plus, Save } from 'lucide-react';
 import AsistenteProduccion from '../Presentación/InterfazUsuario/AsistenteProduccion';
+import GestionFila from '../Dominio/ModelosDeDominio/GestionFila';
+import GestionAcciones from '../Dominio/ModelosDeDominio/GestionAcciones';
+import SAL from '../Persistencia/SistemaAlmacenamientoLocal/SAL';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const PlantillaBase = () => {
   const asistenteProduccion = new AsistenteProduccion();
+  const sal = new SAL();
   const [elements, setElements] = useState([
     { id: 'ID1', type: 'Entrada', name: 'Entrada 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
     { id: 'ID2', type: 'VTR Nota', name: 'VTR Nota 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
@@ -22,8 +26,8 @@ const PlantillaBase = () => {
   const addElement = () => {
     const newElement = {
       id: `ID${elements.length + 1}`,
-      type: 'Nuevo Tipo',
-      name: 'Nuevo Nombre',
+      type: '',
+      name: '',
       startTime: '00:00:00',
       duration: '00:00:00',
       elapsedTime: '00:00:00'
@@ -101,11 +105,43 @@ const PlantillaBase = () => {
     setElements(newElements);
   };
 
+  const duplicarFila = (id) => {
+    const elementToDuplicate = elements.find(el => el.id === id);
+    if (elementToDuplicate) {
+      const newElement = { ...elementToDuplicate, id: `ID${elements.length + 1}` };
+      setElements([...elements, newElement]);
+    }
+  };
+
+  const saveToFile = async () => {
+    const fileHandle = await window.showSaveFilePicker({
+      suggestedName: 'plantilla.etgc',
+      types: [
+        {
+          description: 'ETgc Files',
+          accept: {
+            'application/etgc': ['.etgc'],
+          },
+        },
+      ],
+    });
+
+    const writableStream = await fileHandle.createWritable();
+    await writableStream.write(JSON.stringify(elements));
+    await writableStream.close();
+
+    sal.almacenarDatos(elements);
+  };
+
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
   });
+
+  const tiposDeFila = [
+    'Entrada', 'VTR Nota', 'VTR Full', 'Placa', 'Titulo', 'Voz en Off', 'Cortina', 'Reel', 'Promocion-Venta', 'Tiempo de Corte', 'Bloque', 'Total'
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
@@ -131,6 +167,10 @@ const PlantillaBase = () => {
             <Link to="/" className="text-gray-600 hover:text-gray-900">
               <HomeIcon className="h-6 w-6" />
             </Link>
+            <button className="flex items-center p-2 rounded-full hover:bg-gray-200" onClick={saveToFile}>
+              <Save className="h-5 w-5 mr-2" />
+              <span className="hidden md:inline">Guardar</span>
+            </button>
           </nav>
         </div>
       </header>
@@ -139,27 +179,27 @@ const PlantillaBase = () => {
           <p className="text-gray-600">{fechaActual}</p>
         </div>
 
-        <div className="bg-white shadow rounded-xl p-6 mb-6">
+        <div className="bg-white shadow rounded-xl p-2 mb-2"> {/* Reducir padding */}
           <div className="container text-center">
             <div className="row">
               <div className="col">
-                <label className="block text-sm font-medium text-gray-700">Al aire</label>
+                <label className="block text-xs font-medium text-gray-700">Al aire</label> {/* Reducir tamaño del texto */}
               </div>
               <div className="col">
-                <label className="block text-sm font-medium text-gray-700">Tiempo recorrido</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" />
+                <label className="block text-xs font-medium text-gray-700">Tiempo recorrido</label> {/* Reducir tamaño del texto */}
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
               </div>
               <div className="col">
-                <label className="block text-sm font-medium text-gray-700">Tiempo de más</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" />
+                <label className="block text-xs font-medium text-gray-700">Tiempo de más</label> {/* Reducir tamaño del texto */}
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
               </div>
               <div className="col">
-                <label className="block text-sm font-medium text-gray-700">Tiempo en curso</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" />
+                <label className="block text-xs font-medium text-gray-700">Tiempo en curso</label> {/* Reducir tamaño del texto */}
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
               </div>
               <div className="col">
-                <label className="block text-sm font-medium text-gray-700">Tiempo total</label>
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" />
+                <label className="block text-xs font-medium text-gray-700">Tiempo total</label> {/* Reducir tamaño del texto */}
+                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
               </div>
             </div>
           </div>
@@ -176,7 +216,7 @@ const PlantillaBase = () => {
                 <th>Tiempo de inicio</th>
                 <th>Duración</th>
                 <th>Tiempo ejecutado</th>
-                <th>
+                <th className="actions-header">
                   Acciones
                   <button className="add-btn" onClick={addElement} style={{ marginLeft: '10px' }}>
                     <Plus /> Añadir
@@ -187,7 +227,7 @@ const PlantillaBase = () => {
             <tbody>
               {elements.map(element => (
                 <React.Fragment key={element.id}>
-                  <tr className="program-row">
+                  <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
                     <td className="program-id">
                       <input
                         type="text"
@@ -196,11 +236,15 @@ const PlantillaBase = () => {
                       />
                     </td>
                     <td className="program-type">
-                      <input
-                        type="text"
+                      <select
                         value={element.type}
                         onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
-                      />
+                      >
+                        <option value="" disabled>Escoger tipo de fila</option>
+                        {tiposDeFila.map(tipo => (
+                          <option key={tipo} value={tipo}>{tipo}</option>
+                        ))}
+                      </select>
                     </td>
                     <td className="program-name">
                       <input
@@ -231,34 +275,19 @@ const PlantillaBase = () => {
                       />
                     </td>
                     <td className="actions">
-                      <a href="#" className="view-link"><Eye /> View</a>
-                      <a href="#" className="zcpl-link" onClick={() => toggleZcPl(element.id)}><Download /> ZcPl</a>
-                      <a href="#" className="add-link" onClick={addElement}><Plus /> </a>
-                      <a href="#" className="delete-link" onClick={() => removeElement(element.id)}><Trash2 /> Eliminar</a>
+                      <GestionAcciones
+                        element={element}
+                        toggleZcPl={toggleZcPl}
+                        addElement={addElement}
+                        removeElement={removeElement}
+                        duplicarFila={duplicarFila}
+                      />
                     </td>
                   </tr>
                   {showZcPl === element.id && (
                     <tr className="zcpl-row">
                       <td colSpan="7">
-                        <div className="zcpl-container">
-                          <div className="zcpl-section">
-                            <h3>Zócalos</h3>
-                            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TITULOS')}>TITULOS</button>
-                            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'CATASTROFE')}>CATASTROFE</button>
-                            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, '2 LINEAS')}>2 LINEAS</button>
-                            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'VENTAS')}>VENTAS</button>
-                            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TEXTUALES')}>TEXTUALES</button>
-                          </div>
-                          <div className="zcpl-section">
-                            <h3>Placas</h3>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'EQUIPOS')}>EQUIPOS</button>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS EQUIPOS')}>DATOS EQUIPOS</button>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'COMPARATIVA')}>COMPARATIVA</button>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS')}>DATOS</button>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 3')}>PVENTA X 3</button>
-                            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 1')}>PVENTA X 1</button>
-                          </div>
-                        </div>
+                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} />
                       </td>
                     </tr>
                   )}

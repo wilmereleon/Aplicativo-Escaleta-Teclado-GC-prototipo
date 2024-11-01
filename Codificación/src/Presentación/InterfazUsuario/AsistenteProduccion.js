@@ -9,7 +9,21 @@ import Comparativa from '../../Datos/Repositorios/Comparativa';
 import Datos from '../../Datos/Repositorios/Datos';
 import PventasX3 from '../../Datos/Repositorios/PventasX3';
 import PventasX1 from '../../Datos/Repositorios/PventasX1';
-import { Fila, FilaEntrada, FilaVTRNota, FilaVTRFull, FilaPlaca } from '../../Dominio/ModelosDeDominio/Fila';
+import {
+  Fila,
+  FilaEntrada,
+  FilaVTRNota,
+  FilaVTRFull,
+  FilaPlaca,
+  FilaTitulo,
+  FilaVozEnOff,
+  FilaCortina,
+  FilaReel,
+  FilaPromocionVenta,
+  FilaTiempoDeCorte,
+  FilaBloque,
+  FilaTotal
+} from '../../Dominio/ModelosDeDominio/Fila';
 
 class AsistenteProduccion {
   constructor() {
@@ -31,6 +45,30 @@ class AsistenteProduccion {
       case 'Placa':
         newElement = new FilaPlaca(id, name, startTime, duration, elapsedTime);
         break;
+      case 'Titulo':
+        newElement = new FilaTitulo(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Voz en Off':
+        newElement = new FilaVozEnOff(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Cortina':
+        newElement = new FilaCortina(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Reel':
+        newElement = new FilaReel(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Promocion-Venta':
+        newElement = new FilaPromocionVenta(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Tiempo de Corte':
+        newElement = new FilaTiempoDeCorte(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Bloque':
+        newElement = new FilaBloque(id, name, startTime, duration, elapsedTime);
+        break;
+      case 'Total':
+        newElement = new FilaTotal(id, name, startTime, duration, elapsedTime);
+        break;
       default:
         newElement = new Fila(id, type, name, startTime, duration, elapsedTime);
         break;
@@ -39,66 +77,48 @@ class AsistenteProduccion {
     return this.elements;
   }
 
-  insertarZocalo(id, zocalo) {
-    const element = this.elements.find(el => el.id === id);
-    if (element) {
-      element.zocalos.push(zocalo);
-    }
-    return this.elements;
-  }
-
-  insertarPlaca(id, placa) {
-    const element = this.elements.find(el => el.id === id);
-    if (element) {
-      element.placas.push(placa);
-    }
-    return this.elements;
-  }
-
-  // Métodos específicos para insertar diferentes tipos de zócalos
   insertarZocaloTitulo(id) {
-    return this.insertarZocalo(id, new ZocaloTitulo());
+    // Implementación para insertar Zócalo Titulo
   }
 
   insertarZocaloCatastrofe(id) {
-    return this.insertarZocalo(id, new ZocaloCatastrofe());
+    // Implementación para insertar Zócalo Catastrofe
   }
 
   insertarZocaloDosLineas(id) {
-    return this.insertarZocalo(id, new ZocaloDosLineas());
+    // Implementación para insertar Zócalo Dos Lineas
   }
 
   insertarZocaloVentas(id) {
-    return this.insertarZocalo(id, new ZocaloVentas());
+    // Implementación para insertar Zócalo Ventas
   }
 
   insertarZocaloTextuales(id) {
-    return this.insertarZocalo(id, new ZocaloTextuales());
+    // Implementación para insertar Zócalo Textuales
   }
 
-  // Métodos específicos para insertar diferentes tipos de placas
   insertarPlacaEquipos(id) {
-    return this.insertarPlaca(id, new Equipo());
+    // Implementación para insertar Placa Equipos
   }
 
   insertarPlacaDatosEquipos(id) {
-    return this.insertarPlaca(id, new DatosEquipos());
+    // Implementación para insertar Placa Datos Equipos
   }
 
   insertarPlacaComparativa(id) {
-    return this.insertarPlaca(id, new Comparativa());
+    // Implementación para insertar Placa Comparativa
   }
 
   insertarPlacaDatos(id) {
-    return this.insertarPlaca(id, new Datos());
+    // Implementación para insertar Placa Datos
   }
 
   insertarPlacaPventaX3(id) {
-    return this.insertarPlaca(id, new PventasX3());
+    // Implementación para insertar Placa Pventa X3
   }
 
   insertarPlacaPventaX1(id) {
-    return this.insertarPlaca(id, new PventasX1());
+    // Implementación para insertar Placa Pventa X1
   }
 }
 
