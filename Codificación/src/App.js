@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { Bell, Settings, User, Home as HomeIcon, FileText, Archive, Plus, ArrowRight, Download, Clock } from 'lucide-react';
 import VistaPlantillas from './components/VistaPlantillas';
 import PlantillaBaseLayout from './components/PlantillaBaseLayout';
 import Home from './components/Home'; // Importar el componente Home
 import Footer from './components/Footer'; // Importar el componente Footer
 import './App.css'; // Asegúrate de importar el archivo CSS aquí
-
 
 export default function App() {
   const fileInputRef = useRef(null);
@@ -25,11 +24,11 @@ export default function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/plantilla-base" element={<PlantillaBaseLayout />} />
-        <Route path="/vista-plantillas" element={<VistaPlantillas />} />
-        <Route path="/" element={<MainLayout handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
-      </Routes>
+      <Switch>
+        <Route path="/plantilla-base" component={PlantillaBaseLayout} />
+        <Route path="/vista-plantillas" component={VistaPlantillas} />
+        <Route path="/" component={() => <MainLayout handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
+      </Switch>
     </Router>
   );
 }
@@ -90,10 +89,10 @@ function MainLayout({ handleImportClick, fileInputRef, handleFileChange }) {
         </aside>
 
         <main className="flex-1 overflow-y-auto p-8">
-          <Routes>
-            <Route path="/" element={<Home handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
-            <Route path="/vista-plantillas" element={<VistaPlantillas />} />
-          </Routes>
+          <Switch>
+            <Route path="/" exact component={() => <Home handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
+            <Route path="/vista-plantillas" component={VistaPlantillas} />
+          </Switch>
         </main>
       </div>
 

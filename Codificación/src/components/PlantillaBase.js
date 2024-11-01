@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Settings, User, Home as HomeIcon, Plus, Save } from 'lucide-react';
+import { Bell, Settings, User, Home as HomeIcon, Plus } from 'lucide-react';
 import AsistenteProduccion from '../Presentación/InterfazUsuario/AsistenteProduccion';
 import GestionFila from '../Dominio/ModelosDeDominio/GestionFila';
 import GestionAcciones from '../Dominio/ModelosDeDominio/GestionAcciones';
-import SAL from '../Persistencia/SistemaAlmacenamientoLocal/SAL';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const PlantillaBase = () => {
   const asistenteProduccion = new AsistenteProduccion();
-  const sal = new SAL();
   const [elements, setElements] = useState([
     { id: 'ID1', type: 'Entrada', name: 'Entrada 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
     { id: 'ID2', type: 'VTR Nota', name: 'VTR Nota 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
@@ -113,26 +111,6 @@ const PlantillaBase = () => {
     }
   };
 
-  const saveToFile = async () => {
-    const fileHandle = await window.showSaveFilePicker({
-      suggestedName: 'plantilla.etgc',
-      types: [
-        {
-          description: 'ETgc Files',
-          accept: {
-            'application/etgc': ['.etgc'],
-          },
-        },
-      ],
-    });
-
-    const writableStream = await fileHandle.createWritable();
-    await writableStream.write(JSON.stringify(elements));
-    await writableStream.close();
-
-    sal.almacenarDatos(elements);
-  };
-
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
@@ -167,10 +145,6 @@ const PlantillaBase = () => {
             <Link to="/" className="text-gray-600 hover:text-gray-900">
               <HomeIcon className="h-6 w-6" />
             </Link>
-            <button className="flex items-center p-2 rounded-full hover:bg-gray-200" onClick={saveToFile}>
-              <Save className="h-5 w-5 mr-2" />
-              <span className="hidden md:inline">Guardar</span>
-            </button>
           </nav>
         </div>
       </header>
