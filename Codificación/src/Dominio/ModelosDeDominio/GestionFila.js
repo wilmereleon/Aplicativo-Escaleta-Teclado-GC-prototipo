@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GestionFila = ({ element, agregarZocalo, agregarPlaca }) => {
+const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick }) => {
   return (
     <div className="zcpl-container">
       {element.type === 'Entrada' && (
@@ -15,12 +15,12 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca }) => {
           </div>
           <div className="zcpl-section">
             <h3>Placas</h3>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'EQUIPOS')}>EQUIPOS</button>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS EQUIPOS')}>DATOS EQUIPOS</button>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'COMPARATIVA')}>COMPARATIVA</button>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS')}>DATOS</button>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 3')}>PVENTA X 3</button>
-            <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 1')}>PVENTA X 1</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'EQUIPOS'); onEditClick(element); }}>EQUIPOS</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'DATOS EQUIPOS'); onEditClick(element); }}>DATOS EQUIPOS</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'COMPARATIVA'); onEditClick(element); }}>COMPARATIVA</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'DATOS'); onEditClick(element); }}>DATOS</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'PVENTA X 3'); onEditClick(element); }}>PVENTA X 3</button>
+            <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'PVENTA X 1'); onEditClick(element); }}>PVENTA X 1</button>
           </div>
         </>
       )}
@@ -49,12 +49,12 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca }) => {
       {element.type === 'Placa' && (
         <div className="zcpl-section">
           <h3>Placas</h3>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'EQUIPOS')}>EQUIPOS</button>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS EQUIPOS')}>DATOS EQUIPOS</button>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'COMPARATIVA')}>COMPARATIVA</button>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'DATOS')}>DATOS</button>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 3')}>PVENTA X 3</button>
-          <button className="zcpl-btn placas-btn" onClick={() => agregarPlaca(element.id, 'PVENTA X 1')}>PVENTA X 1</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'EQUIPOS'); onEditClick(element); }}>EQUIPOS</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'DATOS EQUIPOS'); onEditClick(element); }}>DATOS EQUIPOS</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'COMPARATIVA'); onEditClick(element); }}>COMPARATIVA</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'DATOS'); onEditClick(element); }}>DATOS</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'PVENTA X 3'); onEditClick(element); }}>PVENTA X 3</button>
+          <button className="zcpl-btn placas-btn" onClick={() => { agregarPlaca(element.id, 'PVENTA X 1'); onEditClick(element); }}>PVENTA X 1</button>
         </div>
       )}
       {element.type === 'Reel' && (

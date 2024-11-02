@@ -8,7 +8,9 @@ class ZocaloCatastrofe extends Zocalo {
         this.tipo = 'CATASTROFE';
     }
 
-    insertarCatastrofe() {}
+    insertarCatastrofe() {
+        // Lógica para insertar un zócalo de tipo catástrofe
+    }
 }
 
 module.exports = ZocaloCatastrofe;

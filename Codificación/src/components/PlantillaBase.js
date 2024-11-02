@@ -4,6 +4,7 @@ import { Bell, Settings, User, Home as HomeIcon, Plus } from 'lucide-react';
 import AsistenteProduccion from '../Presentación/InterfazUsuario/AsistenteProduccion';
 import GestionFila from '../Dominio/ModelosDeDominio/GestionFila';
 import GestionAcciones from '../Dominio/ModelosDeDominio/GestionAcciones';
+import VistaPrevioVentana from '../Presentación/InterfazUsuario/VistaPrevioVentana';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -16,9 +17,10 @@ const PlantillaBase = () => {
     { id: 'ID4', type: 'Placa', name: 'Placa 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
   ]);
   const [showZcPl, setShowZcPl] = useState(null);
+  const [editingElement, setEditingElement] = useState(null);
 
   useEffect(() => {
-    setElements(asistenteProduccion.elements);
+    setElements(asistenteProduccion.elements || []);
   }, []);
 
   const addElement = () => {
@@ -111,6 +113,14 @@ const PlantillaBase = () => {
     }
   };
 
+  const handleEditClick = (element) => {
+    setEditingElement(element);
+  };
+
+  const handleCloseEdit = () => {
+    setEditingElement(null);
+  };
+
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
@@ -199,7 +209,7 @@ const PlantillaBase = () => {
               </tr>
             </thead>
             <tbody>
-              {elements.map(element => (
+              {elements && elements.map(element => (
                 <React.Fragment key={element.id}>
                   <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
                     <td className="program-id">
@@ -255,13 +265,14 @@ const PlantillaBase = () => {
                         addElement={addElement}
                         removeElement={removeElement}
                         duplicarFila={duplicarFila}
+                        onEditClick={() => handleEditClick(element)}
                       />
                     </td>
                   </tr>
                   {showZcPl === element.id && (
                     <tr className="zcpl-row">
                       <td colSpan="7">
-                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} />
+                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} />
                       </td>
                     </tr>
                   )}
@@ -281,6 +292,9 @@ const PlantillaBase = () => {
           </div>
         </div>
       </footer>
+      {editingElement && (
+        <VistaPrevioVentana tipo={editingElement.type} onClose={handleCloseEdit} datos={editingElement} />
+      )}
     </div>
   );
 };

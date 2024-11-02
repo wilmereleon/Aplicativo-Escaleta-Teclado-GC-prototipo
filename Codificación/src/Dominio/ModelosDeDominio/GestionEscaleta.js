@@ -1,4 +1,5 @@
 // src/dominio/ModelosDeDominio/GestionEscaleta.js
+const IEscaleta = require('../Interfaces/IEscaleta');
 class GestionEscaleta {
     constructor() {
       this.elements = [
