@@ -8,7 +8,10 @@ class ZocaloTitulo extends Zocalo {
     this.tipo = 'TITULOS';
   }
 
-  insertarTitulo() {}
+  insertarTitulo(solapa, titulo) {
+    this.solapa = solapa;
+    this.titulo = titulo;
+  }
 }
 
 module.exports = ZocaloTitulo;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Gotham&display=swap" rel="stylesheet" />
+  <link href="./css/main.css" rel="stylesheet" />
+  <title>Vista Zócalo Título</title>
+</head>
+<body>
+  <div class="v203_2">
+    <div class="v203_3"></div>
+    <div class="v204_7"></div>
+    <span class="v206_21" id="titulo">HOY BRILLA EL CICLISMO COLOMBIANO</span>
+    <span class="v206_23" id="solapa">COPETE DE LA NOTA - NOMBRE DEL PERSONAJE</span>
+  </div>
+  <script>
+    // Script para actualizar el contenido de los elementos con los datos del formulario
+    window.addEventListener('message', (event) => {
+      const { solapa, titulo } = event.data;
+      document.getElementById('solapa').textContent = solapa;
+      document.getElementById('titulo').textContent = titulo;
+    });
+  </script>
+</body>
+</html>

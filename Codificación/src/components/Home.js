@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, ArrowRight, Download } from 'lucide-react';
 
 const Home = ({ handleImportClick, fileInputRef, handleFileChange }) => {
+  const [elements, setElements] = useState([]);
+  const fileInput = useRef(null);
+
+  const addElement = () => {
+    if (!elements) {
+      setElements([]);
+    }
+    const newElement = {
+      id: `ID${elements.length + 1}`,
+      type: '',
+      name: '',
+      startTime: '00:00:00',
+      duration: '00:00:00',
+      elapsedTime: '00:00:00'
+    };
+    setElements([...elements, newElement]);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-gray-900">Programas</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+        <button onClick={addElement} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
           <Plus className="mr-2 h-5 w-5" />
           Crear nuevo
         </button>

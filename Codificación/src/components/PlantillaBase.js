@@ -4,7 +4,9 @@ import { Bell, Settings, User, Home as HomeIcon, Plus } from 'lucide-react';
 import AsistenteProduccion from '../Presentación/InterfazUsuario/AsistenteProduccion';
 import GestionFila from '../Dominio/ModelosDeDominio/GestionFila';
 import GestionAcciones from '../Dominio/ModelosDeDominio/GestionAcciones';
+import InterfazZocalos from '../Presentación/InterfazUsuario/InterfazZocalos';
 import VistaPrevioVentana from '../Presentación/InterfazUsuario/VistaPrevioVentana';
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -18,6 +20,7 @@ const PlantillaBase = () => {
   ]);
   const [showZcPl, setShowZcPl] = useState(null);
   const [editingElement, setEditingElement] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     setElements(asistenteProduccion.elements || []);
@@ -121,6 +124,15 @@ const PlantillaBase = () => {
     setEditingElement(null);
   };
 
+  const handleViewClick = (element) => {
+    setEditingElement(element);
+    setShowPreview(true);
+  };
+
+  const handleClosePreview = () => {
+    setShowPreview(false);
+  };
+
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
@@ -140,18 +152,18 @@ const PlantillaBase = () => {
             <span className="text-xl font-bold">ETgc</span>
           </div>
           <nav className="flex items-center space-x-4">
-            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
               <Bell className="h-5 w-5 mr-2" />
               <span className="hidden md:inline">Notifications</span>
-            </button>
-            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            </Button>
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
               <Settings className="h-5 w-5 mr-2" />
               <span className="hidden md:inline">Settings</span>
-            </button>
-            <button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            </Button>
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
               <User className="h-5 w-5 mr-2" />
               <span className="hidden md:inline">Profile</span>
-            </button>
+            </Button>
             <Link to="/" className="text-gray-600 hover:text-gray-900">
               <HomeIcon className="h-6 w-6" />
             </Link>
@@ -202,9 +214,9 @@ const PlantillaBase = () => {
                 <th>Tiempo ejecutado</th>
                 <th className="actions-header">
                   Acciones
-                  <button className="add-btn" onClick={addElement} style={{ marginLeft: '10px' }}>
+                  <Button className="add-btn" onClick={addElement} style={{ marginLeft: '10px' }}>
                     <Plus /> Añadir
-                  </button>
+                  </Button>
                 </th>
               </tr>
             </thead>
@@ -213,49 +225,58 @@ const PlantillaBase = () => {
                 <React.Fragment key={element.id}>
                   <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
                     <td className="program-id">
-                      <input
-                        type="text"
+                      <TextField
                         value={element.id}
                         onChange={(e) => handleInputChange(element.id, 'id', e.target.value)}
+                        variant="outlined"
+                        size="small"
                       />
                     </td>
                     <td className="program-type">
-                      <select
-                        value={element.type}
-                        onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
-                      >
-                        <option value="" disabled>Escoger tipo de fila</option>
-                        {tiposDeFila.map(tipo => (
-                          <option key={tipo} value={tipo}>{tipo}</option>
-                        ))}
-                      </select>
+                      <FormControl variant="outlined" size="small" fullWidth>
+                        <InputLabel>Tipo</InputLabel>
+                        <Select
+                          value={element.type}
+                          onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
+                          label="Tipo"
+                        >
+                          <MenuItem value="" disabled>Escoger tipo de fila</MenuItem>
+                          {tiposDeFila.map(tipo => (
+                            <MenuItem key={tipo} value={tipo}>{tipo}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </td>
                     <td className="program-name">
-                      <input
-                        type="text"
+                      <TextField
                         value={element.name}
                         onChange={(e) => handleInputChange(element.id, 'name', e.target.value)}
+                        variant="outlined"
+                        size="small"
                       />
                     </td>
                     <td className="start-time">
-                      <input
-                        type="text"
+                      <TextField
                         value={element.startTime}
                         onChange={(e) => handleInputChange(element.id, 'startTime', e.target.value)}
+                        variant="outlined"
+                        size="small"
                       />
                     </td>
                     <td className="duration">
-                      <input
-                        type="text"
+                      <TextField
                         value={element.duration}
                         onChange={(e) => handleInputChange(element.id, 'duration', e.target.value)}
+                        variant="outlined"
+                        size="small"
                       />
                     </td>
                     <td className="elapsed-time">
-                      <input
-                        type="text"
+                      <TextField
                         value={element.elapsedTime}
                         onChange={(e) => handleInputChange(element.id, 'elapsedTime', e.target.value)}
+                        variant="outlined"
+                        size="small"
                       />
                     </td>
                     <td className="actions">
@@ -265,7 +286,7 @@ const PlantillaBase = () => {
                         addElement={addElement}
                         removeElement={removeElement}
                         duplicarFila={duplicarFila}
-                        onEditClick={() => handleEditClick(element)}
+                        onViewClick={handleViewClick}
                       />
                     </td>
                   </tr>
@@ -276,12 +297,22 @@ const PlantillaBase = () => {
                       </td>
                     </tr>
                   )}
+                  {editingElement && editingElement.id === element.id && (
+                    <tr className="edit-row">
+                      <td colSpan="7">
+                        <InterfazZocalos tipo={editingElement.type} />
+                      </td>
+                    </tr>
+                  )}
                 </React.Fragment>
               ))}
             </tbody>
           </table>
         </div>
       </main>
+      {showPreview && (
+        <VistaPrevioVentana tipo={editingElement.type} onClose={handleClosePreview} datos={editingElement} />
+      )}
       <footer className="bg-white border-t border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
@@ -292,9 +323,6 @@ const PlantillaBase = () => {
           </div>
         </div>
       </footer>
-      {editingElement && (
-        <VistaPrevioVentana tipo={editingElement.type} onClose={handleCloseEdit} datos={editingElement} />
-      )}
     </div>
   );
 };

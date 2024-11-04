@@ -1,17 +1,17 @@
 import React from 'react';
 
-const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick }) => {
+const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplicarFila, addElement }) => {
   return (
     <div className="zcpl-container">
       {element.type === 'Entrada' && (
         <>
           <div className="zcpl-section">
             <h3>Zócalos</h3>
-            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TITULOS')}>TITULOS</button>
-            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'CATASTROFE')}>CATASTROFE</button>
-            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, '2 LINEAS')}>2 LINEAS</button>
-            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'VENTAS')}>VENTAS</button>
-            <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TEXTUALES')}>TEXTUALES</button>
+            <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'TITULOS'); onEditClick(element); }}>TITULOS</button>
+            <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'CATASTROFE'); onEditClick(element); }}>CATASTROFE</button>
+            <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, '2 LINEAS'); onEditClick(element); }}>2 LINEAS</button>
+            <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'VENTAS'); onEditClick(element); }}>VENTAS</button>
+            <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'TEXTUALES'); onEditClick(element); }}>TEXTUALES</button>
           </div>
           <div className="zcpl-section">
             <h3>Placas</h3>
@@ -27,23 +27,23 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick }) => {
       {(element.type === 'VTR Nota' || element.type === 'VTR Full') && (
         <div className="zcpl-section">
           <h3>Zócalos</h3>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'CATASTROFE')}>CATASTROFE</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, '2 LINEAS')}>2 LINEAS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'CATASTROFE'); onEditClick(element); }}>CATASTROFE</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, '2 LINEAS'); onEditClick(element); }}>2 LINEAS</button>
         </div>
       )}
       {element.type === 'Titulo' && (
         <div className="zcpl-section">
           <h3>Zócalos</h3>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TITULOS')}>TITULOS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'TITULOS'); onEditClick(element); }}>TITULOS</button>
         </div>
       )}
       {element.type === 'Voz en Off' && (
         <div className="zcpl-section">
           <h3>Zócalos</h3>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'CATASTROFE')}>CATASTROFE</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, '2 LINEAS')}>2 LINEAS</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'VENTAS')}>VENTAS</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TEXTUALES')}>TEXTUALES</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'CATASTROFE'); onEditClick(element); }}>CATASTROFE</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, '2 LINEAS'); onEditClick(element); }}>2 LINEAS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'VENTAS'); onEditClick(element); }}>VENTAS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'TEXTUALES'); onEditClick(element); }}>TEXTUALES</button>
         </div>
       )}
       {element.type === 'Placa' && (
@@ -60,10 +60,10 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick }) => {
       {element.type === 'Reel' && (
         <div className="zcpl-section">
           <h3>Zócalos</h3>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'CATASTROFE')}>CATASTROFE</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, '2 LINEAS')}>2 LINEAS</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'VENTAS')}>VENTAS</button>
-          <button className="zcpl-btn zocalos-btn" onClick={() => agregarZocalo(element.id, 'TEXTUALES')}>TEXTUALES</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'CATASTROFE'); onEditClick(element); }}>CATASTROFE</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, '2 LINEAS'); onEditClick(element); }}>2 LINEAS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'VENTAS'); onEditClick(element); }}>VENTAS</button>
+          <button className="zcpl-btn zocalos-btn" onClick={() => { agregarZocalo(element.id, 'TEXTUALES'); onEditClick(element); }}>TEXTUALES</button>
         </div>
       )}
       {element.type === 'Promocion-Venta' && (

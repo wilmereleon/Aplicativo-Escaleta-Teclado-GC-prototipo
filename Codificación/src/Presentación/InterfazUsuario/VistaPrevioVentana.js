@@ -1,21 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import Draggable from 'react-draggable';
 import './VistaPrevioVentana.css';
-import saveData from '../../utils/saveData'; // Importar la función saveData
+import saveData from '../../utils/saveData';
 
 const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
-  const [formData, setFormData] = useState({
-    solapa: '',
-    texto: '',
-    foto: ''
-  });
+  const [htmlContent, setHtmlContent] = useState('');
+  const [formData, setFormData] = useState({ solapa: '', titulo: '' });
+
+  useEffect(() => {
+    const loadHtmlContent = async () => {
+      let url = '';
+      switch (tipo) {
+        case 'TITULOS':
+          url = '/src/Presentación/VistaZócaloTítulo.html';
+          break;
+        // Agregar más casos para otros tipos de zócalos
+        default:
+          console.error(`Tipo de zócalo no soportado: ${tipo}`);
+          return;
+      }
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al cargar el contenido HTML');
+        }
+        const text = await response.text();
+        setHtmlContent(text);
+      } catch (error) {
+        console.error('Error al cargar el contenido HTML:', error);
+      }
+    };
+
+    loadHtmlContent();
+  }, [tipo]);
 
   useEffect(() => {
     if (datos) {
       setFormData({
         solapa: datos.solapa || '',
-        texto: datos.texto || '',
-        foto: datos.foto || ''
+        titulo: datos.titulo || ''
       });
     }
   }, [datos]);
@@ -29,125 +52,60 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
   };
 
   const handleSave = async () => {
-    // Lógica para guardar los datos
     const filename = `datos_${tipo}_${Date.now()}.json`;
     await saveData(formData, filename);
     console.log('Datos guardados:', formData);
-    onClose();
   };
 
-  const renderFormFields = () => {
-    switch (tipo) {
-      case 'CATASTROFE':
-      case '2 LINEAS':
-      case 'TEXTUALES':
-      case 'TITULOS':
-      case 'VENTAS':
-        return (
-          <>
-            <label>
-              Solapa:
-              <input
-                type="text"
-                name="solapa"
-                value={formData.solapa}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Texto:
-              <textarea
-                name="texto"
-                value={formData.texto}
-                onChange={handleInputChange}
-              />
-            </label>
-          </>
-        );
-      case 'DATOS':
-        return (
-          <>
-            <label>
-              Solapa:
-              <input
-                type="text"
-                name="solapa"
-                value={formData.solapa}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Texto:
-              <textarea
-                name="texto"
-                value={formData.texto}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Foto:
-              <input
-                type="text"
-                name="foto"
-                value={formData.foto}
-                onChange={handleInputChange}
-              />
-            </label>
-          </>
-        );
-      default:
-        return null;
+  useEffect(() => {
+    if (htmlContent) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, 'text/html');
+      const tituloElement = doc.getElementById('titulo');
+      const solapaElement = doc.getElementById('solapa');
+      if (tituloElement) tituloElement.textContent = formData.titulo;
+      if (solapaElement) solapaElement.textContent = formData.solapa;
+      setHtmlContent(doc.documentElement.outerHTML);
     }
-  };
-
-  const renderBackgroundImage = () => {
-    switch (tipo) {
-      case 'CATASTROFE':
-        return <img src="/images/Z CATASTROFE.png" alt="Fondo Catástrofe" className="ventana-edicion-fondo-medio" />;
-      case '2 LINEAS':
-        return <img src="/images/Z 2 LINEAS.png" alt="Fondo Dos Lineas" className="ventana-edicion-fondo-medio" />;
-      case 'TEXTUALES':
-        return <img src="/images/Z TEXTUALES.png" alt="Fondo Textuales" className="ventana-edicion-fondo-medio" />;
-      case 'TITULOS':
-        return <img src="/images/Z TITULOS.png" alt="Fondo Titulos" className="ventana-edicion-fondo-medio" />;
-      case 'VENTAS':
-        return <img src="/images/Z VENTAS.png" alt="Fondo Ventas" className="ventana-edicion-fondo-medio" />;
-      case 'DATOS':
-        return (
-          <>
-            <img src="/video/FONDO.png" alt="Fondo" className="ventana-edicion-fondo-medio" />
-            <img src="/images/P DATOS + FOTO.png" alt="Fondo Datos" className="ventana-edicion-fondo-delantero" />
-          </>
-        );
-      default:
-        return <img src="/video/FONDO.png" alt="Fondo" className="ventana-edicion-fondo-medio" />;
-    }
-  };
+  }, [formData, htmlContent]);
 
   return (
-    <Draggable handle=".ventana-edicion-header">
-      <div className="ventana-edicion">
-        <div className="ventana-edicion-contenido">
-          <div className="ventana-edicion-header">
-            <div className="ventana-edicion-titulo">
-              <h2>{`Edición de ${tipo}`}</h2>
-            </div>
-            <div className="ventana-edicion-controles">
-              <button className="ventana-edicion-minimizar">_</button>
-              <button className="ventana-edicion-maximizar">[]</button>
-              <button className="ventana-edicion-cerrar" onClick={onClose}>X</button>
-            </div>
+    <div className="ventana-edicion">
+      <div className="ventana-edicion-contenido">
+        <div className="ventana-edicion-header">
+          <div className="ventana-edicion-titulo">
+            <h2>{`Edición de ${tipo}`}</h2>
           </div>
-          <div className="ventana-edicion-fondo-container">
-            {renderBackgroundImage()}
-            <div className="ventana-edicion-form">
-              {renderFormFields()}
-              <button onClick={handleSave}>Salvar</button>
-            </div>
+          <div className="ventana-edicion-controles">
+            <button className="ventana-edicion-cerrar" onClick={onClose}>X</button>
+          </div>
+        </div>
+        <div className="ventana-edicion-fondo-container">
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+          <div className="form-container">
+            <label>
+              Solapa:
+              <input
+                type="text"
+                name="solapa"
+                value={formData.solapa}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Título:
+              <input
+                type="text"
+                name="titulo"
+                value={formData.titulo}
+                onChange={handleInputChange}
+              />
+            </label>
+            <button onClick={handleSave}>Guardar</button>
           </div>
         </div>
       </div>
-    </Draggable>
+    </div>
   );
 };
 
