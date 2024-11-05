@@ -12,12 +12,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const PlantillaBase = () => {
   const asistenteProduccion = new AsistenteProduccion();
-  const [elements, setElements] = useState([
-    { id: 'ID1', type: 'Entrada', name: 'Entrada 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
-    { id: 'ID2', type: 'VTR Nota', name: 'VTR Nota 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
-    { id: 'ID3', type: 'VTR Full', name: 'VTR Full 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
-    { id: 'ID4', type: 'Placa', name: 'Placa 1', startTime: '00:00:00', duration: '00:00:00', elapsedTime: '00:00:00' },
-  ]);
+  const [elements, setElements] = useState([]);
   const [showZcPl, setShowZcPl] = useState(null);
   const [editingElement, setEditingElement] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
@@ -26,9 +21,15 @@ const PlantillaBase = () => {
     setElements(asistenteProduccion.elements || []);
   }, []);
 
-  const addElement = () => {
+  const addNewElement = async () => {
+    const newId = prompt('Ingrese un nuevo ID:');
+    if (!elements || elements.some(el => el.id === newId)) {
+      alert('El ID ya está en uso o no se pudo obtener la lista de elementos. Por favor, elija otro ID.');
+      return;
+    }
+
     const newElement = {
-      id: `ID${elements.length + 1}`,
+      id: newId,
       type: '',
       name: '',
       startTime: '00:00:00',
@@ -36,6 +37,27 @@ const PlantillaBase = () => {
       elapsedTime: '00:00:00'
     };
     setElements([...elements, newElement]);
+    await updateExcel(newElement);
+  };
+
+  const updateExcel = async (element) => {
+    try {
+      const response = await fetch('http://localhost:3001/updateExcel', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: element.id, solapa: element.solapa, titulo: element.titulo }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al actualizar el archivo Excel');
+      }
+
+      console.log('Excel actualizado correctamente');
+    } catch (error) {
+      console.error('Error al actualizar el archivo Excel:', error.message);
+    }
   };
 
   const removeElement = (id) => {
@@ -214,7 +236,7 @@ const PlantillaBase = () => {
                 <th>Tiempo ejecutado</th>
                 <th className="actions-header">
                   Acciones
-                  <Button className="add-btn" onClick={addElement} style={{ marginLeft: '10px' }}>
+                  <Button className="add-btn" onClick={addNewElement} style={{ marginLeft: '10px' }}>
                     <Plus /> Añadir
                   </Button>
                 </th>
@@ -283,7 +305,7 @@ const PlantillaBase = () => {
                       <GestionAcciones
                         element={element}
                         toggleZcPl={toggleZcPl}
-                        addElement={addElement}
+                        addElement={addNewElement}
                         removeElement={removeElement}
                         duplicarFila={duplicarFila}
                         onViewClick={handleViewClick}
@@ -293,7 +315,7 @@ const PlantillaBase = () => {
                   {showZcPl === element.id && (
                     <tr className="zcpl-row">
                       <td colSpan="7">
-                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} />
+                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} onViewClick={handleViewClick} />
                       </td>
                     </tr>
                   )}
@@ -311,7 +333,7 @@ const PlantillaBase = () => {
         </div>
       </main>
       {showPreview && (
-        <VistaPrevioVentana tipo={editingElement.type} onClose={handleClosePreview} datos={editingElement} />
+        <VistaPrevioVentana tipo={editingElement?.type} onClose={handleClosePreview} datos={editingElement} />
       )}
       <footer className="bg-white border-t border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">

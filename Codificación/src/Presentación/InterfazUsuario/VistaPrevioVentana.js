@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './VistaPrevioVentana.css';
-import saveData from '../../utils/saveData';
 
 const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
   const [htmlContent, setHtmlContent] = useState('');
-  const [formData, setFormData] = useState({ solapa: '', titulo: '' });
 
   useEffect(() => {
     const loadHtmlContent = async () => {
       let url = '';
       switch (tipo) {
         case 'TITULOS':
-          url = '/src/Presentación/VistaZócaloTítulo.html';
+          url = '/VistaZócaloTítulo.html';
           break;
         // Agregar más casos para otros tipos de zócalos
         default:
@@ -34,76 +32,43 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
     loadHtmlContent();
   }, [tipo]);
 
-  useEffect(() => {
-    if (datos) {
-      setFormData({
-        solapa: datos.solapa || '',
-        titulo: datos.titulo || ''
+  const handleSave = (event) => {
+    const { solapa, titulo } = event.data;
+    // Enviar los datos al servidor para actualizar el Excel
+    fetch('http://localhost:3001/updateExcel', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: datos.id, solapa, titulo }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al actualizar el archivo Excel');
+        }
+        return response.text();
+      })
+      .then(() => {
+        console.log('Excel actualizado correctamente');
+        onClose();
+      })
+      .catch(error => {
+        console.error('Error al actualizar el archivo Excel:', error);
       });
-    }
-  }, [datos]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSave = async () => {
-    const filename = `datos_${tipo}_${Date.now()}.json`;
-    await saveData(formData, filename);
-    console.log('Datos guardados:', formData);
   };
 
   useEffect(() => {
-    if (htmlContent) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlContent, 'text/html');
-      const tituloElement = doc.getElementById('titulo');
-      const solapaElement = doc.getElementById('solapa');
-      if (tituloElement) tituloElement.textContent = formData.titulo;
-      if (solapaElement) solapaElement.textContent = formData.solapa;
-      setHtmlContent(doc.documentElement.outerHTML);
-    }
-  }, [formData, htmlContent]);
+    window.addEventListener('message', handleSave);
+    return () => {
+      window.removeEventListener('message', handleSave);
+    };
+  }, []);
 
   return (
-    <div className="ventana-edicion">
-      <div className="ventana-edicion-contenido">
-        <div className="ventana-edicion-header">
-          <div className="ventana-edicion-titulo">
-            <h2>{`Edición de ${tipo}`}</h2>
-          </div>
-          <div className="ventana-edicion-controles">
-            <button className="ventana-edicion-cerrar" onClick={onClose}>X</button>
-          </div>
-        </div>
-        <div className="ventana-edicion-fondo-container">
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-          <div className="form-container">
-            <label>
-              Solapa:
-              <input
-                type="text"
-                name="solapa"
-                value={formData.solapa}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Título:
-              <input
-                type="text"
-                name="titulo"
-                value={formData.titulo}
-                onChange={handleInputChange}
-              />
-            </label>
-            <button onClick={handleSave}>Guardar</button>
-          </div>
-        </div>
+    <div className="vista-previo-ventana">
+      <div className="ventana-contenido">
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        <button onClick={onClose}>Cerrar</button>
       </div>
     </div>
   );

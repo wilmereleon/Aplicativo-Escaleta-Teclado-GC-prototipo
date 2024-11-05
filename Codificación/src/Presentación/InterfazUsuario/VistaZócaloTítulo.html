@@ -9,15 +9,25 @@
   <div class="v203_2">
     <div class="v203_3"></div>
     <div class="v204_7"></div>
-    <span class="v206_21" id="titulo">HOY BRILLA EL CICLISMO COLOMBIANO</span>
-    <span class="v206_23" id="solapa">COPETE DE LA NOTA - NOMBRE DEL PERSONAJE</span>
+    <label for="solapa">Solapa:</label>
+    <input type="text" id="solapa" name="solapa" value="SOLAPA PARA NOMBRE DE PERSONAJE">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" value="TITULAR O CITA DE ANFITRIÓN">
+    <button id="saveButton">Guardar</button>
   </div>
   <script>
     // Script para actualizar el contenido de los elementos con los datos del formulario
     window.addEventListener('message', (event) => {
       const { solapa, titulo } = event.data;
-      document.getElementById('solapa').textContent = solapa;
-      document.getElementById('titulo').textContent = titulo;
+      document.getElementById('solapa').value = solapa;
+      document.getElementById('titulo').value = titulo;
+    });
+
+    // Script para enviar los datos de vuelta al servidor
+    document.getElementById('saveButton').addEventListener('click', () => {
+      const solapa = document.getElementById('solapa').value;
+      const titulo = document.getElementById('titulo').value;
+      window.parent.postMessage({ solapa, titulo }, '*');
     });
   </script>
 </body>
