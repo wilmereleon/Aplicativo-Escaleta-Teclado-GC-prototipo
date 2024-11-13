@@ -5,7 +5,19 @@ const ZocaloTextuales = require('./ZocaloTextuales');
 const ZocaloTitulo = require('./ZocaloTitulo');
 const ZocaloVentas = require('./ZocaloVentas');
 
+/**
+ * Clase GestionZocalos
+ * Esta clase maneja la gestión de diferentes tipos de zócalos en la aplicación.
+ */
 class GestionZocalos {
+    /**
+     * Método insertarZocalo
+     * Inserta un nuevo zócalo basado en el tipo especificado.
+     * @param {string} tipo - Tipo de zócalo a insertar.
+     * @param {object} datos - Datos necesarios para insertar el zócalo.
+     * @returns {object} - Nuevo zócalo creado.
+     * @throws {Error} - Si el tipo de zócalo no es soportado.
+     */
     insertarZocalo(tipo, datos) {
         let nuevoZocalo;
         switch (tipo) {

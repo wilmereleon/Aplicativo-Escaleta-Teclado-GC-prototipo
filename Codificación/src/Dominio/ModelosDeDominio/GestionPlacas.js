@@ -6,7 +6,18 @@ const PlacaDatos = require('./PlacaDatos');
 const PlacaPventaX3 = require('./PlacaPventaX3');
 const PlacaPventaX1 = require('./PlacaPventaX1');
 
+/**
+ * Clase GestionPlacas
+ * Esta clase maneja la gestión de diferentes tipos de placas en la aplicación.
+ */
 class GestionPlacas {
+    /**
+     * Método insertarPlaca
+     * Inserta una nueva placa basada en el tipo especificado.
+     * @param {string} tipo - Tipo de placa a insertar.
+     * @returns {object} - Nueva placa creada.
+     * @throws {Error} - Si el tipo de placa no es soportado.
+     */
     insertarPlaca(tipo) {
         let nuevaPlaca;
         switch (tipo) {

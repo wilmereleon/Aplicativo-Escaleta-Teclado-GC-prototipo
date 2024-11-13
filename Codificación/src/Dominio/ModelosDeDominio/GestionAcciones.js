@@ -1,6 +1,15 @@
 import React from 'react';
 import { Eye, Plus, Trash2, Download, Copy } from 'lucide-react';
 
+/**
+ * Componente GestionAcciones
+ * Este componente representa las acciones de gestión disponibles para un elemento en la escaleta.
+ * @param {object} element - El elemento de la escaleta.
+ * @param {function} toggleZcPl - Función para mostrar u ocultar el componente de zócalos y placas.
+ * @param {function} addElement - Función para agregar un nuevo elemento.
+ * @param {function} removeElement - Función para eliminar un elemento.
+ * @param {function} duplicarFila - Función para duplicar una fila.
+ */
 const GestionAcciones = ({ element, toggleZcPl, addElement, removeElement, duplicarFila }) => {
   return (
     <div className="actions-container">
