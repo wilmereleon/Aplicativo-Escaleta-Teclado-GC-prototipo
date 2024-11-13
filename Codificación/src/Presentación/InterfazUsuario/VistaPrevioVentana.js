@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './VistaPrevioVentana.css';
 
+/**
+ * Componente VistaPrevioVentana
+ * Este componente carga y muestra el contenido HTML de una vista previa de zócalo.
+ * @param {string} tipo - Tipo de zócalo a mostrar.
+ * @param {function} onClose - Función para cerrar el componente.
+ * @param {object} datos - Datos iniciales del zócalo.
+ */
 const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
   const [htmlContent, setHtmlContent] = useState('');
 
+  /**
+   * useEffect para cargar el contenido HTML basado en el tipo de zócalo
+   * Se ejecuta cuando el componente se monta y cuando el tipo de zócalo cambia.
+   */
   useEffect(() => {
     const loadHtmlContent = async () => {
       let url = '';
@@ -32,6 +43,11 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
     loadHtmlContent();
   }, [tipo]);
 
+  /**
+   * handleSave
+   * Función para manejar el evento de guardar los datos del zócalo.
+   * @param {object} event - Evento de mensaje que contiene los datos del zócalo.
+   */
   const handleSave = (event) => {
     const { solapa, titulo } = event.data;
     // Enviar los datos al servidor para actualizar el Excel
@@ -57,6 +73,10 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
       });
   };
 
+  /**
+   * useEffect para agregar y remover el event listener para el evento de mensaje
+   * Se ejecuta cuando el componente se monta y se desmonta.
+   */
   useEffect(() => {
     window.addEventListener('message', handleSave);
     return () => {
@@ -67,6 +87,7 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
   return (
     <div className="vista-previo-ventana">
       <div className="ventana-contenido">
+        {/* Renderizar el contenido HTML cargado */}
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         <button onClick={onClose}>Cerrar</button>
       </div>

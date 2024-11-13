@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * Componente InterfazZocalos
+ * Este componente carga y muestra el contenido HTML de una interfaz de zócalo.
+ * @param {string} tipo - Tipo de zócalo a mostrar.
+ */
 const InterfazZocalos = ({ tipo }) => {
   const [htmlContent, setHtmlContent] = useState('');
 
+  /**
+   * useEffect para cargar el contenido HTML basado en el tipo de zócalo
+   * Se ejecuta cuando el componente se monta y cuando el tipo de zócalo cambia.
+   */
   useEffect(() => {
     const loadHtmlContent = async () => {
       let url = '';

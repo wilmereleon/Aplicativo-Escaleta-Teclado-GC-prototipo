@@ -4,9 +4,14 @@ import { Home as HomeIcon, FileText, Archive, Plus, Clock } from 'lucide-react';
 import './VistaPlantillas.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+/**
+ * Componente VistaPlantillas
+ * Este componente representa la vista de plantillas de la aplicación, donde los usuarios pueden navegar entre diferentes plantillas y acceder a históricos.
+ */
 const VistaPlantillas = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
+      {/* Encabezado */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center">
@@ -31,6 +36,7 @@ const VistaPlantillas = () => {
       </header>
 
       <div className="flex-grow flex">
+        {/* Barra lateral */}
         <aside className="w-64 bg-white shadow-md">
           <nav className="mt-5 px-2">
             <Link to="/" className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
@@ -59,6 +65,7 @@ const VistaPlantillas = () => {
           </nav>
         </aside>
 
+        {/* Contenido principal */}
         <main className="flex-1 overflow-y-auto p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-semibold text-gray-900">Plantillas</h1>

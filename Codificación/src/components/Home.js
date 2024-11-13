@@ -1,58 +1,48 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Plus, ArrowRight, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
-const Home = ({ handleImportClick, fileInputRef, handleFileChange }) => {
-  const [elements, setElements] = useState([]);
-  const fileInput = useRef(null);
+/**
+ * Componente InterfazZocalos
+ * Este componente carga y muestra el contenido HTML de una interfaz de zócalo.
+ * @param {string} tipo - Tipo de zócalo a mostrar.
+ */
+const InterfazZocalos = ({ tipo }) => {
+  const [htmlContent, setHtmlContent] = useState('');
 
-  const addElement = () => {
-    if (!elements) {
-      setElements([]);
-    }
-    const newElement = {
-      id: `ID${elements.length + 1}`,
-      type: '',
-      name: '',
-      startTime: '00:00:00',
-      duration: '00:00:00',
-      elapsedTime: '00:00:00'
+  /**
+   * useEffect para cargar el contenido HTML basado en el tipo de zócalo
+   * Se ejecuta cuando el componente se monta y cuando el tipo de zócalo cambia.
+   */
+  useEffect(() => {
+    const loadHtmlContent = async () => {
+      let url = '';
+      switch (tipo) {
+        case 'TITULOS':
+          url = '/src/Presentación/VistaZócaloTítulo.html';
+          break;
+        // Agregar más casos para otros tipos de zócalos
+        default:
+          console.error(`Tipo de zócalo no soportado: ${tipo}`);
+          return;
+      }
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al cargar el contenido HTML');
+        }
+        const text = await response.text();
+        setHtmlContent(text);
+      } catch (error) {
+        console.error('Error al cargar el contenido HTML:', error);
+      }
     };
-    setElements([...elements, newElement]);
-  };
+
+    loadHtmlContent();
+  }, [tipo]);
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">Programas</h1>
-        <button onClick={addElement} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-          <Plus className="mr-2 h-5 w-5" />
-          Crear nuevo
-        </button>
-      </div>
-
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">DCSHA</h2>
-        <p className="text-gray-600 mb-4">De ciclismo de habla así</p>
-        <div className="flex space-x-4">
-          <Link to="/vista-plantillas" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
-            <ArrowRight className="mr-2 h-5 w-5" />
-            Ingresar
-          </Link>
-          <button onClick={handleImportClick} className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center">
-            <Download className="mr-2 h-5 w-5" />
-            Importar proyecto
-          </button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-        </div>
-      </div>
-    </div>
+    <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
   );
 };
 
-export default Home;
+export default InterfazZocalos;

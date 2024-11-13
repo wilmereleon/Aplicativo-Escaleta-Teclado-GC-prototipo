@@ -1,7 +1,15 @@
+/**
+ * Clase Comparativa
+ * Esta clase representa un tipo de zócalo de comparativa en la aplicación.
+ */
 class Comparativa {
-    constructor() {
-      this.tipo = 'COMPARATIVA';
-    }
+  /**
+   * Constructor de la clase Comparativa
+   * Inicializa el tipo de zócalo como 'COMPARATIVA'.
+   */
+  constructor() {
+    this.tipo = 'COMPARATIVA';
   }
-  
-  export default Comparativa;
+}
+
+export default Comparativa;

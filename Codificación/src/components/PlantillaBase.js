@@ -10,6 +10,10 @@ import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } fro
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+/**
+ * Componente PlantillaBase
+ * Este componente representa la plantilla base de la aplicación, donde los usuarios pueden gestionar elementos de la escaleta.
+ */
 const PlantillaBase = () => {
   const asistenteProduccion = new AsistenteProduccion();
   const [elements, setElements] = useState([]);
@@ -17,10 +21,18 @@ const PlantillaBase = () => {
   const [editingElement, setEditingElement] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
 
+  /**
+   * useEffect para cargar los elementos iniciales
+   * Se ejecuta cuando el componente se monta.
+   */
   useEffect(() => {
     setElements(asistenteProduccion.elements || []);
   }, []);
 
+  /**
+   * addNewElement
+   * Función para agregar un nuevo elemento a la lista de elementos.
+   */
   const addNewElement = async () => {
     const newId = prompt('Ingrese un nuevo ID:');
     if (!elements || elements.some(el => el.id === newId)) {
@@ -40,6 +52,11 @@ const PlantillaBase = () => {
     await updateExcel(newElement);
   };
 
+  /**
+   * updateExcel
+   * Función para actualizar el archivo Excel con los datos del elemento.
+   * @param {object} element - Elemento a actualizar en el Excel.
+   */
   const updateExcel = async (element) => {
     try {
       const response = await fetch('http://localhost:3001/updateExcel', {
@@ -60,15 +77,32 @@ const PlantillaBase = () => {
     }
   };
 
+  /**
+   * removeElement
+   * Función para eliminar un elemento de la lista de elementos.
+   * @param {string} id - ID del elemento a eliminar.
+   */
   const removeElement = (id) => {
     const newElements = elements.filter(el => el.id !== id);
     setElements(newElements);
   };
 
+  /**
+   * toggleZcPl
+   * Función para mostrar u ocultar el componente de zócalos y placas.
+   * @param {string} id - ID del elemento a mostrar u ocultar.
+   */
   const toggleZcPl = (id) => {
     setShowZcPl(showZcPl === id ? null : id);
   };
 
+  /**
+   * handleInputChange
+   * Función para manejar los cambios en los campos de entrada de los elementos.
+   * @param {string} id - ID del elemento a actualizar.
+   * @param {string} field - Campo a actualizar.
+   * @param {string} value - Nuevo valor del campo.
+   */
   const handleInputChange = (id, field, value) => {
     const newElements = elements.map(el => {
       if (el.id === id) {
@@ -79,6 +113,12 @@ const PlantillaBase = () => {
     setElements(newElements);
   };
 
+  /**
+   * agregarZocalo
+   * Función para agregar un zócalo a un elemento.
+   * @param {string} id - ID del elemento al que se agregará el zócalo.
+   * @param {string} tipo - Tipo de zócalo a agregar.
+   */
   const agregarZocalo = (id, tipo) => {
     let newElements;
     switch (tipo) {
@@ -103,6 +143,12 @@ const PlantillaBase = () => {
     setElements(newElements);
   };
 
+  /**
+   * agregarPlaca
+   * Función para agregar una placa a un elemento.
+   * @param {string} id - ID del elemento al que se agregará la placa.
+   * @param {string} tipo - Tipo de placa a agregar.
+   */
   const agregarPlaca = (id, tipo) => {
     let newElements;
     switch (tipo) {
@@ -130,6 +176,11 @@ const PlantillaBase = () => {
     setElements(newElements);
   };
 
+  /**
+   * duplicarFila
+   * Función para duplicar una fila en la lista de elementos.
+   * @param {string} id - ID del elemento a duplicar.
+   */
   const duplicarFila = (id) => {
     const elementToDuplicate = elements.find(el => el.id === id);
     if (elementToDuplicate) {
@@ -138,29 +189,49 @@ const PlantillaBase = () => {
     }
   };
 
+  /**
+   * handleEditClick
+   * Función para manejar el clic en el botón de editar.
+   * @param {object} element - Elemento a editar.
+   */
   const handleEditClick = (element) => {
     setEditingElement(element);
   };
 
+  /**
+   * handleCloseEdit
+   * Función para cerrar el modo de edición.
+   */
   const handleCloseEdit = () => {
     setEditingElement(null);
   };
 
+  /**
+   * handleViewClick
+   * Función para manejar el clic en el botón de vista previa.
+   * @param {object} element - Elemento a mostrar en la vista previa.
+   */
   const handleViewClick = (element) => {
     setEditingElement(element);
     setShowPreview(true);
   };
 
+  /**
+   * handleClosePreview
+   * Función para cerrar la vista previa.
+   */
   const handleClosePreview = () => {
     setShowPreview(false);
   };
 
+  // Obtener la fecha actual en formato local
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
   });
 
+  // Tipos de fila disponibles
   const tiposDeFila = [
     'Entrada', 'VTR Nota', 'VTR Full', 'Placa', 'Titulo', 'Voz en Off', 'Cortina', 'Reel', 'Promocion-Venta', 'Tiempo de Corte', 'Bloque', 'Total'
   ];

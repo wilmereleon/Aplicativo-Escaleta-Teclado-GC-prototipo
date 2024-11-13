@@ -1,9 +1,11 @@
+/* Estilos generales para el cuerpo del documento */
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f0f0f0;
   color: #333;
 }
 
+/* Estilos para el encabezado */
 header {
   display: flex;
   justify-content: space-between;
@@ -12,53 +14,63 @@ header {
   color: white;
 }
 
+/* Estilos para las secciones de notificaciones, configuraciones y perfil en el encabezado */
 .notifications, .settings, .profile {
   margin: 0 10px;
 }
 
+/* Estilos para el título del programa */
 .program-title {
   text-align: center;
   margin: 20px 0;
   font-size: 1.5em;
 }
 
+/* Estilos para la información de tiempo */
 .time-info {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
 }
 
+/* Estilos para la tabla de programación */
 .schedule-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
+/* Estilos para las celdas de la tabla de programación */
 .schedule-table th, .schedule-table td {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
+/* Estilos para los encabezados de la tabla de programación */
 .schedule-table th {
   background-color: #007bff;
   color: white;
 }
 
+/* Ajustar el ancho de la columna de acciones */
 .schedule-table th.actions-header,
 .schedule-table td.actions {
-  width: 200px; /* Ajustar el ancho de la columna de acciones */
+  width: 200px;
 }
 
+/* Estilos para las filas pares de la tabla de programación */
 .program-row:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+/* Estilos para el contenedor de acciones */
 .actions-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
+/* Estilos para los enlaces de acciones */
 .actions a {
   margin: 0 5px;
   cursor: pointer;
@@ -66,6 +78,7 @@ header {
   color: inherit;
 }
 
+/* Estilos para el contenedor de zócalos */
 .zcpl-container {
   display: flex;
   justify-content: space-between;
@@ -75,14 +88,17 @@ header {
   border-radius: 5px;
 }
 
+/* Estilos para las secciones de zócalos */
 .zcpl-section {
   width: 48%;
 }
 
+/* Estilos para los encabezados de las secciones de zócalos */
 .zcpl-section h3 {
   margin-bottom: 10px;
 }
 
+/* Estilos para los botones de zócalos */
 .zcpl-btn {
   display: block;
   width: 100%;
@@ -94,21 +110,25 @@ header {
   font-family: 'Helvetica Rounded LT Std', sans-serif;
 }
 
+/* Estilos específicos para los botones de zócalos */
 .zocalos-btn {
   background-color: #0830D3;
   color: #FF00E1;
 }
 
+/* Estilos específicos para el primer botón de zócalos */
 .zocalos-btn:nth-child(1) {
   background-color: #DFFA04;
   color: #0830D3;
 }
 
+/* Estilos específicos para los botones de placas */
 .placas-btn {
   background-color: #0830D3;
   color: #DFFA04;
 }
 
+/* Estilos para el tiempo recorrido */
 .tiempo-recorrido {
   color: #16D95A;
   background-color: black;
@@ -122,6 +142,7 @@ header {
   text-align: center; /* Centrar el texto */
 }
 
+/* Estilos para el tiempo adicional */
 .tiempo-mas {
   color: #BA2E17;
   background-color: black;
@@ -135,6 +156,7 @@ header {
   text-align: center; /* Centrar el texto */
 }
 
+/* Estilos para el tiempo en curso */
 .tiempo-curso {
   color: #3211B2;
   background-color: black;
@@ -148,6 +170,7 @@ header {
   text-align: center; /* Centrar el texto */
 }
 
+/* Estilos para el tiempo total */
 .tiempo-total {
   color: #9C30FF;
   background-color: black;

@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import VistaZocaloTitulo from '../../Presentación/InterfazUsuario/VistaZocaloTitulo';
 
+/**
+ * Componente GestionFila
+ * Este componente maneja la gestión de filas en la escaleta, incluyendo la adición de zócalos y placas.
+ * @param {object} element - Elemento de la fila.
+ * @param {function} agregarZocalo - Función para agregar un zócalo.
+ * @param {function} agregarPlaca - Función para agregar una placa.
+ * @param {function} onEditClick - Función para manejar el clic en el botón de editar.
+ * @param {function} duplicarFila - Función para duplicar una fila.
+ * @param {function} addElement - Función para agregar un nuevo elemento.
+ * @param {function} onViewClick - Función para manejar el clic en el botón de vista previa.
+ */
 const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplicarFila, addElement, onViewClick }) => {
+  const [showVistaZocaloTitulo, setShowVistaZocaloTitulo] = useState(false);
+
+  /**
+   * handleZocaloClick
+   * Función para manejar el clic en el botón de zócalo.
+   * @param {number} id - ID del zócalo.
+   * @param {string} tipo - Tipo de zócalo.
+   */
   const handleZocaloClick = (id, tipo) => {
     console.log(`agregarZocalo llamado con id: ${id}, tipo: ${tipo}`);
     agregarZocalo(id, tipo);
     onEditClick(element);
-    onViewClick(element); // Abrir la ventana de vista previa
+    setShowVistaZocaloTitulo(true); // Mostrar el menú con VistaZocaloTitulo
+  };
+
+  /**
+   * handleCloseVistaZocaloTitulo
+   * Función para cerrar el componente VistaZocaloTitulo.
+   */
+  const handleCloseVistaZocaloTitulo = () => {
+    setShowVistaZocaloTitulo(false);
   };
 
   return (
@@ -20,6 +48,11 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
             <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'VENTAS')}>VENTAS</button>
             <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'TEXTUALES')}>TEXTUALES</button>
           </div>
+          {showVistaZocaloTitulo && (
+            <div className="vista-zocalo-titulo-container">
+              <VistaZocaloTitulo onClose={handleCloseVistaZocaloTitulo} datos={element} />
+            </div>
+          )}
           <div className="zcpl-section">
             <h3>Placas</h3>
             <button className="zcpl-btn placas-btn" onClick={() => handleZocaloClick(element.id, 'EQUIPOS')}>EQUIPOS</button>
@@ -42,6 +75,11 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
         <div className="zcpl-section">
           <h3>Zócalos</h3>
           <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'TITULOS')}>TITULOS</button>
+          {showVistaZocaloTitulo && (
+            <div className="vista-zocalo-titulo-container">
+              <VistaZocaloTitulo onClose={handleCloseVistaZocaloTitulo} datos={element} />
+            </div>
+          )}
         </div>
       )}
       {element.type === 'Voz en Off' && (
