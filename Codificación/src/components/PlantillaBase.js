@@ -9,7 +9,31 @@ import VistaPrevioVentana from '../Presentación/InterfazUsuario/VistaPrevioVent
 import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import './PlantillaBase.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Save } from 'lucide-react'; // Importar el ícono de salvar
 
+/**
+ * saveAllChanges
+ * Función para salvar todos los cambios de la escaleta e insertar el contenido en el archivo Excel.
+ */
+const saveAllChanges = async () => {
+  try {
+    const response = await fetch('http://localhost:3001/storePages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ paginas: elements, fileName: 'paginas_filas_programa_dcsha.xlsx' }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al salvar los cambios en el archivo Excel paginas_filas_programa_dcsha.xlsx');
+    }
+
+    console.log('Cambios salvados correctamente en el archivo Excel paginas_filas_programa_dcsha.xlsx');
+  } catch (error) {
+    console.error('Error al salvar los cambios en el archivo Excel paginas_filas_programa_dcsha.xlsx:', error);
+  }
+};
 /**
  * Componente PlantillaBase
  * Este componente representa la plantilla base de la aplicación, donde los usuarios pueden gestionar elementos de la escaleta.
@@ -49,31 +73,32 @@ const PlantillaBase = () => {
       elapsedTime: '00:00:00'
     };
     setElements([...elements, newElement]);
-    await updateExcel(newElement);
+    await updateExcel(newElement, 'paginas_filas_programa_dcsha.xlsx');
   };
 
   /**
    * updateExcel
    * Función para actualizar el archivo Excel con los datos del elemento.
    * @param {object} element - Elemento a actualizar en el Excel.
+   * @param {string} fileName - Nombre del archivo Excel a actualizar.
    */
-  const updateExcel = async (element) => {
+  const updateExcel = async (element, fileName) => {
     try {
       const response = await fetch('http://localhost:3001/updateExcel', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: element.id, solapa: element.solapa, titulo: element.titulo }),
+        body: JSON.stringify({ id: element.id, solapa: element.solapa, titulo: element.titulo, fileName }),
       });
 
       if (!response.ok) {
-        throw new Error('Error al actualizar el archivo Excel');
+        throw new Error(`Error al actualizar el archivo Excel ${fileName}`);
       }
 
-      console.log('Excel actualizado correctamente');
+      console.log(`Excel ${fileName} actualizado correctamente`);
     } catch (error) {
-      console.error('Error al actualizar el archivo Excel:', error.message);
+      console.error(`Error al actualizar el archivo Excel ${fileName}:`, error.message);
     }
   };
 
@@ -141,6 +166,7 @@ const PlantillaBase = () => {
         break;
     }
     setElements(newElements);
+    updateExcel({ id, solapa: tipo, titulo: '' }, 'DE_CICLISMO_2023.xlsx');
   };
 
   /**
@@ -174,6 +200,7 @@ const PlantillaBase = () => {
         break;
     }
     setElements(newElements);
+    updateExcel({ id, solapa: tipo, titulo: '' }, 'DE_CICLISMO_2023.xlsx');
   };
 
   /**
@@ -236,188 +263,192 @@ const PlantillaBase = () => {
     'Entrada', 'VTR Nota', 'VTR Full', 'Placa', 'Titulo', 'Voz en Off', 'Cortina', 'Reel', 'Promocion-Venta', 'Tiempo de Corte', 'Bloque', 'Total'
   ];
 
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
-            <span className="text-xl font-bold">ETgc</span>
-          </div>
-          <nav className="flex items-center space-x-4">
-            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-              <Bell className="h-5 w-5 mr-2" />
-              <span className="hidden md:inline">Notifications</span>
-            </Button>
-            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-              <Settings className="h-5 w-5 mr-2" />
-              <span className="hidden md:inline">Settings</span>
-            </Button>
-            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-              <User className="h-5 w-5 mr-2" />
-              <span className="hidden md:inline">Profile</span>
-            </Button>
-            <Link to="/" className="text-gray-600 hover:text-gray-900">
-              <HomeIcon className="h-6 w-6" />
-            </Link>
-          </nav>
+  // Ubicar el botón de salvar en la sección "Elementos de la Escaleta"
+return (
+  <div className="flex flex-col min-h-screen bg-gray-100">
+    <header className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
+          <span className="text-xl font-bold">ETgc</span>
         </div>
-      </header>
-      <main className="flex-1 overflow-y-auto p-8">
-        <div className="mb-6">
-          <p className="text-gray-600">{fechaActual}</p>
-        </div>
+        <nav className="flex items-center space-x-4">
+          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            <Bell className="h-5 w-5 mr-2" />
+            <span className="hidden md:inline">Notifications</span>
+          </Button>
+          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            <Settings className="h-5 w-5 mr-2" />
+            <span className="hidden md:inline">Settings</span>
+          </Button>
+          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+            <User className="h-5 w-5 mr-2" />
+            <span className="hidden md:inline">Profile</span>
+          </Button>
+          <Link to="/" className="text-gray-600 hover:text-gray-900">
+            <HomeIcon className="h-6 w-6" />
+          </Link>
+        </nav>
+      </div>
+    </header>
+    <main className="flex-1 overflow-y-auto p-8">
+      <div className="mb-6">
+        <p className="text-gray-600">{fechaActual}</p>
+      </div>
 
-        <div className="bg-white shadow rounded-xl p-2 mb-2"> {/* Reducir padding */}
-          <div className="container text-center">
-            <div className="row">
-              <div className="col">
-                <label className="block text-xs font-medium text-gray-700">Al aire</label> {/* Reducir tamaño del texto */}
-              </div>
-              <div className="col">
-                <label className="block text-xs font-medium text-gray-700">Tiempo recorrido</label> {/* Reducir tamaño del texto */}
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
-              </div>
-              <div className="col">
-                <label className="block text-xs font-medium text-gray-700">Tiempo de más</label> {/* Reducir tamaño del texto */}
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
-              </div>
-              <div className="col">
-                <label className="block text-xs font-medium text-gray-700">Tiempo en curso</label> {/* Reducir tamaño del texto */}
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
-              </div>
-              <div className="col">
-                <label className="block text-xs font-medium text-gray-700">Tiempo total</label> {/* Reducir tamaño del texto */}
-                <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" /> {/* Mantener tamaño del input */}
-              </div>
+      <div className="fixed-section bg-white shadow rounded-xl p-2 mb-2">
+        <div className="container text-center">
+          <div className="row">
+            <div className="col">
+              <label className="block text-xs font-medium text-gray-700">Al aire</label>
+            </div>
+            <div className="col">
+              <label className="block text-xs font-medium text-gray-700">Tiempo recorrido</label>
+              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" />
+            </div>
+            <div className="col">
+              <label className="block text-xs font-medium text-gray-700">Tiempo de más</label>
+              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" />
+            </div>
+            <div className="col">
+              <label className="block text-xs font-medium text-gray-700">Tiempo en curso</label>
+              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" />
+            </div>
+            <div className="col">
+              <label className="block text-xs font-medium text-gray-700">Tiempo total</label>
+              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" />
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="bg-white shadow rounded-xl p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Elementos de la Escaleta</h2>
-          <table className="schedule-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Tipo</th>
-                <th>Nombre</th>
-                <th>Tiempo de inicio</th>
-                <th>Duración</th>
-                <th>Tiempo ejecutado</th>
-                <th className="actions-header">
-                  Acciones
-                  <Button className="add-btn" onClick={addNewElement} style={{ marginLeft: '10px' }}>
-                    <Plus /> Añadir
-                  </Button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {elements && elements.map(element => (
-                <React.Fragment key={element.id}>
-                  <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
-                    <td className="program-id">
-                      <TextField
-                        value={element.id}
-                        onChange={(e) => handleInputChange(element.id, 'id', e.target.value)}
-                        variant="outlined"
-                        size="small"
-                      />
-                    </td>
-                    <td className="program-type">
-                      <FormControl variant="outlined" size="small" fullWidth>
-                        <InputLabel>Tipo</InputLabel>
-                        <Select
-                          value={element.type}
-                          onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
-                          label="Tipo"
-                        >
-                          <MenuItem value="" disabled>Escoger tipo de fila</MenuItem>
-                          {tiposDeFila.map(tipo => (
-                            <MenuItem key={tipo} value={tipo}>{tipo}</MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </td>
-                    <td className="program-name">
-                      <TextField
-                        value={element.name}
-                        onChange={(e) => handleInputChange(element.id, 'name', e.target.value)}
-                        variant="outlined"
-                        size="small"
-                      />
-                    </td>
-                    <td className="start-time">
-                      <TextField
-                        value={element.startTime}
-                        onChange={(e) => handleInputChange(element.id, 'startTime', e.target.value)}
-                        variant="outlined"
-                        size="small"
-                      />
-                    </td>
-                    <td className="duration">
-                      <TextField
-                        value={element.duration}
-                        onChange={(e) => handleInputChange(element.id, 'duration', e.target.value)}
-                        variant="outlined"
-                        size="small"
-                      />
-                    </td>
-                    <td className="elapsed-time">
-                      <TextField
-                        value={element.elapsedTime}
-                        onChange={(e) => handleInputChange(element.id, 'elapsedTime', e.target.value)}
-                        variant="outlined"
-                        size="small"
-                      />
-                    </td>
-                    <td className="actions">
-                      <GestionAcciones
-                        element={element}
-                        toggleZcPl={toggleZcPl}
-                        addElement={addNewElement}
-                        removeElement={removeElement}
-                        duplicarFila={duplicarFila}
-                        onViewClick={handleViewClick}
-                      />
+      <div className="bg-white shadow rounded-xl p-6" style={{ marginTop: '100px' }}>
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Elementos de la Escaleta</h2>
+        <Button className="save-btn" onClick={saveAllChanges} style={{ marginBottom: '10px' }}>
+          <Save /> Salvar
+        </Button>
+        <table className="schedule-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Nombre</th>
+              <th>Tiempo de inicio</th>
+              <th>Duración</th>
+              <th>Tiempo ejecutado</th>
+              <th className="actions-header">
+                Acciones
+                <Button className="add-btn" onClick={addNewElement} style={{ marginLeft: '10px' }}>
+                  <Plus /> Añadir
+                </Button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {elements && elements.map(element => (
+              <React.Fragment key={element.id}>
+                <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
+                  <td className="program-id">
+                    <TextField
+                      value={element.id}
+                      onChange={(e) => handleInputChange(element.id, 'id', e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </td>
+                  <td className="program-type">
+                    <FormControl variant="outlined" size="small" fullWidth>
+                      <InputLabel>Tipo</InputLabel>
+                      <Select
+                        value={element.type}
+                        onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
+                        label="Tipo"
+                      >
+                        <MenuItem value="" disabled>Escoger tipo de fila</MenuItem>
+                        {tiposDeFila.map(tipo => (
+                          <MenuItem key={tipo} value={tipo}>{tipo}</MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </td>
+                  <td className="program-name">
+                    <TextField
+                      value={element.name}
+                      onChange={(e) => handleInputChange(element.id, 'name', e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </td>
+                  <td className="start-time">
+                    <TextField
+                      value={element.startTime}
+                      onChange={(e) => handleInputChange(element.id, 'startTime', e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </td>
+                  <td className="duration">
+                    <TextField
+                      value={element.duration}
+                      onChange={(e) => handleInputChange(element.id, 'duration', e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </td>
+                  <td className="elapsed-time">
+                    <TextField
+                      value={element.elapsedTime}
+                      onChange={(e) => handleInputChange(element.id, 'elapsedTime', e.target.value)}
+                      variant="outlined"
+                      size="small"
+                    />
+                  </td>
+                  <td className="actions">
+                    <GestionAcciones
+                      element={element}
+                      toggleZcPl={toggleZcPl}
+                      addElement={addNewElement}
+                      removeElement={removeElement}
+                      duplicarFila={duplicarFila}
+                      onViewClick={handleViewClick}
+                    />
+                  </td>
+                </tr>
+                {showZcPl === element.id && (
+                  <tr className="zcpl-row">
+                    <td colSpan="7">
+                      <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} onViewClick={handleViewClick} />
                     </td>
                   </tr>
-                  {showZcPl === element.id && (
-                    <tr className="zcpl-row">
-                      <td colSpan="7">
-                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} onViewClick={handleViewClick} />
-                      </td>
-                    </tr>
-                  )}
-                  {editingElement && editingElement.id === element.id && (
-                    <tr className="edit-row">
-                      <td colSpan="7">
-                        <InterfazZocalos tipo={editingElement.type} />
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
+                )}
+                {editingElement && editingElement.id === element.id && (
+                  <tr className="edit-row">
+                    <td colSpan="7">
+                      <InterfazZocalos tipo={editingElement.type} />
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </main>
+    {showPreview && (
+      <VistaPrevioVentana tipo={editingElement?.type} onClose={handleClosePreview} datos={editingElement} />
+    )}
+    <footer className="bg-white border-t border-gray-200 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
+        <div className="flex space-x-4">
+          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
+          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
+          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
         </div>
-      </main>
-      {showPreview && (
-        <VistaPrevioVentana tipo={editingElement?.type} onClose={handleClosePreview} datos={editingElement} />
-      )}
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
-          <div className="flex space-x-4">
-            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+      </div>
+    </footer>
+  </div>
+);
 };
 
 export default PlantillaBase;

@@ -183,3 +183,24 @@ header {
   justify-content: center; /* Centrar horizontalmente */
   text-align: center; /* Centrar el texto */
 }
+
+.pagina-list li {
+  display: inline;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Estilos para la sección fija de los relojes */
+.fixed-section {
+  position: fixed;
+  top: 80px; /* Ajustar para que no tape la sección de notificaciones */
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.zcpl-container {
+  margin-top: 10px; /* Ajustar según la altura de la sección fija */
+}

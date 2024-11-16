@@ -25,11 +25,30 @@ import {
   FilaTotal
 } from '../../Dominio/ModelosDeDominio/Fila';
 
+/**
+ * Clase AsistenteProduccion
+ * Esta clase maneja la creación y gestión de celdas, zócalos y placas en la aplicación.
+ */
 class AsistenteProduccion {
+  /**
+   * Constructor de la clase AsistenteProduccion
+   * Inicializa la lista de elementos.
+   */
   constructor() {
-    this.elements = [];
+    this.elements = []; // Arreglo para almacenar los elementos
   }
 
+  /**
+   * Método crearCelda
+   * Crea una nueva celda basada en el tipo especificado.
+   * @param {string} id - ID de la celda.
+   * @param {string} type - Tipo de la celda.
+   * @param {string} name - Nombre de la celda.
+   * @param {string} startTime - Tiempo de inicio de la celda.
+   * @param {string} duration - Duración de la celda.
+   * @param {string} elapsedTime - Tiempo transcurrido de la celda.
+   * @returns {Array} - Lista actualizada de elementos.
+   */
   crearCelda(id, type, name, startTime, duration, elapsedTime) {
     let newElement;
     switch (type) {
@@ -77,46 +96,101 @@ class AsistenteProduccion {
     return this.elements;
   }
 
+  /**
+   * Método insertarZocaloTitulo
+   * Implementación para insertar un zócalo de tipo Titulo.
+   * (Actualmente no implementado)
+   */
   insertarZocaloTitulo(id) {
     // Implementación para insertar Zócalo Titulo
   }
 
+  /**
+   * Método insertarZocaloCatastrofe
+   * Implementación para insertar un zócalo de tipo Catastrofe.
+   * (Actualmente no implementado)
+   */
   insertarZocaloCatastrofe(id) {
     // Implementación para insertar Zócalo Catastrofe
   }
 
+  /**
+   * Método insertarZocaloDosLineas
+   * Implementación para insertar un zócalo de tipo Dos Lineas.
+   * (Actualmente no implementado)
+   */
   insertarZocaloDosLineas(id) {
     // Implementación para insertar Zócalo Dos Lineas
   }
 
+  /**
+   * Método insertarZocaloVentas
+   * Implementación para insertar un zócalo de tipo Ventas.
+   * (Actualmente no implementado)
+   */
   insertarZocaloVentas(id) {
     // Implementación para insertar Zócalo Ventas
   }
 
+  /**
+   * Método insertarZocaloTextuales
+   * Implementación para insertar un zócalo de tipo Textuales.
+   * (Actualmente no implementado)
+   */
   insertarZocaloTextuales(id) {
     // Implementación para insertar Zócalo Textuales
   }
 
+  /**
+   * Método insertarPlacaEquipos
+   * Implementación para insertar una placa de tipo Equipos.
+   * (Actualmente no implementado)
+   */
   insertarPlacaEquipos(id) {
     // Implementación para insertar Placa Equipos
   }
 
+  /**
+   * Método insertarPlacaDatosEquipos
+   * Implementación para insertar una placa de tipo Datos Equipos.
+   * (Actualmente no implementado)
+   */
   insertarPlacaDatosEquipos(id) {
     // Implementación para insertar Placa Datos Equipos
   }
 
+  /**
+   * Método insertarPlacaComparativa
+   * Implementación para insertar una placa de tipo Comparativa.
+   * (Actualmente no implementado)
+   */
   insertarPlacaComparativa(id) {
     // Implementación para insertar Placa Comparativa
   }
 
+  /**
+   * Método insertarPlacaDatos
+   * Implementación para insertar una placa de tipo Datos.
+   * (Actualmente no implementado)
+   */
   insertarPlacaDatos(id) {
     // Implementación para insertar Placa Datos
   }
 
+  /**
+   * Método insertarPlacaPventaX3
+   * Implementación para insertar una placa de tipo Pventa X3.
+   * (Actualmente no implementado)
+   */
   insertarPlacaPventaX3(id) {
     // Implementación para insertar Placa Pventa X3
   }
 
+  /**
+   * Método insertarPlacaPventaX1
+   * Implementación para insertar una placa de tipo Pventa X1.
+   * (Actualmente no implementado)
+   */
   insertarPlacaPventaX1(id) {
     // Implementación para insertar Placa Pventa X1
   }

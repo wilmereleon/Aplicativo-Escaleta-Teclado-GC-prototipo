@@ -7,6 +7,7 @@ body {
   padding: 0;
 }
 
+/* Flexbox utilities */
 .flex {
   display: flex;
 }
@@ -19,6 +20,7 @@ body {
   min-height: 100vh;
 }
 
+/* Background color utilities */
 .bg-gray-100 {
   background-color: #F3F4F6;
 }

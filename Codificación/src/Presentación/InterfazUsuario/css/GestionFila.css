@@ -1,0 +1,48 @@
+.fixed-section {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .zcpl-container {
+    margin-top: 80px; /* Ajustar según la altura de la sección fija */
+  }
+  
+  .zcpl-section {
+    margin-bottom: 20px;
+  }
+  
+  .zcpl-btn {
+    margin-right: 10px;
+  }
+  
+  .pagina-section {
+    margin-top: 20px;
+  }
+  
+  .pagina-input {
+    margin-right: 10px;
+  }
+  
+  .pagina-btn {
+    margin-right: 10px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .pagina-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .pagina-list li {
+    display: inline;
+    margin-right: 10px;
+    cursor: pointer;
+  }

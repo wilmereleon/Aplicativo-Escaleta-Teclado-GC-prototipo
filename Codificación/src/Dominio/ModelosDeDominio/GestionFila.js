@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VistaZocaloTitulo from '../../Presentación/InterfazUsuario/VistaZocaloTitulo';
+import SAL from '../../Persistencia/SistemaAlmacenamientoLocal/SAL'; // Asegúrate de que la ruta sea correcta
 
 /**
  * Componente GestionFila
@@ -14,6 +15,21 @@ import VistaZocaloTitulo from '../../Presentación/InterfazUsuario/VistaZocaloTi
  */
 const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplicarFila, addElement, onViewClick }) => {
   const [showVistaZocaloTitulo, setShowVistaZocaloTitulo] = useState(false);
+  const [selectedZocalo, setSelectedZocalo] = useState(null);
+  const [pagina, setPagina] = useState('');
+  const [error, setError] = useState('');
+  const [paginas, setPaginas] = useState([]);
+  const [indice, setIndice] = useState([]);
+
+  // Fetch páginas from SAL on component mount
+  useEffect(() => {
+    const fetchPaginas = async () => {
+      const paginas = await SAL.obtenerPaginas();
+      setPaginas(Array.isArray(paginas) ? paginas : []);
+    };
+
+    fetchPaginas();
+  }, []);
 
   /**
    * handleZocaloClick
@@ -25,7 +41,9 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
     console.log(`agregarZocalo llamado con id: ${id}, tipo: ${tipo}`);
     agregarZocalo(id, tipo);
     onEditClick(element);
+    setSelectedZocalo(tipo);
     setShowVistaZocaloTitulo(true); // Mostrar el menú con VistaZocaloTitulo
+    setIndice(paginas.filter(pagina => pagina.tipo === tipo));
   };
 
   /**
@@ -34,6 +52,53 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
    */
   const handleCloseVistaZocaloTitulo = () => {
     setShowVistaZocaloTitulo(false);
+    setSelectedZocalo(null);
+  };
+
+  /**
+   * handlePaginaChange
+   * Función para manejar el cambio en el campo de Página.
+   * @param {Event} e - Evento de cambio.
+   */
+  const handlePaginaChange = (e) => {
+    const value = e.target.value;
+    // Verificar si el valor es alfanumérico
+    const alphanumericRegex = /^[a-z0-9]+$/i;
+    if (!alphanumericRegex.test(value)) {
+      setError('El valor de la página debe ser alfanumérico.');
+      return;
+    }
+    // Verificar si el valor ya existe en la lista de páginas
+    if (paginas.some(p => p.pagina === value)) {
+      setError('El valor de la página ya existe.');
+      return;
+    }
+    setError('');
+    setPagina(value);
+  };
+
+  /**
+   * handleAddPagina
+   * Función para agregar una nueva página.
+   */
+  const handleAddPagina = () => {
+    if (pagina && !paginas.some(p => p.pagina === pagina)) {
+      const nuevasPaginas = [...paginas, { pagina, tipo: selectedZocalo, tiempoInicio: '', duracion: '', tiempoEjecutado: '' }];
+      setPaginas(nuevasPaginas);
+      SAL.almacenarPaginas(nuevasPaginas); // Almacenar páginas en SAL
+      setPagina('');
+      // Enviar las páginas al servidor
+      fetch('http://localhost:3001/storePages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ paginas: nuevasPaginas }),
+      })
+        .then(response => response.text())
+        .then(message => console.log(message))
+        .catch(error => console.error('Error al almacenar las páginas:', error));
+    }
   };
 
   return (
@@ -48,9 +113,26 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
             <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'VENTAS')}>VENTAS</button>
             <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'TEXTUALES')}>TEXTUALES</button>
           </div>
-          {showVistaZocaloTitulo && (
+          {showVistaZocaloTitulo && selectedZocalo === 'TITULOS' && (
             <div className="vista-zocalo-titulo-container">
               <VistaZocaloTitulo onClose={handleCloseVistaZocaloTitulo} datos={element} />
+              <div className="pagina-section">
+                <h3>Página</h3>
+                <input
+                  type="text"
+                  value={pagina}
+                  onChange={handlePaginaChange}
+                  className="pagina-input"
+                  placeholder="Ingrese el valor de la página"
+                />
+                <button className="pagina-btn" onClick={handleAddPagina}>Agregar Página</button>
+                {error && <p className="error-message">{error}</p>}
+                <ul className="pagina-list">
+                  {indice.map((pagina, index) => (
+                    <li key={index}>{pagina.pagina}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
           <div className="zcpl-section">
@@ -75,9 +157,26 @@ const GestionFila = ({ element, agregarZocalo, agregarPlaca, onEditClick, duplic
         <div className="zcpl-section">
           <h3>Zócalos</h3>
           <button className="zcpl-btn zocalos-btn" onClick={() => handleZocaloClick(element.id, 'TITULOS')}>TITULOS</button>
-          {showVistaZocaloTitulo && (
+          {showVistaZocaloTitulo && selectedZocalo === 'TITULOS' && (
             <div className="vista-zocalo-titulo-container">
               <VistaZocaloTitulo onClose={handleCloseVistaZocaloTitulo} datos={element} />
+              <div className="pagina-section">
+                <h3>Página</h3>
+                <input
+                  type="text"
+                  value={pagina}
+                  onChange={handlePaginaChange}
+                  className="pagina-input"
+                  placeholder="Ingrese el valor de la página"
+                />
+                <button className="pagina-btn" onClick={handleAddPagina}>Agregar Página</button>
+                {error && <p className="error-message">{error}</p>}
+                <ul className="pagina-list">
+                  {indice.map((pagina, index) => (
+                    <li key={index}>{pagina.pagina}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           )}
         </div>

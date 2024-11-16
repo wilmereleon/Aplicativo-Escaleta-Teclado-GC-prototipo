@@ -1,4 +1,5 @@
 const Fila = require('./Fila');
+const SAL = require('../../Persistencia/SistemaAlmacenamientoLocal/SAL');
 
 /**
  * Clase Escaleta
@@ -18,9 +19,25 @@ class Escaleta {
     /**
      * Método agregarFila
      * Método para agregar una nueva fila a la escaleta.
-     * (Actualmente no implementado)
+     * @param {object} fila - Objeto que representa la fila a agregar.
      */
-    agregarFila() {}
+    agregarFila(fila) {
+        this.filas.push(fila);
+        this.guardarFilasEnExcel();
+    }
+
+    /**
+     * Método guardarFilasEnExcel
+     * Método para guardar las filas en el archivo Excel.
+     */
+    async guardarFilasEnExcel() {
+        try {
+            await SAL.almacenarPaginas(this.filas);
+            console.log('Filas almacenadas correctamente en el Excel');
+        } catch (error) {
+            console.error('Error al almacenar las filas en el Excel:', error);
+        }
+    }
 
     /**
      * Método calcularTiempoRestante

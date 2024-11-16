@@ -1,3 +1,8 @@
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Plus, LogIn, Upload } from 'lucide-react';
+import './DCSHA.css'; // Importar la hoja de estilos
+const Escaleta = require('../../Dominio/ModelosDeDominio/Escaleta'); // Asegúrate de que la ruta sea correcta
 const Plantilla = require('../../Dominio/ModelosDeDominio/Plantilla');
 const Historicos = require('../../Datos/Repositorios/Historicos');
 
@@ -64,4 +69,45 @@ class DCSHA {
     crearPlantilla() {}
 }
 
-module.exports = DCSHA;
+/**
+ * Componente DCSHAComponent
+ * Este componente maneja la gestión de plantillas y escaletas en la aplicación.
+ */
+function DCSHAComponent() {
+  const history = useHistory();
+
+  const handleIngresarClick = () => {
+    history.push('/vista-plantillas');
+  };
+
+  return (
+    <div className="dcsha-container">
+      <div className="dcsha-header">
+        <h1 className="dcsha-title">Programas</h1>
+        <button className="dcsha-button">
+          <Plus className="dcsha-button-icon" />
+          Crear nuevo
+        </button>
+      </div>
+      <div className="dcsha-content">
+        <h2 className="dcsha-subtitle">DCSHA</h2>
+        <p className="dcsha-description">De ciclismo se habla</p>
+        <div className="dcsha-action-buttons">
+          <button
+            className="dcsha-action-button"
+            onClick={handleIngresarClick}
+          >
+            <LogIn className="dcsha-action-button-icon" />
+            Ingresar
+          </button>
+          <button className="dcsha-action-button">
+            <Upload className="dcsha-action-button-icon" />
+            Importar proyecto
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export { DCSHA, DCSHAComponent };

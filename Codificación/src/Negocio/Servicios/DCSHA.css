@@ -1,0 +1,84 @@
+/* Estilos para el componente DCSHAComponent */
+
+/* Contenedor principal */
+.dcsha-container {
+    padding: 1.5rem;
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+  }
+  
+  /* Encabezado */
+  .dcsha-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dcsha-title {
+    font-size: 1.875rem; /* 3xl */
+    font-weight: 700; /* bold */
+    color: #1f2937; /* gray-800 */
+  }
+  
+  /* Botón Crear nuevo */
+  .dcsha-button {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .dcsha-button:hover {
+    background-color: #1d4ed8; /* blue-700 */
+  }
+  
+  .dcsha-button-icon {
+    margin-right: 0.5rem;
+  }
+  
+  /* Contenedor de contenido */
+  .dcsha-content {
+    background-color: #f9fafb; /* gray-50 */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .dcsha-subtitle {
+    font-size: 1.5rem; /* 2xl */
+    font-weight: 700; /* bold */
+    color: #1f2937; /* gray-800 */
+  }
+  
+  .dcsha-description {
+    color: #4b5563; /* gray-600 */
+  }
+  
+  /* Botones de acción */
+  .dcsha-action-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .dcsha-action-button {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .dcsha-action-button:hover {
+    background-color: #1d4ed8; /* blue-700 */
+  }
+  
+  .dcsha-action-button-icon {
+    margin-right: 0.5rem;
+  }

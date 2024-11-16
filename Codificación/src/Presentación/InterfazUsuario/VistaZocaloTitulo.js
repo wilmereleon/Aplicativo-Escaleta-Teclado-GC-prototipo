@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 const VistaZocaloTitulo = ({ onClose, datos }) => {
   const [solapa, setSolapa] = useState(datos.solapa || '');
   const [titulo, setTitulo] = useState(datos.titulo || '');
-  const [id, setId] = useState(''); // Estado para el ID
+  const [id, setId] = useState(datos.id || ''); // Estado para el ID
 
   /**
    * handleSave
@@ -21,20 +21,20 @@ const VistaZocaloTitulo = ({ onClose, datos }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id, solapa, titulo }), // Enviar el ID junto con los datos
+      body: JSON.stringify({ id, solapa, titulo, fileName: 'DE_CICLISMO_2023.xlsx' }), // Enviar el ID junto con los datos y el nombre del archivo
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error al actualizar el archivo Excel');
+          throw new Error('Error al actualizar el archivo Excel DE_CICLISMO_2023.xlsx');
         }
         return response.text();
       })
       .then(() => {
-        console.log('Excel actualizado correctamente');
+        console.log('Excel DE_CICLISMO_2023.xlsx actualizado correctamente');
         onClose();
       })
       .catch(error => {
-        console.error('Error al actualizar el archivo Excel:', error);
+        console.error('Error al actualizar el archivo Excel DE_CICLISMO_2023.xlsx:', error);
       });
   };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { DCSHAComponent } from '../Negocio/Servicios/DCSHA'; // Importar el componente DCSHAComponent
 
 /**
  * Componente InterfazZocalos
@@ -45,4 +46,21 @@ const InterfazZocalos = ({ tipo }) => {
   );
 };
 
-export default InterfazZocalos;
+/**
+ * Componente Home
+ * Este componente representa la página de inicio de la aplicación.
+ * @param {function} handleImportClick - Función para manejar el clic en el botón de importar.
+ * @param {object} fileInputRef - Referencia al input de archivo.
+ * @param {function} handleFileChange - Función para manejar el cambio de archivo.
+ */
+export default function Home({ handleImportClick, fileInputRef, handleFileChange }) {
+  return (
+    <div>
+      <h1>Bienvenido a ETgc</h1>
+      <button onClick={handleImportClick}>Importar Archivo</button>
+      <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+      <DCSHAComponent /> {/* Renderizar el componente DCSHAComponent */}
+      <InterfazZocalos tipo="TITULOS" /> {/* Renderizar el componente InterfazZocalos */}
+    </div>
+  );
+}

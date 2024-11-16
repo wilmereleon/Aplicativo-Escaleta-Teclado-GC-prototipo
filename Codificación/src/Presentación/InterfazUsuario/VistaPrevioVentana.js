@@ -50,26 +50,26 @@ const VistaPrevioVentana = ({ tipo, onClose, datos }) => {
    */
   const handleSave = (event) => {
     const { solapa, titulo } = event.data;
-    // Enviar los datos al servidor para actualizar el Excel
+    // Enviar los datos al servidor para actualizar el Excel DE_CICLISMO_2023.xlsx
     fetch('http://localhost:3001/updateExcel', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id: datos.id, solapa, titulo }),
+      body: JSON.stringify({ id: datos.id, solapa, titulo, fileName: 'DE_CICLISMO_2023.xlsx' }),
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error al actualizar el archivo Excel');
+          throw new Error('Error al actualizar el archivo Excel DE_CICLISMO_2023.xlsx');
         }
         return response.text();
       })
       .then(() => {
-        console.log('Excel actualizado correctamente');
+        console.log('Excel DE_CICLISMO_2023.xlsx actualizado correctamente');
         onClose();
       })
       .catch(error => {
-        console.error('Error al actualizar el archivo Excel:', error);
+        console.error('Error al actualizar el archivo Excel DE_CICLISMO_2023.xlsx:', error);
       });
   };
 

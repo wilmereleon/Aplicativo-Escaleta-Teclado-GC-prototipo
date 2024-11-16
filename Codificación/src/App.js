@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { Bell, Settings, User, Home as HomeIcon, FileText, Archive, Plus, ArrowRight, Download, Clock } from 'lucide-react';
+import { Bell, Settings, User, Home as HomeIcon, FileText, Archive, Plus, Clock } from 'lucide-react';
 import VistaPlantillas from './components/VistaPlantillas';
 import PlantillaBaseLayout from './components/PlantillaBaseLayout';
 import Home from './components/Home'; // Importar el componente Home
 import Footer from './components/Footer'; // Importar el componente Footer
+import { DCSHAComponent } from './Negocio/Servicios/DCSHA'; // Importar el componente DCSHAComponent
 import './App.css'; // Asegúrate de importar el archivo CSS aquí
 
 export default function App() {
@@ -27,12 +28,20 @@ export default function App() {
       <Switch>
         <Route path="/plantilla-base" component={PlantillaBaseLayout} />
         <Route path="/vista-plantillas" component={VistaPlantillas} />
+        <Route path="/dcsha" component={DCSHAComponent} />
         <Route path="/" component={() => <MainLayout handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
       </Switch>
     </Router>
   );
 }
 
+/**
+ * Componente MainLayout
+ * Este componente representa el diseño principal de la aplicación, incluyendo el encabezado, la barra lateral y el contenido principal.
+ * @param {function} handleImportClick - Función para manejar el clic en el botón de importar.
+ * @param {object} fileInputRef - Referencia al input de archivo.
+ * @param {function} handleFileChange - Función para manejar el cambio de archivo.
+ */
 function MainLayout({ handleImportClick, fileInputRef, handleFileChange }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
@@ -70,10 +79,10 @@ function MainLayout({ handleImportClick, fileInputRef, handleFileChange }) {
               <FileText className="mr-4 h-6 w-6" />
               Plantillas
             </Link>
-            <button className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+            <Link to="/historicos" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
               <Archive className="mr-4 h-6 w-6" />
               Históricos
-            </button>
+            </Link>
             <div className="mt-5">
               <h3 className="px-2 py-2 text-sm font-medium text-gray-500 uppercase tracking-wider">Accesos rápidos</h3>
               <Link to="/crear-nueva-escaleta" className="mt-1 group flex items-center px-2 py-2 text-base font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
@@ -92,6 +101,7 @@ function MainLayout({ handleImportClick, fileInputRef, handleFileChange }) {
           <Switch>
             <Route path="/" exact component={() => <Home handleImportClick={handleImportClick} fileInputRef={fileInputRef} handleFileChange={handleFileChange} />} />
             <Route path="/vista-plantillas" component={VistaPlantillas} />
+            <Route path="/historicos" component={DCSHAComponent} />
           </Switch>
         </main>
       </div>
