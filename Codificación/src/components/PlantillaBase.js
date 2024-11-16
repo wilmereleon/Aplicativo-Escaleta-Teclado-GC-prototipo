@@ -6,37 +6,14 @@ import GestionFila from '../Dominio/ModelosDeDominio/GestionFila';
 import GestionAcciones from '../Dominio/ModelosDeDominio/GestionAcciones';
 import InterfazZocalos from '../Presentación/InterfazUsuario/InterfazZocalos';
 import VistaPrevioVentana from '../Presentación/InterfazUsuario/VistaPrevioVentana';
+import RelojEscaleta from './RelojEscaleta';
+import SalvarEscaleta from './GuardarCambios';
 import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import './PlantillaBase.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Save } from 'lucide-react'; // Importar el ícono de salvar
 
-/**
- * saveAllChanges
- * Función para salvar todos los cambios de la escaleta e insertar el contenido en el archivo Excel.
- */
-const saveAllChanges = async () => {
-  try {
-    const response = await fetch('http://localhost:3001/storePages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ paginas: elements, fileName: 'paginas_filas_programa_dcsha.xlsx' }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Error al salvar los cambios en el archivo Excel paginas_filas_programa_dcsha.xlsx');
-    }
-
-    console.log('Cambios salvados correctamente en el archivo Excel paginas_filas_programa_dcsha.xlsx');
-  } catch (error) {
-    console.error('Error al salvar los cambios en el archivo Excel paginas_filas_programa_dcsha.xlsx:', error);
-  }
-};
 /**
  * Componente PlantillaBase
- * Este componente representa la plantilla base de la aplicación, donde los usuarios pueden gestionar elementos de la escaleta.
+ * Este componente maneja la interfaz principal de la escaleta, incluyendo la gestión de filas, zócalos y placas.
  */
 const PlantillaBase = () => {
   const asistenteProduccion = new AsistenteProduccion();
@@ -45,27 +22,24 @@ const PlantillaBase = () => {
   const [editingElement, setEditingElement] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
 
-  /**
-   * useEffect para cargar los elementos iniciales
-   * Se ejecuta cuando el componente se monta.
-   */
+  // Cargar los elementos de la escaleta al montar el componente
   useEffect(() => {
     setElements(asistenteProduccion.elements || []);
   }, []);
 
   /**
    * addNewElement
-   * Función para agregar un nuevo elemento a la lista de elementos.
+   * Función para agregar un nuevo elemento a la escaleta.
    */
   const addNewElement = async () => {
-    const newId = prompt('Ingrese un nuevo ID:');
-    if (!elements || elements.some(el => el.id === newId)) {
-      alert('El ID ya está en uso o no se pudo obtener la lista de elementos. Por favor, elija otro ID.');
+    const newPagina = prompt('Ingrese un nuevo ID de página:');
+    if (!elements || elements.some(el => el.id === newPagina)) {
+      alert('El ID de página ya está en uso o no se pudo obtener la lista de elementos. Por favor, elija otro ID.');
       return;
     }
 
     const newElement = {
-      id: newId,
+      id: newPagina,
       type: '',
       name: '',
       startTime: '00:00:00',
@@ -80,7 +54,7 @@ const PlantillaBase = () => {
    * updateExcel
    * Función para actualizar el archivo Excel con los datos del elemento.
    * @param {object} element - Elemento a actualizar en el Excel.
-   * @param {string} fileName - Nombre del archivo Excel a actualizar.
+   * @param {string} fileName - Nombre del archivo Excel.
    */
   const updateExcel = async (element, fileName) => {
     try {
@@ -104,7 +78,7 @@ const PlantillaBase = () => {
 
   /**
    * removeElement
-   * Función para eliminar un elemento de la lista de elementos.
+   * Función para eliminar un elemento de la escaleta.
    * @param {string} id - ID del elemento a eliminar.
    */
   const removeElement = (id) => {
@@ -114,7 +88,7 @@ const PlantillaBase = () => {
 
   /**
    * toggleZcPl
-   * Función para mostrar u ocultar el componente de zócalos y placas.
+   * Función para mostrar u ocultar la sección de zócalos y placas.
    * @param {string} id - ID del elemento a mostrar u ocultar.
    */
   const toggleZcPl = (id) => {
@@ -141,7 +115,7 @@ const PlantillaBase = () => {
   /**
    * agregarZocalo
    * Función para agregar un zócalo a un elemento.
-   * @param {string} id - ID del elemento al que se agregará el zócalo.
+   * @param {string} id - ID del elemento.
    * @param {string} tipo - Tipo de zócalo a agregar.
    */
   const agregarZocalo = (id, tipo) => {
@@ -172,7 +146,7 @@ const PlantillaBase = () => {
   /**
    * agregarPlaca
    * Función para agregar una placa a un elemento.
-   * @param {string} id - ID del elemento al que se agregará la placa.
+   * @param {string} id - ID del elemento.
    * @param {string} tipo - Tipo de placa a agregar.
    */
   const agregarPlaca = (id, tipo) => {
@@ -205,7 +179,7 @@ const PlantillaBase = () => {
 
   /**
    * duplicarFila
-   * Función para duplicar una fila en la lista de elementos.
+   * Función para duplicar una fila en la escaleta.
    * @param {string} id - ID del elemento a duplicar.
    */
   const duplicarFila = (id) => {
@@ -236,7 +210,7 @@ const PlantillaBase = () => {
   /**
    * handleViewClick
    * Función para manejar el clic en el botón de vista previa.
-   * @param {object} element - Elemento a mostrar en la vista previa.
+   * @param {object} element - Elemento a visualizar.
    */
   const handleViewClick = (element) => {
     setEditingElement(element);
@@ -251,204 +225,175 @@ const PlantillaBase = () => {
     setShowPreview(false);
   };
 
-  // Obtener la fecha actual en formato local
   const fechaActual = new Date().toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
   });
 
-  // Tipos de fila disponibles
   const tiposDeFila = [
     'Entrada', 'VTR Nota', 'VTR Full', 'Placa', 'Titulo', 'Voz en Off', 'Cortina', 'Reel', 'Promocion-Venta', 'Tiempo de Corte', 'Bloque', 'Total'
   ];
 
-  // Ubicar el botón de salvar en la sección "Elementos de la Escaleta"
-return (
-  <div className="flex flex-col min-h-screen bg-gray-100">
-    <header className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
-          <span className="text-xl font-bold">ETgc</span>
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <img src="/images/logo.png" alt="ETgc Logo" className="h-8 w-8 mr-2" />
+            <span className="text-xl font-bold">ETgc</span>
+          </div>
+          <nav className="flex items-center space-x-4">
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <Bell className="h-5 w-5 mr-2" />
+              <span className="hidden md:inline">Notifications</span>
+            </Button>
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <Settings className="h-5 w-5 mr-2" />
+              <span className="hidden md:inline">Settings</span>
+            </Button>
+            <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
+              <User className="h-5 w-5 mr-2" />
+              <span className="hidden md:inline">Profile</span>
+            </Button>
+            <Link to="/" className="text-gray-600 hover:text-gray-900">
+              <HomeIcon className="h-6 w-6" />
+            </Link>
+          </nav>
         </div>
-        <nav className="flex items-center space-x-4">
-          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-            <Bell className="h-5 w-5 mr-2" />
-            <span className="hidden md:inline">Notifications</span>
-          </Button>
-          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-            <Settings className="h-5 w-5 mr-2" />
-            <span className="hidden md:inline">Settings</span>
-          </Button>
-          <Button className="flex items-center p-2 rounded-full hover:bg-gray-200">
-            <User className="h-5 w-5 mr-2" />
-            <span className="hidden md:inline">Profile</span>
-          </Button>
-          <Link to="/" className="text-gray-600 hover:text-gray-900">
-            <HomeIcon className="h-6 w-6" />
-          </Link>
-        </nav>
-      </div>
-    </header>
-    <main className="flex-1 overflow-y-auto p-8">
-      <div className="mb-6">
-        <p className="text-gray-600">{fechaActual}</p>
-      </div>
+      </header>
+      <main className="flex-1 overflow-y-auto p-8">
+        <div className="mb-6">
+          <p className="text-gray-600">{fechaActual}</p>
+        </div>
 
-      <div className="fixed-section bg-white shadow rounded-xl p-2 mb-2">
-        <div className="container text-center">
-          <div className="row">
-            <div className="col">
-              <label className="block text-xs font-medium text-gray-700">Al aire</label>
-            </div>
-            <div className="col">
-              <label className="block text-xs font-medium text-gray-700">Tiempo recorrido</label>
-              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-recorrido" placeholder="00:00:00" />
-            </div>
-            <div className="col">
-              <label className="block text-xs font-medium text-gray-700">Tiempo de más</label>
-              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-mas" placeholder="00:00:00" />
-            </div>
-            <div className="col">
-              <label className="block text-xs font-medium text-gray-700">Tiempo en curso</label>
-              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-curso" placeholder="00:00:00" />
-            </div>
-            <div className="col">
-              <label className="block text-xs font-medium text-gray-700">Tiempo total</label>
-              <input type="text" className="mt-1 block w-full shadow-sm sm:text-xs border-gray-300 rounded-md tiempo-total" placeholder="00:00:00" />
-            </div>
+        <RelojEscaleta />
+
+        <div className="bg-white shadow rounded-xl p-6" style={{ marginTop: '100px' }}>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Elementos de la Escaleta</h2>
+          <SalvarEscaleta elements={elements} />
+          <table className="schedule-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Nombre</th>
+                <th>Tiempo de inicio</th>
+                <th>Duración</th>
+                <th>Tiempo ejecutado</th>
+                <th className="actions-header">
+                  Acciones
+                  <Button className="add-btn" onClick={addNewElement} style={{ marginLeft: '10px' }}>
+                    <Plus /> Añadir
+                  </Button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {elements && elements.map(element => (
+                <React.Fragment key={element.id}>
+                  <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
+                    <td className="program-id">
+                      <TextField
+                        value={element.id}
+                        onChange={(e) => handleInputChange(element.id, 'id', e.target.value)}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </td>
+                    <td className="program-type">
+                      <FormControl variant="outlined" size="small" fullWidth>
+                        <InputLabel>Tipo</InputLabel>
+                        <Select
+                          value={element.type}
+                          onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
+                          label="Tipo"
+                        >
+                          <MenuItem value="" disabled>Escoger tipo de fila</MenuItem>
+                          {tiposDeFila.map(tipo => (
+                            <MenuItem key={tipo} value={tipo}>{tipo}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </td>
+                    <td className="program-name">
+                      <TextField
+                        value={element.name}
+                        onChange={(e) => handleInputChange(element.id, 'name', e.target.value)}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </td>
+                    <td className="start-time">
+                      <TextField
+                        value={element.startTime}
+                        onChange={(e) => handleInputChange(element.id, 'startTime', e.target.value)}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </td>
+                    <td className="duration">
+                      <TextField
+                        value={element.duration}
+                        onChange={(e) => handleInputChange(element.id, 'duration', e.target.value)}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </td>
+                    <td className="elapsed-time">
+                      <TextField
+                        value={element.elapsedTime}
+                        onChange={(e) => handleInputChange(element.id, 'elapsedTime', e.target.value)}
+                        variant="outlined"
+                        size="small"
+                      />
+                    </td>
+                    <td className="actions">
+                      <GestionAcciones
+                        element={element}
+                        toggleZcPl={toggleZcPl}
+                        addElement={addNewElement}
+                        removeElement={removeElement}
+                        duplicarFila={duplicarFila}
+                        onViewClick={handleViewClick}
+                      />
+                    </td>
+                  </tr>
+                  {showZcPl === element.id && (
+                    <tr className="zcpl-row">
+                      <td colSpan="7">
+                        <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} onViewClick={handleViewClick} />
+                      </td>
+                    </tr>
+                  )}
+                  {editingElement && editingElement.id === element.id && (
+                    <tr className="edit-row">
+                      <td colSpan="7">
+                        <InterfazZocalos tipo={editingElement.type} />
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
+      {showPreview && (
+        <VistaPrevioVentana tipo={editingElement?.type} onClose={handleClosePreview} datos={editingElement} />
+      )}
+      <footer className="bg-white border-t border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
+          <div className="flex space-x-4">
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
           </div>
         </div>
-      </div>
-
-      <div className="bg-white shadow rounded-xl p-6" style={{ marginTop: '100px' }}>
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Elementos de la Escaleta</h2>
-        <Button className="save-btn" onClick={saveAllChanges} style={{ marginBottom: '10px' }}>
-          <Save /> Salvar
-        </Button>
-        <table className="schedule-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tipo</th>
-              <th>Nombre</th>
-              <th>Tiempo de inicio</th>
-              <th>Duración</th>
-              <th>Tiempo ejecutado</th>
-              <th className="actions-header">
-                Acciones
-                <Button className="add-btn" onClick={addNewElement} style={{ marginLeft: '10px' }}>
-                  <Plus /> Añadir
-                </Button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {elements && elements.map(element => (
-              <React.Fragment key={element.id}>
-                <tr className="program-row" style={{ backgroundColor: element.type === 'Bloque' || element.type === 'Total' ? '#69778A' : 'transparent' }}>
-                  <td className="program-id">
-                    <TextField
-                      value={element.id}
-                      onChange={(e) => handleInputChange(element.id, 'id', e.target.value)}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </td>
-                  <td className="program-type">
-                    <FormControl variant="outlined" size="small" fullWidth>
-                      <InputLabel>Tipo</InputLabel>
-                      <Select
-                        value={element.type}
-                        onChange={(e) => handleInputChange(element.id, 'type', e.target.value)}
-                        label="Tipo"
-                      >
-                        <MenuItem value="" disabled>Escoger tipo de fila</MenuItem>
-                        {tiposDeFila.map(tipo => (
-                          <MenuItem key={tipo} value={tipo}>{tipo}</MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </td>
-                  <td className="program-name">
-                    <TextField
-                      value={element.name}
-                      onChange={(e) => handleInputChange(element.id, 'name', e.target.value)}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </td>
-                  <td className="start-time">
-                    <TextField
-                      value={element.startTime}
-                      onChange={(e) => handleInputChange(element.id, 'startTime', e.target.value)}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </td>
-                  <td className="duration">
-                    <TextField
-                      value={element.duration}
-                      onChange={(e) => handleInputChange(element.id, 'duration', e.target.value)}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </td>
-                  <td className="elapsed-time">
-                    <TextField
-                      value={element.elapsedTime}
-                      onChange={(e) => handleInputChange(element.id, 'elapsedTime', e.target.value)}
-                      variant="outlined"
-                      size="small"
-                    />
-                  </td>
-                  <td className="actions">
-                    <GestionAcciones
-                      element={element}
-                      toggleZcPl={toggleZcPl}
-                      addElement={addNewElement}
-                      removeElement={removeElement}
-                      duplicarFila={duplicarFila}
-                      onViewClick={handleViewClick}
-                    />
-                  </td>
-                </tr>
-                {showZcPl === element.id && (
-                  <tr className="zcpl-row">
-                    <td colSpan="7">
-                      <GestionFila element={element} agregarZocalo={agregarZocalo} agregarPlaca={agregarPlaca} onEditClick={handleEditClick} onViewClick={handleViewClick} />
-                    </td>
-                  </tr>
-                )}
-                {editingElement && editingElement.id === element.id && (
-                  <tr className="edit-row">
-                    <td colSpan="7">
-                      <InterfazZocalos tipo={editingElement.type} />
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </main>
-    {showPreview && (
-      <VistaPrevioVentana tipo={editingElement?.type} onClose={handleClosePreview} datos={editingElement} />
-    )}
-    <footer className="bg-white border-t border-gray-200 py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <p className="text-sm text-gray-500">© 2024 Torneos SAS | Colombia</p>
-        <div className="flex space-x-4">
-          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Políticas</a>
-          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Términos de servicio</a>
-          <a href="#" className="text-sm text-gray-500 hover:text-gray-700">Contacto</a>
-        </div>
-      </div>
-    </footer>
-  </div>
-);
+      </footer>
+    </div>
+  );
 };
 
 export default PlantillaBase;
